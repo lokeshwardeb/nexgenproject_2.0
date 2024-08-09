@@ -1,0 +1,16 @@
+@media screen and (max-width: 770px) {
+    .integrate_desktop_sidebar{
+        display: none !important;
+    }
+}
+@media screen and (max-width: 1260px) {
+    .integrate_desktop_sidebar{
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 1261px) {
+    .integrate_mobile_sidebar{
+        display: none !important;
+    }
+}

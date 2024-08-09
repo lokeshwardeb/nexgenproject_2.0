@@ -1,0 +1,61 @@
+:root{
+    --cus-primary-color: #243CFC;
+    --cus-main-section-bg-color: #E8EBF1;
+}
+
+.cus_primary_color{
+    color: var(--cus-primary-color) !important;
+}
+.bg_cus_primary_color{
+    background-color: var(--cus-primary-color) !important;
+}
+
+
+.cus_main_section_color{
+    color: var(--cus-main-section-bg-color) !important;
+}
+
+.cus_bg_main_section_color{
+    background-color: var(--cus-main-section-bg-color) !important;
+}
+.cus_rounded_btn{
+    border-radius: 50px !important;
+    
+}
+/* Apply styles directly to the elements */
+.scrollbar_container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll; /* Enable vertical scrolling */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    
+}
+
+body{
+    overflow-x: hidden;
+    /* -ms-overflow-style: none; */
+}
+
+.login_inp:focus{
+    color: var(--cus-primary-color) !important;
+}
+
+.cus_box_shadow{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+		  0 10px 10px rgba(0,0,0,0.22);
+}
+
+.cus_nav_link{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+    border-radius: 5px;
+    background-color: #243CFC !important;
+
+}
+
+
+/*
+.scrollbar_container::-webkit-scrollbar {
+   display: none; /* Chrome, Safari, Opera*//*
+}
+*/

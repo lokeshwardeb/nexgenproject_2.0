@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Double Slider Sign in/up Form</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+ <!-- parent container starts from here -->
+<div class="container" id="container">
+	<!-- Sign up contaner starts from here -->
+	<div class="form-container sign-up-container">
+		<form action="#">
+			<img class="nex_gen_logo" src="../assets/Logo.png" alt="">
+			<h1>Register</h1>
+			<input type="text" placeholder="Input your username" />
+			<input type="email" placeholder="Input your email" />
+			<input type="password" placeholder="Input your password" />
+			<button>Sign Up</button>
+		</form>
+	</div>
+	<!-- Sign up container ends here -->
+
+	<!-- Log in container starts from here -->
+	<div class="form-container sign-in-container">
+		<form action="#">
+			<img class="nex_gen_logo" src="../assets/Logo.png" alt="">
+			<h1>Login</h1>
+			<input type="email" placeholder="Input your username or email" />
+			<input type="password" placeholder="Input your password" />
+			<a href="#">Forgot your password?</a>
+			<button>Log In</button>
+		</form>
+	</div>
+	<!-- Log in container ends here -->
+
+	<!-- overlap container starts from here -->
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Mate!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Log In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Mate!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+	<!-- overlap container ends here -->
+</div>
+
+  <script  src="./script.js"></script>
+
+</body>
+</html>
