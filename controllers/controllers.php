@@ -193,10 +193,10 @@ class controllers extends models
     public function signup()
     {
         if (isset($_POST['signup'])) {
-            $username = $this->pure_data($_POST['username']);
-            $email = $this->pure_data($_POST['email']);
-            $password = $this->pure_data($_POST['password']);
-            $cpassword = $this->pure_data($_POST['cpassword']);
+            $username = $this->pure_data($_POST['signup_username']);
+            $email = $this->pure_data($_POST['signup_email']);
+            $password = $this->pure_data($_POST['signup_password']);
+            $cpassword = $this->pure_data($_POST['signup_cpassword']);
 
             // check if all data is blank or not
             if ($username == '' || $email == '' || $password == '' || $cpassword == '') {
