@@ -1,10 +1,14 @@
 <?php
 // session_start();
 // $_SESSION['username'] = 'jai sri ganesh';
-$active_name = "Dashboard";
+$active_name = "All Projects";
+// $dashboard_active_class_name = "sidebar_btn_active";
+// $all_projects_active_class_name = "sidebar_btn_active";
+// sidebar_btn_active
 require __DIR__ . '/inc/_header.php';
 
 $controllers->login_check();
+$controllers->create_new_project();
 
 ?>
 
@@ -29,29 +33,77 @@ $controllers->login_check();
                 </div>
 
             </div>
-            <div class="col-md-9 cus_bg_main_section_color" >
+            <div class="col-md-9 cus_bg_main_section_color">
                 <div class="main_content_section scrollbar_container">
 
 
                     <div class="the_running_main_content montserrat_font">
-                        
-                        <div class="details_container align-items-center">
-                            <div class="details_container_info align-items-center">
-                                <div class="welcome_container">
-                                    <h1>Welcome <a href=""><?php echo $_SESSION['username'] ?></a></h1>
-                                    <!-- <h1>Welcome <a href="">Mr X</a></h1> -->
+
+                        <div class="details_container">
+
+                            <div class="details_container_info">
+
+                                <div class="container">
+                                    <div class="title_section">
+                                        <div class="section_title fs-4 text-center mt-4 inter-font">
+                                            Create new project
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="status_container">
-                                    <h3>Status:</h3>
-                                    <p>Current project: <a href="">xyz</a></p>
-                                    <p>Your team is working on : <a href="">xyz</a></p>
+
+                                <div class="main_content_section mt-4">
+                                    <div class="projects_content lux_roman">
+                                        <div class="container">
+                                            <form action="" method="post">
+                                                <div class="mb-3">
+                                                    <input type="text" name="project_name" class="form-control" placeholder="Enter Project Name" >
+                                                </div>
+                                                <div class="mb-3">
+                                                    <textarea name="project_desc" class="form-control" id="" placeholder="Enter Project Description" cols="30" rows="10"></textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <input type="datetime-local" class="form-control" name="project_submission_datetime" id="">
+                                                </div>
+                                                <div class="mb-3">
+                                                   <button type="submit" name="create_new_project" class="btn btn-outline-primary mt-4 mb-4" >Create new project</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="process_container">
-                                    <h3>Process:</h3>
-                                    <p>Project complete: <a href="">50%</a></p>
-                                </div>
+
+
+                                <?php
+
+                                // $result_total_page = $controllers->get_all_data("projects");
+
+                                // if ($result_total_page) {
+                                //     if ($result_total_page->num_rows > 0) {
+                                //         $total_page_records = $result_total_page->num_rows;
+                                //         $limit = 3;
+                                //         $total_page = ceil($total_page_records - $limit);
+
+                                //         for ($i = 0; $i <= $total_page; $i++) {
+
+                                //         }
+
+
+                                //     }
+                                // }
+
+
+                                ?>
+
+                               
                             </div>
+
                         </div>
+
+
+
+
+
                     </div>
 
 

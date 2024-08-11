@@ -39,6 +39,13 @@ class models extends database{
         return $result;
     }
 
+    public function create_sql_query($sql){
+        $result = $this->connection()->query($sql);
+
+        return $result;
+
+    }
+
     public function delete($table_name, $where_conditions = 0){
         $sql = "DELETE FROM `$table_name` WHERE $where_conditions ";
         $result = $this->connection()->query($sql);

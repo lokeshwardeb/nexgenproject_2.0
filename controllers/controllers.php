@@ -7,22 +7,33 @@
 class controllers extends models
 {
 
-    public function send_sms()
-    {
-        $ch = curl_init('https://textbelt.com/text');
-        $data = array(
-            // 'phone' => '5555555555',
-            'phone' => '01779548241',
-            'message' => 'Hello world',
-            'key' => 'textbelt',
-        );
+    // public function send_sms()
+    // {
+    //     $ch = curl_init('https://textbelt.com/text');
+    //     $data = array(
+    //         // 'phone' => '5555555555',
+    //         'phone' => '01779548241',
+    //         'message' => 'Hello world',
+    //         'key' => 'textbelt',
+    //     );
 
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     curl_setopt($ch, CURLOPT_POST, 1);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        $response = curl_exec($ch);
-        curl_close($ch);
+    //     $response = curl_exec($ch);
+    //     curl_close($ch);
+    // }
+
+    public function check_get_project_id(){
+        if(!isset($_GET['project_id'])){
+            // that means the project id is not set and it should redirect the user
+            echo '
+            <script>
+            location.href="/all_projects";
+            </script>
+            ';
+        }
     }
 
     public function login_check(){
@@ -33,6 +44,63 @@ class controllers extends models
             location.href="/login";
             </script>
             ';
+        }
+    }
+
+    public function create_new_project(){
+        if(isset($_POST['create_new_project'])){
+            $project_name = $this->pure_data($_POST['project_name']);
+            $project_desc = $this->pure_data($_POST['project_desc']);
+            $project_submission_datetime = $this->pure_data($_POST['project_submission_datetime']);
+
+            // check if the data was blank or not 
+            if($project_name == '' || $project_desc == '' || $project_submission_datetime == ''){
+                echo '
+                <script>
+                danger_alert("Please fillup all the data !!", "The data cannot be blank !!");
+                </script>
+                ';
+
+                return;
+            }
+
+            // check if the project was already exists or not 
+            $result_check = $this->get_all_data("projects", "`project_name` = '$project_name' AND `project_desc` = '$project_desc' AND `project_submission_datetime` = '$project_submission_datetime'");
+
+
+            if($result_check){
+                if($result_check->num_rows > 0){
+                    // that means the project already exists on the database
+                    echo '
+                    <script>
+                    danger_alert("Project already exists !!", "Your project already exists on our software !!");
+                    </script>
+                    ';
+
+                    return;
+
+                }
+            }
+
+            $result_create_new_project = $this->insert("projects", "`project_name`, `project_desc`, `project_submission_datetime`", "'$project_name', '$project_desc', '$project_submission_datetime'");
+
+            if($result_create_new_project){
+                // that means the project has been created successfully
+                echo '
+                <script>
+                success_alert("Success !!", "The new project has been created successfully !!");
+                </script>
+                ';
+            }else{
+                // that means the project has been created successfully
+                echo '
+                <script>
+                danger_alert("Error !!", "There was something error while creating you project !!");
+                </script>
+                ';
+            }
+
+
         }
     }
 

@@ -46,6 +46,7 @@
 
 
 
+
 /* .sidebar_btn{
     width: 250px !important;
     border-radius: 50px !important;
@@ -72,4 +73,62 @@
 .sidebar_section_border{
     border-right: 5px solid rgb(207, 207, 207) !important;
 }
+
+
+
+
+/* .main_content_section table tr td{
+    padding: 0.5rem 4.5rem !important;
+} */
+/* .main_content_section table tr{
+    border-left: 5px solid blue !important;
+    margin-bottom: 25px !important;
+} */
+
+
+
+.cus_table_hover table tbody tr{
+    /* border-left: 5px solid blue !important; */
+    margin: 50px !important;
+    /* width: 80% !important; */
+    /* display: flex !important; */
+    /* background-color: green !important; */
+    border-top: 1px solid #ddd !important;
+    border-bottom: 1px solid #ddd !important;
+    border-right: 1px solid #ddd !important;
+
+}
+.cus_table_hover table tbody tr:hover{
+    border-left: 5px solid blue !important;
+    /* background-color: green !important; */
+}
+
+.project_main{
+    height: 25px;
+}
+
+.project_col_main{
+    width: 80%;
+}
+
+.project_main_col_content:hover{
+    /* border-start border-5 border-primary cus_project_main_box */
+
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgb(0 163 255 / 25%) !important;
+    border-left: 5px solid blue !important;
+    transition: all ease 400ms;
+
+}
+.project_main_col_content{
+    border: 1px solid #ddd !important;
+
+    transition: all ease 600ms;
+    /* box-shadow: 0 14px 28px rgba(211, 211, 211, 0.25),
+     0 10px 10px rgb(0 163 255 / 25%) !important; */
+
+    /* cfskd;clfd[pzzzzzzz] */
+}
+
+
+
 

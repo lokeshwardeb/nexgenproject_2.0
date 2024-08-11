@@ -48,6 +48,11 @@ $controllers = new controllers;
     <link rel="stylesheet" href="/assets/css/responsive.css">
     <link rel="stylesheet" href="/assets/css/dashboard.css">
 
+     <!-- bootpress ai js files -->
+ <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>
+<script src="https://mediafiles.botpress.cloud/3175fb81-1692-4bba-9916-12f850a4bda5/webchat/v2/config.js"></script>
+
+
     
 
 </head>
