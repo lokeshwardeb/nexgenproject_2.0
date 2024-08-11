@@ -6,7 +6,7 @@ $controllers->login();
 
 $controllers->signup();
 
-$controllers->send_sms();
+// $controllers->send_sms();
 
 ?>
 
