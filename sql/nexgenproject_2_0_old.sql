@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2024 at 09:21 PM
+-- Generation Time: Aug 09, 2024 at 10:53 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,31 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `nexgenproject_2.0`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `projects`
---
-
-CREATE TABLE `projects` (
-  `project_id` int(11) NOT NULL,
-  `project_name` varchar(255) NOT NULL,
-  `project_desc` varchar(255) NOT NULL,
-  `project_submission_datetime` varchar(255) NOT NULL,
-  `datetime` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `projects`
---
-
-INSERT INTO `projects` (`project_id`, `project_name`, `project_desc`, `project_submission_datetime`, `datetime`) VALUES
-(1, 'jai sri ganesh', 'jai sri ganesh', 'fkjflj', '2024-08-10 15:29:42'),
-(2, 'jai sri ganesh2', 'jai sri ganesh2', 'jai sri ganesh2', '2024-08-10 17:10:33'),
-(3, 'jai sri ganesh3', 'jai sri ganesh3', 'jai sri ganesh3', '2024-08-10 17:10:33'),
-(4, 'jai sri ganesh4', 'jai sri ganesh4', 'jai sri ganesh4', '2024-08-10 17:10:53'),
-(6, 'First new project', 'This is the main project description', '2024-08-10T19:28', '2024-08-10 19:28:09');
 
 -- --------------------------------------------------------
 
@@ -75,12 +50,6 @@ INSERT INTO `users` (`user_id`, `user_name`, `email`, `password`, `datetime`) VA
 --
 
 --
--- Indexes for table `projects`
---
-ALTER TABLE `projects`
-  ADD PRIMARY KEY (`project_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -89,12 +58,6 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `projects`
---
-ALTER TABLE `projects`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
