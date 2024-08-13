@@ -13,6 +13,7 @@ $Routes = [
     '/create_new_project' => __DIR__ . '/views/pages/create_new_project.views.php',
     '/projects_hub' => __DIR__ . '/views/pages/projects_hub.views.php',
     '/projects_file_repository' => __DIR__ . '/views/pages/projects_files_repository.views.php',
+    '/send_msg' => __DIR__ . '/views/pages/send_msg.views.php',
     '/logout' => __DIR__ . '/views/pages/logout.views.php',
 
 

@@ -7,6 +7,40 @@
 class controllers extends models
 {
 
+
+    public function send_push_msg($channel_name, $event_name, $message){
+        $options = array(
+            'cluster' => 'ap2',
+            'useTLS' => true
+          );
+          $pusher = new Pusher\Pusher(
+            '4f9b2dd81bc8677892ac',
+            '9409f799504b5a4d9728',
+            '1843504',
+            $options
+          );
+        
+          $data['message'] = $message;
+          $pusher->trigger($channel_name, $event_name, $data);
+        
+        //   $data['message'] = 'hello world';
+        //   $pusher->trigger('my-channel', 'my-event', $data);
+    }
+
+    public function send_file_repo_msg(){
+        if(isset($_POST['send_file_repo_msg'])){
+            $file_repo_repl_txt = $this->pure_data($_POST['file_repo_repl_txt']);
+
+            $this->send_push_msg("my-channel", "my-event", "$file_repo_repl_txt");
+
+            echo 'file_repo_worked';
+
+            // $this->send_push_msg();
+        }
+    }
+
+
+
     // public function send_sms()
     // {
     //     $ch = curl_init('https://textbelt.com/text');
@@ -136,6 +170,7 @@ class controllers extends models
                     // that means the user exists
                     while ($row = $result_check_user->fetch_assoc()) {
                         $get_user_name = $row['user_name'];
+                        $get_user_id = $row['user_id'];
                         $get_email = $row['email'];
                         $get_password = $row['password'];
 
@@ -144,6 +179,7 @@ class controllers extends models
                             // that means the password is correct and it should continue the login process
 
                             $_SESSION['username'] = $username;
+                            $_SESSION['user_id'] = $get_user_id;
                             $_SESSION['email'] = $get_email;
                             $_SESSION['login_status'] = true;
                             $_SESSION['is_loggedin'] = 'loggedin';

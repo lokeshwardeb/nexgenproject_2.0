@@ -1,0 +1,18 @@
+{
+    "name": "nexgenproject_2.0/nexgenproject_2.0",
+    "description": "NexGenProject a ultimate solution for the teams who has to maintain their projects. Its a solution for the team so that they can connect, collaborate, share through and manage their projects in an organized way. It is also designed for the individuals and also for the team and the IT organizations.",
+    "autoload": {
+        "psr-4": {
+            "Nexgenproject20\\Nexgenproject20\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lokeshwar Deb Protik",
+            "email": "lokeshwardebdevelop@gmail.com"
+        }
+    ],
+    "require": {
+        "pusher/pusher-php-server": "^7.2"
+    }
+}
