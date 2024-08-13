@@ -237,8 +237,8 @@ $controllers->send_file_repo_msg();
                                                             class="form-control mt-4 mb-4" cols="30"
                                                             rows="5"></textarea>
 
-                                                            <input type="text" value="<?php echo $user_id ?>" name="message_sender_user_id" id="message_sender_user_id">
-                                                            <input type="text" value="<?php echo $_SESSION['user_id'] ?>" name="message_sender_user_id" id="current_user_id">
+                                                            <input type="hidden" value="<?php echo $user_id ?>" name="message_sender_user_id" id="message_sender_user_id">
+                                                            <input type="hidden" value="<?php echo $_SESSION['user_id'] ?>" name="message_sender_user_id" id="current_user_id">
 
                                                         <input type="file" name="file_repo_files_upload"
                                                             class="form-control" id="">
@@ -282,9 +282,9 @@ $controllers->send_file_repo_msg();
                                                             channel.bind('my-event', function (data) {
 
                                                                 // alert("received data =>" + data.message)
-                                                                alert("received msg status =>" + data.message_status)
+                                                                // alert("received msg status =>" + data.message_status)
 
-                                                                alert("message_sender_user_id =>" + data.message_sender_user_id)
+                                                                // alert("message_sender_user_id =>" + data.message_sender_user_id)
 
                                                                 var get_msg_sender_user_id = data.message_sender_user_id;
                                                                 var get_current_user_id = $("#current_user_id").val()
