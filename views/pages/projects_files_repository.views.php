@@ -15,6 +15,10 @@ $controllers->send_file_repo_msg();
 
 ?>
 
+<script>
+    // success_alert("jai sri ganesh", "jai sri ganesh");
+</script>
+
 <style>
     .msg_container {
         /* max-height: 200px; Adjust as needed */
@@ -266,6 +270,9 @@ $controllers->send_file_repo_msg();
                                                 }
 
                                                 window.onload = scrollToBottom();
+
+                                                // success_alert("jai sri ganesh", "jai sri ganesh")
+                                                // danger_alert("hey !!")
                                             </script>
                                         </div>
 
@@ -339,7 +346,13 @@ $controllers->send_file_repo_msg();
                                                             // })
 
 
+                                                            
+
+                                                           
                                                             $("#msg_submit").click(function () {
+                                                            // $("#msg_submit").on("submit", function (e) {
+
+                                                                // e.preventDefault();
 
                                                                 // alert("hi")
 
@@ -347,6 +360,11 @@ $controllers->send_file_repo_msg();
                                                                 var message_sender_user_id = $("#message_sender_user_id").val()
 
                                                                 console.log(msg_to_send);
+
+                                                                if(msg_to_send == ''){
+                                                                    danger_alert("Hey, your message is empty and you have not selected any file !!", "You have to write a message or select a file !!")
+                                                                    return;
+                                                                }
 
                                                                 
 
