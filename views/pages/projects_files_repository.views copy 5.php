@@ -192,10 +192,6 @@ $controllers->login_check();
                                                             <input type="hidden" value="<?php echo $user_id ?>"
                                                                 name="message_sender_user_id"
                                                                 id="message_sender_user_id">
-
-                                                                <input type="hidden" name="project_id" value="<?php echo $project_id ?>" >
-                                                                <input type="hidden" name="event_name" id="event_name" value="project_id_<?php echo $project_id ?>" >
-
                                                             <input type="hidden"
                                                                 value="<?php echo $_SESSION['user_id'] ?>"
                                                                 name="current_user_id" id="current_user_id">
@@ -228,12 +224,8 @@ $controllers->login_check();
                                                             cluster: 'ap2'
                                                         });
 
-                                                        var event_name = $("#event_name").val();
-
-                                                        // var channel = pusher.subscribe('my-channel');
-                                                        var channel = pusher.subscribe('project_repository');
-                                                        channel.bind(event_name, function (data) {
-                                                        // channel.bind('my-event', function (data) {
+                                                        var channel = pusher.subscribe('my-channel');
+                                                        channel.bind('my-event', function (data) {
 
                                                             var get_msg_sender_user_id = data.message_sender_user_id;
                                                             var get_current_user_id = $("#current_user_id").val()
@@ -242,19 +234,19 @@ $controllers->login_check();
                                                                 // that means the message is sent by my (current loggedin user)
                                                                 $("#messages").append('<div class="sended_msg shadow m-4">' + data.message + '</div>')
 
-                                                                if (data.file_uploaded_path != undefined || data.file_name != undefined) {
-                                                                    // if the data_uploaded_path is not set and if data file name is not set
-                                                                    $("#messages").append('<div class="sended_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
-                                                                    // $("#messages").append('<div class="sended_msg shadow m-4""><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
-                                                                    $("#repo_upload_file").val("");
-                                                                }
-
-                                                                // $("#messages").append('<div class="sended_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
-                                                                //     // $("#messages").append('<div class="sended_msg shadow m-4""><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
+                                                                // if (data.file_uploaded_path == '' || data.file_name == '') {
+                                                                //     // if the data_uploaded_path is not set and if data file name is not set
+                                                                //     $("#messages").append('<div><a href="'. data.file_uploaded_path .'" download="" >'. data.file_name .'</a></div>')
                                                                 //     $("#repo_upload_file").val("");
+                                                                // }
 
-                                                                // $("#messages").append('<div><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
-                                                                // $("#repo_upload_file").val("");
+                                                                // var file_msg_new = $('<div class="file_msg" id="file_msg_1">Hi i am new msg</div>');
+                                                                var file_msg_new = $('<div><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name  +'</a></div>');
+
+                                                                $("#messages").append(file_msg_new);
+
+                                                                // $("#messages").append('<div><a href="'. data.file_uploaded_path .'" download="" >'. data.file_name .'</a></div>')
+                                                                $("#repo_upload_file").val("");
 
                                                                 scrollToBottom()
                                                                 $("#msg_to_send").val("")
@@ -262,12 +254,6 @@ $controllers->login_check();
                                                             } else {
                                                                 // that means the message is not sent by me (current loggedin user)
                                                                 $("#messages").append('<div class="received_msg shadow m-4">' + data.message + '</div>')
-                                                                if (data.file_uploaded_path != undefined || data.file_name != undefined) {
-                                                                    // if the data_uploaded_path is not set and if data file name is not set
-                                                                    $("#messages").append('<div class="received_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
-                                                                    // $("#messages").append('<div class="sended_msg shadow m-4""><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
-                                                                    $("#repo_upload_file").val("");
-                                                                }
                                                                 scrollToBottom()
                                                             }
                                                         });
