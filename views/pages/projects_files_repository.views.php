@@ -240,8 +240,11 @@ $controllers->login_check();
 
                                                             if (get_msg_sender_user_id == get_current_user_id) {
                                                                 // that means the message is sent by my (current loggedin user)
-                                                                $("#messages").append('<div class="sended_msg shadow m-4">' + data.message + '</div>')
+                                                                if(data.message != ''){
+                                                                    $("#messages").append('<div class="sended_msg shadow m-4">' + data.message + '</div>')
 
+                                                                }
+                                                               
                                                                 if (data.file_uploaded_path != undefined || data.file_name != undefined) {
                                                                     // if the data_uploaded_path is not set and if data file name is not set
                                                                     $("#messages").append('<div class="sended_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
@@ -261,7 +264,11 @@ $controllers->login_check();
 
                                                             } else {
                                                                 // that means the message is not sent by me (current loggedin user)
-                                                                $("#messages").append('<div class="received_msg shadow m-4">' + data.message + '</div>')
+                                                                if(data.message != ''){
+                                                                    $("#messages").append('<div class="received_msg shadow m-4">' + data.message + '</div>')
+
+                                                                }
+                                                                // $("#messages").append('<div class="received_msg shadow m-4">' + data.message + '</div>')
                                                                 if (data.file_uploaded_path != undefined || data.file_name != undefined) {
                                                                     // if the data_uploaded_path is not set and if data file name is not set
                                                                     $("#messages").append('<div class="received_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
@@ -331,4 +338,5 @@ $controllers->login_check();
 </main>
 
 <?php
+require __DIR__ . '/inc/_footer_scripts.php';
 require __DIR__ . '/inc/_footer.php';
