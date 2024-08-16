@@ -193,12 +193,21 @@ $controllers->login_check();
                                                                 name="message_sender_user_id"
                                                                 id="message_sender_user_id">
 
-                                                                <input type="hidden" name="project_id" value="<?php echo $project_id ?>" >
-                                                                <input type="hidden" name="event_name" id="event_name" value="project_id_<?php echo $project_id ?>" >
+                                                            <input type="hidden" name="project_id"
+                                                                value="<?php echo $project_id ?>">
+                                                            <input type="hidden" name="event_name" id="event_name"
+                                                                value="project_id_<?php echo $project_id ?>">
 
                                                             <input type="hidden"
                                                                 value="<?php echo $_SESSION['user_id'] ?>"
                                                                 name="current_user_id" id="current_user_id">
+
+                                                            <input type="hidden"
+                                                                value="<?php echo $_SESSION['username'] ?>"
+                                                                name="message_sender_user_name"
+                                                                id="message_sender_user_name">
+
+
                                                             <input type="file" name="repo_upload_file"
                                                                 class="form-control" id="repo_upload_file">
                                                             <button name="send_file_repo_msg" type="submit"
@@ -233,24 +242,52 @@ $controllers->login_check();
                                                         // var channel = pusher.subscribe('my-channel');
                                                         var channel = pusher.subscribe('project_repository');
                                                         channel.bind(event_name, function (data) {
-                                                        // channel.bind('my-event', function (data) {
+                                                            // channel.bind('my-event', function (data) {
 
                                                             var get_msg_sender_user_id = data.message_sender_user_id;
                                                             var get_current_user_id = $("#current_user_id").val()
 
                                                             if (get_msg_sender_user_id == get_current_user_id) {
                                                                 // that means the message is sent by my (current loggedin user)
-                                                                if(data.message != ''){
-                                                                    $("#messages").append('<div class="sended_msg shadow m-4">' + data.message + '</div>')
+                                                                // add the message sender user_name
+                                                                //  $("#messages").append('<div class="mt-4 ms-4  text-primary">'+ data.message_sender_user_name +'</div>')
+
+                                                                if (data.message != '') {
+
+                                                                    $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
+
+
+
+
+                                                                    // $("#messages").append('<div class="sended_msg shadow m-4">' + data.message + '</div>')
+                                                                    // $("#messages").append('<div class="parent_msg"><div class="mt-4 ms-4  text-primary">'+ data.message_sender_user_name +'</div><div class="sended_msg shadow m-4">' + data.message + '</div></div>')
 
                                                                 }
-                                                               
+
                                                                 if (data.file_uploaded_path != undefined || data.file_name != undefined) {
                                                                     // if the data_uploaded_path is not set and if data file name is not set
-                                                                    $("#messages").append('<div class="sended_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">'+ data.message_sender_user_name +'</div><div class="msg">' + data.message + '</div></div>')
+
+                                                                    $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+
+
+
+                                                                    // $("#messages").append('<div class="sended_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
                                                                     // $("#messages").append('<div class="sended_msg shadow m-4""><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
                                                                     $("#repo_upload_file").val("");
                                                                 }
+
+                                                                // send_notification('New file repository Message by : '+ data.message_sender_user_name , data.message, "/projects_file_repository?project_id=6");
+
+                                                                // send_notification("New file repository Message by "+ $message_sender_user_name +", " '. $message .' ");
+
+
+
+                                                                // // add the message sender user_name
+                                                                // $("#messages").append('<div class="m-4">'+ data.message_sender_user_name +'</div>')
+
+
 
                                                                 // $("#messages").append('<div class="sended_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
                                                                 //     // $("#messages").append('<div class="sended_msg shadow m-4""><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
@@ -264,17 +301,42 @@ $controllers->login_check();
 
                                                             } else {
                                                                 // that means the message is not sent by me (current loggedin user)
-                                                                if(data.message != ''){
-                                                                    $("#messages").append('<div class="received_msg shadow m-4">' + data.message + '</div>')
+                                                                if (data.message != '') {
+
+                                                                    $("#messages").append('<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
+
+                                                                    // send the notification
+                                                                    send_notification('New Message was sent on file repository by : ' + data.message_sender_user_name, data.message, "/projects_file_repository?project_id=6");
+
+
+
+                                                                    // $("#messages").append('<div class="received_msg shadow m-4">' + data.message + '</div>')
 
                                                                 }
                                                                 // $("#messages").append('<div class="received_msg shadow m-4">' + data.message + '</div>')
                                                                 if (data.file_uploaded_path != undefined || data.file_name != undefined) {
                                                                     // if the data_uploaded_path is not set and if data file name is not set
-                                                                    $("#messages").append('<div class="received_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+
+
+
+
+                                                                    $("#messages").append('<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+
+
+                                                                    // $("#messages").append('<div class="received_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
                                                                     // $("#messages").append('<div class="sended_msg shadow m-4""><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
                                                                     $("#repo_upload_file").val("");
+
+                                                                    // send the file upload notification
+                                                                    send_notification('New File was uploaded on file repository by : ' + data.message_sender_user_name, data.message, "/projects_file_repository?project_id=6");
                                                                 }
+
+                                                                //  // add the message sender user_name
+                                                                //  $("#messages").append('<div class="m-4">'+ data.message_sender_user_name +'</div>')
+
+                                                                send_notification('New Message was sent on file repository by : '+ data.message_sender_user_name , data.message, "/projects_file_repository?project_id=6");
+
+
                                                                 scrollToBottom()
                                                             }
                                                         });
@@ -286,10 +348,19 @@ $controllers->login_check();
                                                                 e.preventDefault();
 
                                                                 var msg_to_send = $("#msg_to_send").val();
-                                                                var message_sender_user_id = $("#message_sender_user_id").val()
+                                                                var message_sender_user_id = $("#message_sender_user_id").val();
                                                                 var repo_upload_file = $("#repo_upload_file").val();
 
-                                                                var msg_submit_spinner = $("#msg_submit").html('<div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"><span class="visually-hidden">Loading...</span></div>')
+                                                                var message_sender_user_name = $("#message_sender_user_name").val();
+
+                                                                var msg_submit_spinner = $("#msg_submit").html('<div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"><span class="visually-hidden">Loading...</span></div>');
+
+                                                                $("#msg_submit").attr("disabled", "disabled");
+                                                                // $("#msg_submit").removeAttr("disabled");
+
+                                                                // $("#msg_submit").attr("disabled", "disabled");
+                                                                // $("#msg_submit").removeAttr("disabled");
+
                                                                 // var msg_submit_spinner = $("#msg_submit").html('<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>')
 
                                                                 if (msg_to_send == '' && repo_upload_file == '') {
@@ -298,7 +369,9 @@ $controllers->login_check();
 
                                                                     $("#msg_submit").html("");
                                                                     $("#msg_submit").text("Submit");
-                                                                    // return;
+                                                                    $("#msg_submit").removeAttr("disabled");
+
+                                                                    return;
                                                                 } else {
                                                                     var formData = new FormData(this);
                                                                     // that means that the message is not blank
@@ -314,6 +387,14 @@ $controllers->login_check();
                                                                             $("#repo_upload_file").val("");
                                                                             $("#msg_submit").html("");
                                                                             $("#msg_submit").text("Submit");
+
+                                                                            if (response != '') {
+                                                                                // that means there is an error maybe exists !!
+                                                                                danger_alert("Error", response)
+                                                                            }
+
+                                                                            // $("#msg_submit").attr("disabled", "disabled");
+                                                                            $("#msg_submit").removeAttr("disabled");
 
                                                                             scrollToBottom();
                                                                         },

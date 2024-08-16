@@ -95,3 +95,157 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+
+
+
+
+// document desktop notification
+// if (!window.Notification) {
+//     console.log('Browser does not support notifications.');
+// } else {
+//     // check if permission is already granted
+//     if (Notification.permission === 'granted') {
+//         // show notification here
+//     } else {
+//         // request permission from user
+//         Notification.requestPermission().then(function(p) {
+//            if(p === 'granted') {
+//                // show notification here
+// var notify = new Notification('Hi there!');
+
+//            } else {
+//                console.log('User blocked notifications.');
+//            }
+//         }).catch(function(err) {
+//             console.error(err);
+//         });
+//     }
+// }
+// var notify = new Notification('Hi there!');
+
+
+
+
+
+
+
+
+
+// desktop notification function
+function send_notification(notification_title_msg, notification_body_msg, window_open_url) {
+    if (!window.Notification) {
+        console.log('Browser does not support notifications.');
+    } else {
+        // check if permission is already granted
+        if (Notification.permission === 'granted') {
+            // show notification here
+            var notify = new Notification(notification_title_msg, {
+                // body: 'How are you doing?',
+                // body: 'Jai sri ganesh',
+                body: notification_body_msg,
+                icon: './assets/img/nexGenProject_logo.jpeg'
+                // icon: '/assets/img/Logo.png'
+
+                // icon: 'https://lokeshwardebportfolio.epizy.com/assets/img/hero_img.png'
+
+                // icon: 'https://bit.ly/2DYqRrh',
+            });
+
+            notify.addEventListener("click", function () {
+                window.open(window_open_url);
+                // window.open("http://localhost:8000/dashboard");
+            })
+
+
+        } else {
+            // request permission from user
+            Notification.requestPermission().then(function (p) {
+                if (p === 'granted') {
+                    // show notification here
+                    var notify = new Notification('Hi there!', {
+                        body: 'Welcome to our project management community ! You will be able to receive all the important notifications from nexGenProject so that you can easily manage everything and don\'t missout anything !!',
+
+                        icon: './assets/img/nexGenProject_logo.jpeg'
+
+                        // icon: 'https://lokeshwardebportfolio.epizy.com/assets/img/hero_img.png'
+                        // icon: '/assets/img/Logo.png'
+                        // icon: 'https://attacomsian.com/'
+                    });
+
+                    notify.addEventListener("click", function () {
+                        window.open("http://localhost:8000/dashboard");
+                    })
+
+                } else {
+                    console.log('User blocked notifications.');
+                }
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+    }
+}
+
+// send_notification();
+// notifyMe();
+
+
+
+
+
+
+
+
+
+// default notification function to check is the notifications is enabled or not
+
+// desktop notification function
+function check_notification() {
+    if (!window.Notification) {
+        console.log('Browser does not support notifications.');
+    } else {
+        // check if permission is already granted
+        if (Notification.permission === 'granted') {
+            // show notification here
+
+            // var notify = new Notification('The check is this', {
+            //     // body: 'How are you doing?',
+            //     body: 'Jai sri ganesh',
+            //     icon: './assets/img/nexGenProject_logo.jpeg'
+            //     // icon: '/assets/img/Logo.png'
+
+            //     // icon: 'https://lokeshwardebportfolio.epizy.com/assets/img/hero_img.png'
+
+            //     // icon: 'https://bit.ly/2DYqRrh',
+            // });
+        } else {
+            // request permission from user
+            Notification.requestPermission().then(function (p) {
+                if (p === 'granted') {
+                    // show notification here
+                    var notify = new Notification('Hi there!', {
+                        body: 'Welcome to our project management community ! You will be able to receive all the important notifications from nexGenProject so that you can easily manage everything and don\'t missout anything !!',
+
+                        icon: './assets/img/nexGenProject_logo.jpeg'
+
+                        // icon: 'https://lokeshwardebportfolio.epizy.com/assets/img/hero_img.png'
+                        // icon: '/assets/img/Logo.png'
+                        // icon: 'https://attacomsian.com/'
+                    });
+
+                    notify.addEventListener("click", function () {
+                        window.open("http://localhost:8000/dashboard");
+                    })
+
+                } else {
+                    console.log('User blocked notifications.');
+                }
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+    }
+}
+
+check_notification();
+

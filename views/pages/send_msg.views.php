@@ -23,6 +23,7 @@
       $message = $controllers->pure_data($_POST['message']);
       $message_sender_user_id = $controllers->pure_data($_POST['message_sender_user_id']);
       $get_project_id = $controllers->pure_data($_POST['project_id']);
+      $message_sender_user_name = $controllers->pure_data($_POST['message_sender_user_name']);
 
       $channel_name = "project_repository";
 
@@ -58,10 +59,18 @@
     
       $data['message'] = $message;
       $data['message_sender_user_id'] = $message_sender_user_id;
+      $data['message_sender_user_name'] = $message_sender_user_name;
       $data['message_status'] = "send";
     //   $data['message'] = 'jai sri ganesh pusher';
     //   $data['message'] = $message;
       // $pusher->trigger("my-channel", "my-event", $data);
+
+      // echo '
+      // <script>
+
+      // send_notification("New file repository Message by '. $message_sender_user_name .'", " '. $message .' ");
+      
+      // </script>';
 
 
 
