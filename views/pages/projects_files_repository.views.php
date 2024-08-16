@@ -289,9 +289,16 @@ $controllers->login_check();
                                                                 var message_sender_user_id = $("#message_sender_user_id").val()
                                                                 var repo_upload_file = $("#repo_upload_file").val();
 
+                                                                var msg_submit_spinner = $("#msg_submit").html('<div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"><span class="visually-hidden">Loading...</span></div>')
+                                                                // var msg_submit_spinner = $("#msg_submit").html('<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>')
+
                                                                 if (msg_to_send == '' && repo_upload_file == '') {
                                                                     // that means if the message and upload file both are blank then it should through an error
-                                                                    danger_alert("Hey, your message is empty and you have not selected any file !!", "You have to write some message or select some files to upload and send !!")
+                                                                    danger_alert("Hey, your message is empty and you have not selected any file !!", "You have to write some message or select some files to upload and send !!");
+
+                                                                    $("#msg_submit").html("");
+                                                                    $("#msg_submit").text("Submit");
+                                                                    // return;
                                                                 } else {
                                                                     var formData = new FormData(this);
                                                                     // that means that the message is not blank
@@ -302,13 +309,17 @@ $controllers->login_check();
                                                                         contentType: false,
                                                                         processData: false,
                                                                         success: function (response) {
-                                                                            success_alert("Message Sent", response);
+                                                                            // success_alert("Message Sent", response);
                                                                             $("#msg_to_send").val("");
                                                                             $("#repo_upload_file").val("");
+                                                                            $("#msg_submit").html("");
+                                                                            $("#msg_submit").text("Submit");
 
                                                                             scrollToBottom();
                                                                         },
                                                                         error: function (xhr, status, error) {
+                                                                            // $("#msg_submit").html("");
+                                                                            // $("#msg_submit").text("Submit");
                                                                             console.log("Error: " + error);
                                                                         }
                                                                     });
