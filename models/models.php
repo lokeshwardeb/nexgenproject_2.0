@@ -11,6 +11,15 @@ class models extends database{
         return $result;
 
     }
+
+    public function get_the_max_id($id_row_name, $table_name){
+        $sql = "SELECT max(`$id_row_name`) FROM `$table_name`;";
+        $result = $this->connection()->query($sql);
+
+        return $result;
+
+    }
+
     public function insert($table_name, $table_rows, $table_rows_values){
         $sql = "INSERT INTO `$table_name`($table_rows) VALUES ($table_rows_values)";
         $result = $this->connection()->query($sql);

@@ -167,14 +167,115 @@ $controllers->login_check();
                                             <div class="msg_main_section">
                                                 <div class="container">
                                                     <div class="msg_container" id="messages">
+                                                        <?php
 
-                                                        <div class="received_msg shadow m-4">Message 1</div>
+                                                        $get_current_user_id = $_SESSION['user_id'];
+
+                                                        $result_get_project_repository_messages = $controllers->get_all_data("projects_file_repository", "`project_id` = '$project_id'");
+
+                                                        if ($result_get_project_repository_messages) {
+                                                            if ($result_get_project_repository_messages->num_rows > 0) {
+                                                                while ($row = $result_get_project_repository_messages->fetch_assoc()) {
+
+                                                                    $get_repository_msg = $row['repository_msg'];
+                                                                    $get_repository_msg_status = $row['repository_msg_status'];
+                                                                    $get_msg_sender_user_id = $row['msg_sender_user_id'];
+                                                                    $get_msg_sender_user_name = $row['msg_sender_user_name'];
+                                                                    $get_msg_repo_project_id = $row['project_id'];
+                                                                    $get_file_upload_status = $row['file_upload_status'];
+                                                                    $get_file_name = $row['file_name'];
+
+                                                                    if ($get_msg_sender_user_id == $get_current_user_id) {
+                                                                        // that means the message was sent from my user id (me)
+                                                        
+                                                                        // echo '
+                                                        
+                                                                        // <script>
+                                                                        // $("#messages").append("<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">'. $get_msg_sender_user_name .'</div><div class="msg">'. $get_repository_msg .'</div></div>");
+                                                                        // </script>
+                                                        
+                                                                        // ';
+                                                        
+
+                                                                        // echo '<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
+
+                                                                        echo '<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="main_msg_section d-flex"><div class="msg">' . $get_repository_msg . '</div><div class="delete_button"><button onclick="delete_msg(this)" data-msg-sender-user-id="'. $get_msg_sender_user_id .'"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>';
+
+                                                                        
+
+                                                                        
+
+                                                                        if ($get_file_name != '') {
+                                                                            // that means the file name is not blank and the file has been uploaded
+                                                        
+                                                                            // echo '
+                                                                            // <script>
+                                                                            // $("#messages").append("<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>");
+                                                                            // </script>
+                                                                            // ';
+                                                        
+                                                                            echo '
+                                                                        <div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
+                                                                        ';
+
+
+                                                                        }
+
+
+
+                                                                    } else {
+
+                                                                        // echo '
+                                                                        // <script>
+                                                                        // $("#messages").append("<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">'. $get_msg_sender_user_name .'</div><div class="msg">'. $get_repository_msg .'</div></div>")
+                                                                        // </script>
+                                                                        // ';
+                                                        
+                                                                        // that means the message was not sent from my user id (me)
+                                                                        echo '<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
+
+                                                                        if ($get_file_name != '') {
+                                                                            // that means the file name is not blank and the file has been uploaded
+                                                        
+                                                                            // echo '
+                                                                            // <script>
+                                                                            // $("#messages").append("<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>")
+                                                                            // </script>
+                                                                            // ';
+                                                        
+                                                                            echo '
+                                                                            <div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
+                                                                            ';
+
+
+                                                                        }
+
+                                                                    }
+
+                                                                    // echo '<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>';
+                                                                }
+                                                            }else{
+                                                                // that means there are no message or files exists on the repository
+                                                                echo '
+                                                                <div class="container text-center">
+                                                                
+                                                                <div class="inter-font text-secondary mt-4 fs-5">No messages or files exists on this repository</div>
+                                                                <div class="mt-2 mb-4">Be the first one to write some messages or upload some files related to this project in this repository</div>
+                                                                
+                                                                </div>
+                                                                ';
+                                                            }
+                                                        }
+
+                                                        ?>
+
+                                                        <!-- <div class="received_msg shadow m-4">Message 1</div>
                                                         <div class="received_msg shadow m-4">
                                                             <div>
                                                                 <a href="./assets/uploads/project_files_repo_upload/Projects.jpg"
                                                                     download="">Message 2</a>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
 
                                                     <?php
@@ -243,6 +344,9 @@ $controllers->login_check();
                                                         var channel = pusher.subscribe('project_repository');
                                                         channel.bind(event_name, function (data) {
                                                             // channel.bind('my-event', function (data) {
+
+                                                                // test
+                                                                // alert(data.check_repo_msg_id);
 
                                                             var get_msg_sender_user_id = data.message_sender_user_id;
                                                             var get_current_user_id = $("#current_user_id").val()
@@ -334,7 +438,7 @@ $controllers->login_check();
                                                                 //  // add the message sender user_name
                                                                 //  $("#messages").append('<div class="m-4">'+ data.message_sender_user_name +'</div>')
 
-                                                                send_notification('New Message was sent on file repository by : '+ data.message_sender_user_name , data.message, "/projects_file_repository?project_id=6");
+                                                                // send_notification('New Message was sent on file repository by : '+ data.message_sender_user_name , data.message, "/projects_file_repository?project_id=6");
 
 
                                                                 scrollToBottom()
@@ -343,7 +447,18 @@ $controllers->login_check();
                                                     </script>
 
                                                     <script>
+
+                                                        function delete_msg(self){
+                                                            var get_msg_sender_user_id = self.getAttribute("data-msg-sender-user-id");
+                                                            console.log(get_msg_sender_user_id)
+                                                        }
+
+
                                                         $(document).ready(function () {
+
+                                                            
+
+
                                                             $("#submit_form").on("submit", function (e) {
                                                                 e.preventDefault();
 

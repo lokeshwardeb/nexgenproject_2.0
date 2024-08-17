@@ -56,6 +56,68 @@
         }
         // $data['file_name'] = $file_name;
       }
+
+      if($message != '' && $_FILES['repo_upload_file']['name'] == ''){
+        // that means the message is not blank and the file is not uploaded
+        $result_insert_message = $controllers->insert("projects_file_repository", "`repository_msg`, `project_id`, `repository_msg_status`, `msg_sender_user_id`, `msg_sender_user_name`, `file_upload_status`", "'$message', '$get_project_id', 'file_and_message', '$message_sender_user_id', '$message_sender_user_name', 'file_not_uploaded'");
+        
+      }
+
+      if($message == '' && $_FILES['repo_upload_file']['name'] != ''){
+        // that means the message is blank and the file is uploaded
+        $result_insert_message = $controllers->insert("projects_file_repository", "`repository_msg`, `project_id`, `repository_msg_status`, `msg_sender_user_id`, `msg_sender_user_name`, `file_upload_status`, `file_name`", "'$message', '$get_project_id', 'file_and_message', '$message_sender_user_id', '$message_sender_user_name', 'file_uploaded', '$file_name'");
+
+
+      }
+
+      // check if the message is blank or not
+      if($message !='' && $_FILES['repo_upload_file']['name'] !=''){
+        // that means the message and upload files is not blank and it should insert the message and its info's with files details into database
+
+        // differently add the files and messages on the repository
+
+        // firstly add the the message
+
+        // get the last id
+        $repository_msg_last_id = $controllers->get_the_max_id("repository_msg_id", "projects_file_repository");
+
+        $repository_msg_next_id = $repository_msg_last_id + $repository_msg_last_id;
+
+        if($repository_msg_next_id == 0){
+          $repository_msg_next_id = 1;
+        }
+
+        // str_shuffle()
+
+
+        // add the repository_msg_code
+        $repository_msg_code = "pronex_repo_msg_" . $repository_msg_next_id;
+
+        $result_insert_message = $controllers->insert("projects_file_repository", "`repository_msg_code`,`repository_msg`, `project_id`, `repository_msg_status`, `msg_sender_user_id`, `msg_sender_user_name`, `file_upload_status`", "'$repository_msg_code','$message', '$get_project_id', 'file_and_message', '$message_sender_user_id', '$message_sender_user_name', 'file_not_uploaded'");
+
+        // after the add of the message add the file
+
+        $result_insert_message = $controllers->insert("projects_file_repository", "`repository_msg_code`,`project_id`, `repository_msg_status`, `msg_sender_user_id`, `msg_sender_user_name`, `file_upload_status`, `file_name`", "'$repository_msg_code', '$get_project_id', 'file_and_message', '$message_sender_user_id', '$message_sender_user_name', 'file_uploaded'");
+
+        $data['check_repo_msg_id'] = $repository_msg_code;
+
+        
+
+
+
+
+
+
+        // $result_insert_message = $controllers->insert("projects_file_repository", "`repository_msg`, `project_id`, `repository_msg_status`, `msg_sender_user_id`, `msg_sender_user_name`, `file_upload_status`, `file_name`", "'$message', '$get_project_id', 'file_and_message', '$message_sender_user_id', '$message_sender_user_name', 'file_uploaded', '$file_name'");
+
+
+        // if($result_insert_message){
+        //   // that means the data has been inserted successfully
+
+        // }
+
+
+      }
     
       $data['message'] = $message;
       $data['message_sender_user_id'] = $message_sender_user_id;
