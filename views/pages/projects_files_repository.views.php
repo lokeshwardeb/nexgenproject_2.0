@@ -176,7 +176,8 @@ $controllers->login_check();
                                                         if ($result_get_project_repository_messages) {
                                                             if ($result_get_project_repository_messages->num_rows > 0) {
                                                                 while ($row = $result_get_project_repository_messages->fetch_assoc()) {
-
+                                                                    
+                                                                    $get_repository_msg_id = $row['repository_msg_id'];
                                                                     $get_repository_msg = $row['repository_msg'];
                                                                     $get_repository_msg_status = $row['repository_msg_status'];
                                                                     $get_msg_sender_user_id = $row['msg_sender_user_id'];
@@ -199,7 +200,7 @@ $controllers->login_check();
 
                                                                         // echo '<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
 
-                                                                        echo '<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="main_msg_section d-flex"><div class="msg">' . $get_repository_msg . '</div><div class="delete_button"><button onclick="delete_msg(this)" data-msg-sender-user-id="'. $get_msg_sender_user_id .'"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>';
+                                                                        echo '<div class="parent_msg sended_msg shadow m-4 msg_id_'. $get_repository_msg_id .' " id="msg_id_'. $get_repository_msg_id .'"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="main_msg_section d-flex"><div class="msg">' . $get_repository_msg . '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="'. $get_repository_msg_id .'"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>';
 
                                                                         
 
@@ -215,7 +216,7 @@ $controllers->login_check();
                                                                             // ';
                                                         
                                                                             echo '
-                                                                        <div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
+                                                                        <div class="parent_msg sended_msg shadow m-4 msg_id_'. $get_repository_msg_id .' " id="msg_id_'. $get_repository_msg_id .'" ><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
                                                                         ';
 
 
@@ -448,13 +449,59 @@ $controllers->login_check();
 
                                                     <script>
 
+                                                        // function delete_msg(self){
+                                                        //     var get_repository_msg_id = self.getAttribute("data-repository_msg_id");
+                                                        //     console.log(get_repository_msg_id)
+
+                                                        //     $.ajax({
+                                                        //         type: "POST",
+                                                        //         url: "/delete_msg",
+                                                        //         data: {repository_msg_id: get_repository_msg_id},
+                                                        //         // dataType: "dataType",
+                                                        //         success: function (response) {
+                                                        //             console.log(response)
+                                                        //             // if(response != ''){
+                                                        //             //     success_alert("Success !!", response.data)
+                                                        //             // }
+                                                        //         }
+                                                        //     });
+
+                                                        // }
+
+
                                                         function delete_msg(self){
-                                                            var get_msg_sender_user_id = self.getAttribute("data-msg-sender-user-id");
-                                                            console.log(get_msg_sender_user_id)
+                                                            var get_repository_msg_id = self.getAttribute("data-repository_msg_id");
+                                                            console.log(get_repository_msg_id)
+
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "/delete_msg",
+                                                                data: {repository_msg_id: get_repository_msg_id},
+                                                                // dataType: "dataType",
+                                                                success: function (response) {
+                                                                    console.log(response)
+
+                                                                    console.log(this)
+                                                                    console.log(self)
+                                                                    // console.log(self.parent())
+
+                                                                    $("#msg_id_" + get_repository_msg_id).removeClass("sended_msg");
+
+                                                                    $("#msg_id_" + get_repository_msg_id).html("")
+
+                                                                    
+
+
+                                                                    if(response != ''){
+                                                                        // success_alert("Success !!", response)
+                                                                    }
+                                                                }
+                                                            });
+
                                                         }
 
-
                                                         $(document).ready(function () {
+                                                            
 
                                                             
 

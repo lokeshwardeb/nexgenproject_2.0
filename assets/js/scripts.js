@@ -249,3 +249,30 @@ function check_notification() {
 
 check_notification();
 
+
+
+
+
+
+                                                        // function delete_msg(self){
+                                                        //     var get_repository_msg_id = self.getAttribute("data-repository_msg_id");
+                                                        //     console.log(get_repository_msg_id)
+
+                                                        //     $.ajax({
+                                                        //         type: "POST",
+                                                        //         url: "/delete_msg",
+                                                        //         data: {repository_msg_id: get_repository_msg_id},
+                                                        //         // dataType: "dataType",
+                                                        //         success: function (response) {
+                                                        //             console.log(response)
+                                                        //             // if(response != ''){
+                                                        //             //     success_alert("Success !!", response.data)
+                                                        //             // }
+                                                        //         }
+                                                        //     });
+
+                                                        // }
+
+
+
+

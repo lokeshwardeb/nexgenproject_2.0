@@ -13,7 +13,12 @@ class models extends database{
     }
 
     public function get_the_max_id($id_row_name, $table_name){
-        $sql = "SELECT max(`$id_row_name`) FROM `$table_name`;";
+        // $sql = "SELECT max(`$id_row_name`) FROM `$table_name`;";
+        
+        // $sql = "SELECT max(repository_msg_id) as max_id FROM projects_file_repository";
+
+
+        $sql = "SELECT max(`$id_row_name`) as max_id FROM `$table_name`";
         $result = $this->connection()->query($sql);
 
         return $result;
