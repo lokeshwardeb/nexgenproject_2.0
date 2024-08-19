@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2024 at 06:23 AM
+-- Generation Time: Aug 17, 2024 at 08:18 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -79,12 +79,10 @@ INSERT INTO `projects_file_repository` (`repository_msg_id`, `project_id`, `repo
 (6, '6', '', 'this is the test for the main jai sri ganesh', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-16 21:47:10'),
 (7, '6', '', 'jai sri ganesh', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-16 22:00:43'),
 (9, '6', '', 'hi', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-17 22:59:55'),
-(33, '6', 'pronex_repo_msg_12', '', 'file_and_message', '2', 'birt', 'file_uploaded', 'Projects.jpg', '', '', '2024-08-19 02:20:05'),
-(34, '6', 'pronex_repo_msg_34', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:20:21'),
-(35, '6', 'pronex_repo_msg_35', 'cfdfd\r\nfdfdf', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:20:43'),
-(36, '6', 'pronex_repo_msg_36', 'dfdfmdf,md\r\nf\r\ndf\r\nd\r\nfd\r\n', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:22:11'),
-(37, '6', 'pronex_repo_msg_37', 'fdjfkdfkdjlf\r\nfd\r\nf\r\ndf\r\nd\r\nf\r\nd', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:22:46'),
-(39, '6', 'pronex_repo_msg_39', 'hi', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:27:46');
+(10, '6', 'pronex_repo_msg_1', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-17 23:37:10'),
+(11, '6', '', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-17 23:48:09'),
+(12, '6', '', 'hi', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-17 23:50:15'),
+(13, '6', '', 'check', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-18 00:11:24');
 
 -- --------------------------------------------------------
 
@@ -147,7 +145,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `projects_file_repository`
 --
 ALTER TABLE `projects_file_repository`
-  MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
