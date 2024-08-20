@@ -176,7 +176,7 @@ $controllers->login_check();
                                                         if ($result_get_project_repository_messages) {
                                                             if ($result_get_project_repository_messages->num_rows > 0) {
                                                                 while ($row = $result_get_project_repository_messages->fetch_assoc()) {
-                                                                    
+
                                                                     $get_repository_msg_id = $row['repository_msg_id'];
                                                                     $get_repository_msg = $row['repository_msg'];
                                                                     $get_repository_msg_status = $row['repository_msg_status'];
@@ -199,12 +199,12 @@ $controllers->login_check();
                                                         
 
                                                                         // echo '<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
+                                                        
+                                                                        echo '<div class="parent_msg sended_msg shadow m-4 msg_id_' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="main_msg_section d-flex"><div class="msg">' . $get_repository_msg . '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' . $get_repository_msg_id . '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>';
 
-                                                                        echo '<div class="parent_msg sended_msg shadow m-4 msg_id_'. $get_repository_msg_id .' " id="msg_id_'. $get_repository_msg_id .'"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="main_msg_section d-flex"><div class="msg">' . $get_repository_msg . '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="'. $get_repository_msg_id .'"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>';
 
-                                                                        
 
-                                                                        
+
 
                                                                         if ($get_file_name != '') {
                                                                             // that means the file name is not blank and the file has been uploaded
@@ -216,10 +216,12 @@ $controllers->login_check();
                                                                             // ';
                                                         
                                                                             echo '
-                                                                        <div class="parent_msg sended_msg shadow m-4 msg_id_'. $get_repository_msg_id .' " id="msg_id_'. $get_repository_msg_id .'" ><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
+                                                                        <div class="parent_msg sended_msg shadow m-4 msg_id_' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '" ><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
                                                                         ';
 
 
+                                                                            // <!-- <div class="parent_msg sended_msg shadow m-4 msg_id_'. $get_repository_msg_id .' " id="msg_id_'. $get_repository_msg_id .'" ><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div> -->
+                                                        
                                                                         }
 
 
@@ -255,7 +257,7 @@ $controllers->login_check();
 
                                                                     // echo '<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>';
                                                                 }
-                                                            }else{
+                                                            } else {
                                                                 // that means there are no message or files exists on the repository
                                                                 echo '
                                                                 <div class="container text-center">
@@ -295,7 +297,7 @@ $controllers->login_check();
                                                                 name="message_sender_user_id"
                                                                 id="message_sender_user_id">
 
-                                                            <input type="hidden" name="project_id"
+                                                            <input type="hidden" id="project_id" name="project_id"
                                                                 value="<?php echo $project_id ?>">
                                                             <input type="hidden" name="event_name" id="event_name"
                                                                 value="project_id_<?php echo $project_id ?>">
@@ -343,11 +345,31 @@ $controllers->login_check();
 
                                                         // var channel = pusher.subscribe('my-channel');
                                                         var channel = pusher.subscribe('project_repository');
+
+                                                        // pusher.trigger("my-channel", "my-event", { message: "hello world" });
+                                                        // pusher.trigger("my-channel", "my-event", { message: "hello world" });
+
+
                                                         channel.bind(event_name, function (data) {
                                                             // channel.bind('my-event', function (data) {
 
-                                                                // test
-                                                                // alert(data.check_repo_msg_id);
+                                                            // test
+                                                            // alert(data.check_repo_msg_id);
+
+                                                            //    alert(data.delete_msg_status)
+
+                                                            // if(data.delete_msg_status !=''){
+
+                                                            //     // pusher.bi
+
+
+                                                            //     alert("hello world")
+
+                                                            // }
+
+                                                            // alert(data.repository_msg_last_id)
+
+
 
                                                             var get_msg_sender_user_id = data.message_sender_user_id;
                                                             var get_current_user_id = $("#current_user_id").val()
@@ -357,10 +379,30 @@ $controllers->login_check();
                                                                 // add the message sender user_name
                                                                 //  $("#messages").append('<div class="mt-4 ms-4  text-primary">'+ data.message_sender_user_name +'</div>')
 
+
+                                                                // check if the delete data is exists or not
+
+
+
                                                                 if (data.message != '') {
 
-                                                                    $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
 
+
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_'. $get_repository_msg_id .' " id="msg_id_'. $get_repository_msg_id .'" ><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>')
+
+
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_'+ data.repository_msg_id +' " id="msg_id_'+ data.repository_msg_id +'" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><div class="msg">' + data.message + '</div></div></div></div>')
+
+
+
+                                                                    // the main messages with the delete features
+                                                                    $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>');
+
+
+
+
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_'+ data.repository_msg_id +' " id="msg_id_'+ data.repository_msg_id +'" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>')
 
 
 
@@ -408,7 +450,11 @@ $controllers->login_check();
                                                                 // that means the message is not sent by me (current loggedin user)
                                                                 if (data.message != '') {
 
-                                                                    $("#messages").append('<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
+                                                                    $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.repository_msg_id + '" id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
+                                                                    // $("#messages").append('<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
+
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div></div></div>');
+
 
                                                                     // send the notification
                                                                     send_notification('New Message was sent on file repository by : ' + data.message_sender_user_name, data.message, "/projects_file_repository?project_id=6");
@@ -444,6 +490,146 @@ $controllers->login_check();
 
                                                                 scrollToBottom()
                                                             }
+
+
+
+                                                            // check the pusher delete message status 
+
+                                                            console.log("the delete msg is : " + data.delete_msg_status)
+
+                                                            var msg_id_element = $("#msg_id_" + delete_repository_msg_id);
+
+                                                            console.log(msg_id_element)
+
+                                                            if (data.delete_msg_status == 'msg_deleted') {
+
+                                                                // alert("alert activated")
+                                                                // that means the msg has been deleted successfully !
+
+                                                                // get the id so that we can delete the msg
+
+                                                                // alert(data.delete_repository_msg_id)
+
+                                                                // check this alert on for debuging the delete repo msg error
+                                                                // alert(data.delete_repository_msg_status)
+
+                                                                // var get_repository_msg_id = self.getAttribute("data-repository_msg_id");
+
+                                                                var delete_repository_msg_id = data.delete_repository_msg_id;
+
+                                                                console.log(delete_repository_msg_id)
+
+                                                                var del_msg_id = "msg_id_" + delete_repository_msg_id;
+                                                                var get_del_id = $("#" + del_msg_id);
+
+
+
+
+                                                                if(get_del_id.hasClass("sended_msg")){
+                                                                    get_del_id.html("")
+                                                                    get_del_id.addClass("d-none")
+
+
+                                                                }else if(get_del_id.hasClass("received_msg")){
+                                                                    get_del_id.html("")
+                                                                    get_del_id.addClass("d-none")
+                                                                }
+
+
+
+
+
+
+                                                                // var del_msg_id = "msg_id_" + delete_repository_msg_id;
+
+                                                                // $("#" + del_msg_id).addClass("d-none");
+                                                                // $("#" + del_msg_id).html("")
+
+
+                                                                // $("#" + del_msg_id).removeClass("sended_msg")
+                                                                // $("#" + del_msg_id).removeClass("received_msg")
+                                                                // if ($("#" + del_msg_id).hasClass("sended_msg")) {
+
+                                                                //     $("#" + del_msg_id).removeClass("sended_msg");
+                                                                //     $("#" + del_msg_id).addClass("d-none");
+                                                                //     $("#" + del_msg_id).html("")
+
+
+
+                                                                // } else if ($("#" + del_msg_id).hasClass("received_msg")) {
+
+                                                                //     $("#" + del_msg_id).removeClass("sended_msg");
+                                                                //     $("#" + del_msg_id).addClass("d-none");
+                                                                //     $("#" + del_msg_id).html("")
+
+
+
+                                                                // } 
+                                                                // else {
+                                                                //     // that means the sended_msg or the received_msg is not exists and it should remove the html only
+
+                                                                //     // alert("something went wrong, the classes not exits !!")
+                                                                //     alert("else runs!!")
+
+                                                                //     $("#" + del_msg_id).addClass("d-none");
+                                                                //     $("#" + del_msg_id).html("")
+
+                                                                //     $(".msg_id_undefined").addClass("d-none");
+                                                                //     $(".msg_id_undefined").html("")
+
+
+
+
+                                                                // }
+                                                                // $("#" + del_msg_id).html("")
+
+
+
+                                                                // console.log("delete repo msg id : " + delete_repository_msg_id)
+
+                                                                // data.delete_msg_status = '';
+
+                                                                // console.log("the last msg status" + data.delete_msg_status);
+                                                                // console.log("the last msg status" + data.delete_msg_status);
+
+                                                                var msg_id_element = $("#msg_id_" + delete_repository_msg_id);
+
+                                                                console.log(msg_id_element)
+
+
+                                                                // var remove_class = $("#msg_id_" + delete_repository_msg_id).removeClass("sended_msg")
+
+                                                                // var remove_html = $("#msg_id_" + delete_repository_msg_id).html("")
+
+                                                                // console.log("the main element" + msg_id_element)
+
+                                                                // console.log("msg class = " + remove_class)
+                                                                // console.log("msg html = " + remove_html)
+
+
+
+                                                                // $("#msg_id_" + get_repository_msg_id).removeClass("sended_msg")
+
+                                                                // $("#msg_id_" + get_repository_msg_id).html("")
+                                                                // var get_delete_msg_id = $("#msg_id_" + data.delete_repository_msg_id).val("")
+
+                                                                // var delete_msg_id = $("#delete_repository_msg_id").val('')
+                                                                // var delete_msg_id = $("#delete_repository_msg_id").val('')
+
+                                                                // pusher.bi
+
+
+                                                                // alert(data.delete_msg_status)
+
+                                                            } 
+                                                            
+                                                            else {
+                                                                // that means there was something error with the delete msg features
+                                                                // alert("There was something error while deleting the msg , msg data not exist !!")
+                                                            }
+
+
+
                                                         });
                                                     </script>
 
@@ -469,14 +655,16 @@ $controllers->login_check();
                                                         // }
 
 
-                                                        function delete_msg(self){
+                                                        function delete_msg(self) {
                                                             var get_repository_msg_id = self.getAttribute("data-repository_msg_id");
-                                                            console.log(get_repository_msg_id)
+                                                            // console.log(get_repository_msg_id);
+
+                                                            var project_id = $("#project_id").val()
 
                                                             $.ajax({
                                                                 type: "POST",
                                                                 url: "/delete_msg",
-                                                                data: {repository_msg_id: get_repository_msg_id},
+                                                                data: { repository_msg_id: get_repository_msg_id, project_id: project_id },
                                                                 // dataType: "dataType",
                                                                 success: function (response) {
                                                                     console.log(response)
@@ -489,10 +677,14 @@ $controllers->login_check();
 
                                                                     $("#msg_id_" + get_repository_msg_id).html("")
 
-                                                                    
+                                                                    console.log("sended repo msg id =>" + get_repository_msg_id)
 
 
-                                                                    if(response != ''){
+
+
+
+
+                                                                    if (response != '') {
                                                                         // success_alert("Success !!", response)
                                                                     }
                                                                 }
@@ -501,9 +693,10 @@ $controllers->login_check();
                                                         }
 
                                                         $(document).ready(function () {
-                                                            
 
-                                                            
+
+                                                            // if()
+
 
 
                                                             $("#submit_form").on("submit", function (e) {
