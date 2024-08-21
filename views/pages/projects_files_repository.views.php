@@ -255,7 +255,7 @@ $controllers->login_check();
 
                                                                         if ($get_repository_msg != '') {
                                                                             // that means the message is not blank
-                                                                            echo '<div class="parent_msg received_msg shadow m-4 ' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
+                                                                            echo '<div class="parent_msg received_msg shadow m-4 msg_id_' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
                                                                         }
 
 
@@ -274,7 +274,7 @@ $controllers->login_check();
                                                                             // ';
                                                         
                                                                             echo '
-                                                                            <div class="parent_msg received_msg shadow m-4 ' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
+                                                                            <div class="parent_msg received_msg shadow m-4 msg_id_' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
                                                                             ';
 
                                                                             // echo '
