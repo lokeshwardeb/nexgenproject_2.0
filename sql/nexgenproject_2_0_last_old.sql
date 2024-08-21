@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2024 at 11:18 PM
+-- Generation Time: Aug 19, 2024 at 06:23 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -72,10 +72,19 @@ CREATE TABLE `projects_file_repository` (
 --
 
 INSERT INTO `projects_file_repository` (`repository_msg_id`, `project_id`, `repository_msg_code`, `repository_msg`, `repository_msg_status`, `msg_sender_user_id`, `msg_sender_user_name`, `file_upload_status`, `file_name`, `msg_show_status`, `file_show_status`, `datetime`) VALUES
-(239, '6', 'pronex_repo_msg_1', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-21 22:51:09'),
-(241, '6', 'pronex_repo_msg_241', 'hi', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-21 22:51:25'),
-(283, '6', 'pronex_repo_msg_283', 'fdjfldjfd', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-22 02:41:29'),
-(287, '6', 'pronex_repo_msg_284', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-22 03:00:41');
+(1, '6', '', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_uploaded', 'Projects.jpg', '', '', '2024-08-16 17:08:15'),
+(2, '6', '', 'dkjfdk', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-16 21:07:56'),
+(4, '6', '', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_uploaded', 'login.PNG', '', '', '2024-08-16 21:45:56'),
+(5, '6', '', 'hi jai sri ganesh ', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-16 21:46:22'),
+(6, '6', '', 'this is the test for the main jai sri ganesh', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-16 21:47:10'),
+(7, '6', '', 'jai sri ganesh', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-16 22:00:43'),
+(9, '6', '', 'hi', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-17 22:59:55'),
+(33, '6', 'pronex_repo_msg_12', '', 'file_and_message', '2', 'birt', 'file_uploaded', 'Projects.jpg', '', '', '2024-08-19 02:20:05'),
+(34, '6', 'pronex_repo_msg_34', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:20:21'),
+(35, '6', 'pronex_repo_msg_35', 'cfdfd\r\nfdfdf', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:20:43'),
+(36, '6', 'pronex_repo_msg_36', 'dfdfmdf,md\r\nf\r\ndf\r\nd\r\nfd\r\n', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:22:11'),
+(37, '6', 'pronex_repo_msg_37', 'fdjfkdfkdjlf\r\nfd\r\nf\r\ndf\r\nd\r\nf\r\nd', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:22:46'),
+(39, '6', 'pronex_repo_msg_39', 'hi', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-19 02:27:46');
 
 -- --------------------------------------------------------
 
@@ -138,7 +147,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `projects_file_repository`
 --
 ALTER TABLE `projects_file_repository`
-  MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
+  MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `users`
