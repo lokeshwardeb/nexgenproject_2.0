@@ -215,8 +215,14 @@ $controllers->login_check();
                                                                             // </script>
                                                                             // ';
                                                         
-                                                                            echo '
-                                                                        <div class="parent_msg sended_msg shadow m-4 msg_id_' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '" ><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
+                                                                        //     echo '
+                                                                        // <div class="parent_msg sended_msg shadow m-4 msg_id_' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '" ><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
+                                                                        // ';
+
+                                                                        echo '
+                                                                            
+                                                                        <div class="parent_msg sended_msg shadow m-4 msg_id_' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="main_msg_section d-flex"><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' . $get_repository_msg_id . '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>
+                                                                        
                                                                         ';
 
 
@@ -235,7 +241,8 @@ $controllers->login_check();
                                                                         // ';
                                                         
                                                                         // that means the message was not sent from my user id (me)
-                                                                        echo '<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
+                                                                        echo '<div class="parent_msg received_msg shadow m-4 '. $get_repository_msg_id .' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
+                                                                        // echo '<div class="parent_msg received_msg shadow m-4" id=><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg">' . $get_repository_msg . '</div></div>';
 
                                                                         if ($get_file_name != '') {
                                                                             // that means the file name is not blank and the file has been uploaded
@@ -247,8 +254,18 @@ $controllers->login_check();
                                                                             // ';
                                                         
                                                                             echo '
-                                                                            <div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
+                                                                            <div class="parent_msg received_msg shadow m-4 '. $get_repository_msg_id .' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div></div>
                                                                             ';
+
+                                                                            // echo '
+                                                                            
+                                                                            // <div class="parent_msg sended_msg shadow m-4 msg_id_' . $get_repository_msg_id . ' " id="msg_id_' . $get_repository_msg_id . '"><div class="msg_sender_user_name text-primary">' . $get_msg_sender_user_name . '</div><div class="main_msg_section d-flex"><div class="msg_file msg"><a href="/assets/uploads/project_files_repo_upload/' . $get_file_name . '" download="" >' . $get_file_name . ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' . $get_repository_msg_id . '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>
+                                                                            
+                                                                            // ';
+
+
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>');
+
 
 
                                                                         }
@@ -397,7 +414,10 @@ $controllers->login_check();
 
 
                                                                     // the main messages with the delete features
-                                                                    $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>');
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>');
+
+                                                                    
+                                                                    $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
 
 
 
@@ -414,14 +434,24 @@ $controllers->login_check();
                                                                 if (data.file_uploaded_path != undefined || data.file_name != undefined) {
                                                                     // if the data_uploaded_path is not set and if data file name is not set
 
-                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">'+ data.message_sender_user_name +'</div><div class="msg">' + data.message + '</div></div>')
+                                                                    // main code demo
 
-                                                                    $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
 
 
-                                                                    // $("#messages").append('<div class="sended_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
-                                                                    // $("#messages").append('<div class="sended_msg shadow m-4""><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>');
+
+                                                                    $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-repository_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
+
+
+                                                                    
+
+                                                                    // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+
+
+
+
                                                                     $("#repo_upload_file").val("");
                                                                 }
 
@@ -471,7 +501,7 @@ $controllers->login_check();
 
 
 
-                                                                    $("#messages").append('<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+                                                                    $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
 
                                                                     // $("#messages").append('<div class="received_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')

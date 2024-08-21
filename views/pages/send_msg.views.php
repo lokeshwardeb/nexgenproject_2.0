@@ -216,7 +216,8 @@
       $data['delete_msg_status'] = '';
       $data['delete_repository_msg_id'] = '';
       $data['repository_msg_last_id'] = $repository_msg_last_id;
-      $data['repository_msg_id'] = $repository_msg_next_id;
+      // $data['repository_msg_id'] = $repository_msg_next_id;
+      $data['repository_msg_id'] = $repository_msg_last_id + 1;
       $data['message_sender_user_id'] = $message_sender_user_id;
       $data['message_sender_user_name'] = $message_sender_user_name;
       $data['message_status'] = "send";

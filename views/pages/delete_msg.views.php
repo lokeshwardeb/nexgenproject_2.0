@@ -45,10 +45,10 @@ echo $repository_msg_id = $controllers->pure_data($_POST['repository_msg_id']);
 
 
 // check the message sender user id on database
-$result_check_sql = $controllers->get_all_data("projects_file_repository", "`repository_msg_id` = '$repository_msg_id'");
+// $result_check_sql = $controllers->get_all_data("projects_file_repository", "`repository_msg_id` = '$repository_msg_id'");
 
-if ($result_check_sql) {
-  if ($result_check_sql->num_rows > 0) {
+// if ($result_check_sql) {
+  // if ($result_check_sql->num_rows > 0) {
     // that means the data exists and the message is already exists and it should continue the process
 
     // now delete the msg from the database
@@ -73,12 +73,12 @@ if ($result_check_sql) {
       $data['delete_msg_status'] = 'msg_not_deleted';
 
     }
-  }else{
-    $data['delete_repository_msg_status'] = "the table was not found";
-    $data['delete_msg_status'] = 'msg_table_not_found';
+  // }else{
+  //   $data['delete_repository_msg_status'] = "the table was not found";
+  //   $data['delete_msg_status'] = 'msg_table_not_found';
 
-  }
-}
+  // }
+// }
 
 
 // $data['message'] = $message;
