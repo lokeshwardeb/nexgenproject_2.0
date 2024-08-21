@@ -213,11 +213,11 @@
       }
     
       $data['message'] = $message;
-      $data['delete_msg_status'] = '';
-      $data['delete_repository_msg_id'] = '';
-      $data['repository_msg_last_id'] = $repository_msg_last_id;
+      // $data['delete_msg_status'] = '';
+      // $data['delete_repository_msg_id'] = '';
+      // $data['repository_msg_last_id'] = $repository_msg_last_id;
       // $data['repository_msg_id'] = $repository_msg_next_id;
-      $data['repository_msg_id'] = $repository_msg_last_id + 1;
+      // $data['repository_msg_id'] = $repository_msg_last_id + 1;
       $data['message_sender_user_id'] = $message_sender_user_id;
       $data['message_sender_user_name'] = $message_sender_user_name;
       $data['message_status'] = "send";
@@ -231,6 +231,25 @@
       // send_notification("New file repository Message by '. $message_sender_user_name .'", " '. $message .' ");
       
       // </script>';
+
+
+
+        // get the last id
+        $result_repository_msg_last_id = $controllers->get_the_max_id("repository_msg_id", "projects_file_repository");
+
+        //  $row_total = $result_repository_msg_last_id->fetch_assoc();
+ 
+        while($row = $result_repository_msg_last_id->fetch_assoc()){
+ 
+          $get_the_max_id = $row['max_id'];
+ 
+        }
+
+      $data['repository_msg_id'] = $get_the_max_id;
+
+      $data['repository_msg_last_id'] = $get_the_max_id;
+
+
 
 
 

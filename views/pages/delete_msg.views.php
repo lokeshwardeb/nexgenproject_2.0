@@ -34,7 +34,15 @@ $event_name = "project_id_" . $get_project_id;
 
 
 // $message_sender_user_id = $controllers->pure_data($_POST['message_sender_user_id']);
-echo $repository_msg_id = $controllers->pure_data($_POST['repository_msg_id']);
+// echo $repository_msg_id = $controllers->pure_data($_POST['repository_msg_id']);
+echo 'received msg is is : ' . $repository_msg_id = $controllers->pure_data($_POST['delete_repository_msg_id']);
+$get_repo_msg_id = $controllers->pure_data($_POST['delete_repository_msg_id']) + 1;
+
+echo $get_file_uploaded_path = $controllers->pure_data($_POST['file_uploaded_path']);
+
+
+
+
 // $repository_msg_id = $controllers->pure_data($_POST['repository_msg_id']);
 
 // echo '
@@ -48,42 +56,65 @@ echo $repository_msg_id = $controllers->pure_data($_POST['repository_msg_id']);
 // $result_check_sql = $controllers->get_all_data("projects_file_repository", "`repository_msg_id` = '$repository_msg_id'");
 
 // if ($result_check_sql) {
-  // if ($result_check_sql->num_rows > 0) {
-    // that means the data exists and the message is already exists and it should continue the process
+// if ($result_check_sql->num_rows > 0) {
+// that means the data exists and the message is already exists and it should continue the process
 
-    // now delete the msg from the database
-    $result_delete_msg = $controllers->delete("projects_file_repository", "`repository_msg_id` = '$repository_msg_id'");
+// now delete the msg from the database
+$result_delete_msg = $controllers->delete("projects_file_repository", "`repository_msg_id` = '$repository_msg_id'");
+$result_delete_msg = $controllers->delete("projects_file_repository", "`repository_msg_id` = '$get_repo_msg_id'");
 
-    if ($result_delete_msg) {
-      // that means the msg has been deleted successfully
+if ($result_delete_msg) {
+  // that means the msg has been deleted successfully
 
-      echo "Message has been deleted successfully !!";
-      // $data['message'] = '';
-      $data['delete_repository_msg_status'] = "deleting successfully";
+  echo "Message has been deleted successfully !!";
+  // $data['message'] = '';
+  $data['delete_repository_msg_status'] = "deleting successfully";
 
-      $data['delete_msg_status'] = 'msg_deleted';
+  $data['delete_msg_status'] = 'msg_deleted';
 
 
 
-      // $data['msg_deleted'] = true;
-
-    } else {
-      // that means the msg has not been deleted successfully
-      $data['delete_repository_msg_status'] = "there was something error while deleting";
-      $data['delete_msg_status'] = 'msg_not_deleted';
-
-    }
-  // }else{
-  //   $data['delete_repository_msg_status'] = "the table was not found";
-  //   $data['delete_msg_status'] = 'msg_table_not_found';
-
+  // delete the file
+  // while($row = $result_check_sql->fetch_assoc()){
+  //  echo $get_file_name = $row['file_name'];
   // }
+
+  // $upload_dir = '/assets/uploads/project_files_repo_upload/';
+  // $get_upload_file = $upload_dir . $get_file_name;
+
+
+  if ($get_file_uploaded_path != '' || $get_file_uploaded_path != null) {
+    // check if file exists 
+    if (file_exists($get_file_uploaded_path)) {
+      // if the file exists then delete the file
+      unlink($get_file_uploaded_path);
+    }
+  }
+
+
+
+
+
+  // $data['msg_deleted'] = true;
+
+} else {
+  // that means the msg has not been deleted successfully
+  $data['delete_repository_msg_status'] = "there was something error while deleting";
+  $data['delete_msg_status'] = 'msg_not_deleted';
+
+}
+// }else{
+//   $data['delete_repository_msg_status'] = "the table was not found";
+//   $data['delete_msg_status'] = 'msg_table_not_found';
+
+// }
 // }
 
 
 // $data['message'] = $message;
-$data['message'] ='';
+$data['message'] = '';
 $data['delete_repository_msg_id'] = $repository_msg_id;
+$data['repository_msg_id'] = '';
 // $data['delete_repository_msg_id'] = $repository_msg_id;
 // $data['delete_msg_status'] = 'hi';
 // $data['delete_msg_status'] = true;
