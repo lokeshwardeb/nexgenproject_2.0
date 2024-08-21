@@ -716,7 +716,7 @@ $controllers->login_check();
 
                                                             var project_id = $("#project_id").val()
 
-                                                            alert("passed repo id =>" + get_repository_msg_id + "file uploaded file =>" + get_file_uploaded_path);
+                                                            // alert("passed repo id =>" + get_repository_msg_id + "file uploaded file =>" + get_file_uploaded_path);
 
                                                             $.ajax({
                                                                 type: "POST",
@@ -736,7 +736,7 @@ $controllers->login_check();
 
                                                                     console.log("sended repo msg id =>" + get_repository_msg_id)
 
-                                                                    alert(response)
+                                                                    // alert(response)
 
 
 
