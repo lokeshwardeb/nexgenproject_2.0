@@ -13,8 +13,10 @@ $Routes = [
     '/create_new_project' => __DIR__ . '/views/pages/create_new_project.views.php',
     '/projects_hub' => __DIR__ . '/views/pages/projects_hub.views.php',
     '/projects_file_repository' => __DIR__ . '/views/pages/projects_files_repository.views.php',
-    '/send_msg' => __DIR__ . '/views/pages/send_msg.views.php',
-    '/delete_msg' => __DIR__ . '/views/pages/delete_msg.views.php',
+    '/send_msg' => __DIR__ . '/views/pages/inc/_send_msg.views.php',
+    '/delete_msg' => __DIR__ . '/views/pages/inc/_delete_msg.views.php',
+    // '/send_msg' => __DIR__ . '/views/pages/send_msg.views.php',
+    // '/delete_msg' => __DIR__ . '/views/pages/delete_msg.views.php',
     '/logout' => __DIR__ . '/views/pages/logout.views.php',
 
 
