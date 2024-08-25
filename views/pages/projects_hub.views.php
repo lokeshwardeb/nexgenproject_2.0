@@ -126,7 +126,7 @@ $controllers->check_get_project_id();
                                                 </a>
                                             </div>
                                             <div class="col-md-3 col-sm-12">
-                                                <a href="">
+                                                <a href="/project_discussions?project_id=<?php echo $project_id ?>">
                                                     <button class="btn btn-outline-dark">
                                                         Discussions
                                                     </button>

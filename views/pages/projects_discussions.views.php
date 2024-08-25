@@ -107,10 +107,10 @@ $controllers->login_check();
                                 <div class="container">
                                     <div class="title_section">
                                         <div class="section_title fs-2 text-center mt-4 inter-font">
-                                            Welcome to the projects file repository
+                                            Welcome to the projects discussion
                                         </div>
-                                        <div class="section_desc fs-5 text-center mt-4 lux_roman">
-                                            (Here you can upload or download project files from this repository)
+                                        <div class="section_desc fs-5 text-center mt-4 mb-4 lux_roman">
+                                            (Here you can discuss about your project with the team members)
                                         </div>
                                         <div class="section_title pt-4 fs-4 text-center mt-4 inter-font">
                                             <?php
@@ -174,7 +174,8 @@ $controllers->login_check();
 
                                                         $get_current_user_id = $_SESSION['user_id'];
 
-                                                        $result_get_project_repository_messages = $controllers->get_all_data("projects_file_repository", "`project_id` = '$project_id'");
+                                                        // $result_get_project_repository_messages = $controllers->get_all_data("project_discussions", "`project_id` = '$project_id'");
+                                                        $result_get_project_repository_messages = $controllers->get_all_data("project_discussions", "`project_id` = '$project_id'");
 
                                                         if ($result_get_project_repository_messages) {
                                                             if ($result_get_project_repository_messages->num_rows > 0) {
@@ -384,7 +385,8 @@ $controllers->login_check();
                                                         var event_name = $("#event_name").val();
 
                                                         // var channel = pusher.subscribe('my-channel');
-                                                        var channel = pusher.subscribe('project_repository');
+                                                        var channel = pusher.subscribe('project_discussion');
+                                                        // var channel = pusher.subscribe('project_repository');
 
                                                         // pusher.trigger("my-channel", "my-event", { message: "hello world" });
                                                         // pusher.trigger("my-channel", "my-event", { message: "hello world" });
@@ -478,7 +480,7 @@ $controllers->login_check();
                                                                     $("#repo_upload_file").val("");
                                                                 }
 
-                                                                // send_notification('New file repository Message by : '+ data.message_sender_user_name , data.message, "/projects_file_repository?project_id=6");
+                                                                // send_notification('New file repository Message by : '+ data.message_sender_user_name , data.message, "/project_discussions?project_id=6");
 
                                                                 // send_notification("New file repository Message by "+ $message_sender_user_name +", " '. $message .' ");
 
@@ -510,7 +512,7 @@ $controllers->login_check();
 
 
                                                                     // send the notification
-                                                                    send_notification('New Message was sent on file repository by : ' + data.message_sender_user_name, data.message, "/projects_file_repository?project_id=6");
+                                                                    send_notification('New Message was sent on file repository by : ' + data.message_sender_user_name, data.message, "/project_discussions?project_id=6");
 
 
 
@@ -534,13 +536,13 @@ $controllers->login_check();
                                                                     $("#repo_upload_file").val("");
 
                                                                     // send the file upload notification
-                                                                    send_notification('New File was uploaded on file repository by : ' + data.message_sender_user_name, data.message, "/projects_file_repository?project_id=6");
+                                                                    send_notification('New File was uploaded on file repository by : ' + data.message_sender_user_name, data.message, "/project_discussions?project_id=6");
                                                                 }
 
                                                                 //  // add the message sender user_name
                                                                 //  $("#messages").append('<div class="m-4">'+ data.message_sender_user_name +'</div>')
 
-                                                                // send_notification('New Message was sent on file repository by : '+ data.message_sender_user_name , data.message, "/projects_file_repository?project_id=6");
+                                                                // send_notification('New Message was sent on file repository by : '+ data.message_sender_user_name , data.message, "/project_discussions?project_id=6");
 
 
                                                                 scrollToBottom()
@@ -723,7 +725,8 @@ $controllers->login_check();
 
                                                             $.ajax({
                                                                 type: "POST",
-                                                                url: "/delete_msg",
+                                                                // url: "/delete_msg",
+                                                                url: "/project_discussion_delete_msg",
                                                                 data: { delete_repository_msg_id: get_repository_msg_id, project_id: project_id, file_uploaded_path: get_file_uploaded_path },
                                                                 // dataType: "dataType",
                                                                 success: function (response) {
@@ -794,7 +797,9 @@ $controllers->login_check();
                                                                     // that means that the message is not blank
                                                                     $.ajax({
                                                                         type: "POST",
-                                                                        url: "/send_msg",
+                                                                        // url: "/send_msg",
+                                                                        // url: "/send_msg",
+                                                                        url: "/project_discussion_send_msg",
                                                                         data: formData,
                                                                         contentType: false,
                                                                         processData: false,
