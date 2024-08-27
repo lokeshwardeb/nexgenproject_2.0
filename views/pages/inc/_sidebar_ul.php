@@ -221,8 +221,22 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
         </a>
     </li> -->
     <li class="text-center m-auto">
-        <a href="" class="nav-link text-center mb-4">
-            <button type="button" class="btn  text-center sidebar_btn p-2 ">
+        <a href="/meetings" class="nav-link text-center mb-4">
+            <button type="button" class="btn  text-center <?php 
+            
+            switch($get_url){
+                case '/meetings':
+                    echo 'sidebar_btn_active';
+                    break;
+                case '/meeting_hub':
+                    echo 'sidebar_btn_active';
+                    break;
+                default:
+                    break;
+            }
+
+            
+            ?> sidebar_btn p-2 ">
                 Meetings
             </button>
         </a>

@@ -7,6 +7,115 @@
 class controllers extends models
 {
 
+    public function create_new_meeting(){
+        if(isset($_POST['new_meeting'])){
+
+            $letter = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+            $meeting_code_shuffle = str_shuffle($letter);
+
+            $result_get_meeting = $this->get_all_data("meetings");
+
+            $result_get_meeting_status = $this->get_all_data("meetings", "`meeting_status` = 'running'");
+
+            if($result_get_meeting_status){
+                if($result_get_meeting_status->num_rows > 0){
+                    // that means there already a meeting exist and it should not create a new meeting as only one running meeting is allowed
+                    echo '
+                    <script>
+                    danger_alert("Already a meeting is running !!", "A meeting is already running, please join the meeting !!");
+                    </script>
+                    ';
+
+                    return;
+
+                }
+            }
+
+            if($result_get_meeting){
+                if($result_get_meeting->num_rows > 0){
+
+                    $result_upcoming_meeting_id = $this->get_the_max_id("meeting_id", "meetings");
+
+                    while($row = $result_upcoming_meeting_id->fetch_assoc()){
+                        $upcoming_meeting_id = $row['max_id'];
+                    }
+
+                }else{
+
+                    $upcoming_meeting_id = 1;
+
+                }
+            }
+
+            // $upcoming_meeting_id = $this->get_the_max_id("meeting_id", "meetings");
+
+            echo $meeting_code = (string) $meeting_code_shuffle . '_id_' . $upcoming_meeting_id;
+
+
+
+            $result_create_meeting = $this->insert("meetings", "`meeting_code`, `meeting_status`", "'$meeting_code', 'running'");
+
+            if($result_create_meeting){
+                echo '
+                <script>
+                success_alert("Meeting has been created successfully !!", "Reloading the page in 5 seconds ....");
+                </script>
+                ';
+
+                // reload in 5 seconds
+                echo '
+                <script>
+                setTimeout(function(){ window.location.reload(); }, 5000); 
+                </script>
+                ';
+
+                return;
+
+            }
+
+            
+
+
+            // echo '
+
+            // <a  href="/meeting_hub?meeting_id=">
+            // <button name="join_meeting" id="join_meeting" class="btn btn-primary">Join meeting</button>
+            // </a>
+            
+            // ';
+        }
+    }
+
+
+    public function meetings_handler(){
+
+        if(isset($_GET['meeting_code'])){
+            $meeting_code = $this->pure_data($_GET['meeting_code']);
+
+            $username = $_SESSION['username'];
+
+            $result_get_meetings_status = $this->get_all_data("meetings", "`meeting_code` = '$meeting_code'");
+            if($result_get_meetings_status){
+                if($result_get_meetings_status->num_rows > 0){
+                    // that means the meeting exists with the code
+                    while($row = $result_get_meetings_status->fetch_assoc()){
+                        $meeting_status = $row['meeting_status'];
+                        if($meeting_status == 'running'){
+                            // that means the meeting is running and it should start the meeting
+                            echo '
+                            <script>
+                            start_meeting("'. $username .'");
+                            </script>
+                            ';
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+
     public function add_new_documentation(){
         if(isset($_POST['add_new_documentation'])){
             $documentation_name = $this->pure_data($_POST['documentation_name']);

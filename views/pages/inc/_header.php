@@ -59,6 +59,12 @@ $controllers = new controllers;
 <!-- pusher js files -->
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+<!-- daily js files -->
+<script crossorigin src="https://unpkg.com/@daily-co/daily-js"></script>
+
+<!-- meetings js files -->
+<script src="/assets/js/meetings.js"></script>
+
 <!-- jquery js files -->
 <script src="/assets/js/jquery.js"></script>
     
