@@ -7,6 +7,122 @@
 class controllers extends models
 {
 
+    public function add_new_documentation(){
+        if(isset($_POST['add_new_documentation'])){
+            $documentation_name = $this->pure_data($_POST['documentation_name']);
+            $documentation_desc = $this->pure_data($_POST['documentation_desc']);
+           
+            $documentation_file = $_FILES['documentation_file']['name'];
+            $documentation_file_tmp = $_FILES['documentation_file']['tmp_name'];
+            $documentation_file_extension = pathinfo($documentation_file, PATHINFO_EXTENSION);
+
+            $upload_dir = './assets/uploads/documentations_upload/';
+
+            $upload_file = $upload_dir . $documentation_file;
+
+            if($documentation_name == '' || $documentation_desc == '' || $documentation_file == ''){
+                // that means the data is empty and it should through an error
+                echo '
+                
+                <script>
+                
+                danger_alert("Please fillup all the data !!", "You have to fillup all the data !! Data cannot be blank !!");
+
+                </script>
+
+                ';
+
+                return;
+
+            }
+
+
+            // check if the data already exists on the database
+            $check_result = $this->get_all_data("documentations", "`documentation_name` = '$documentation_name' AND `documentation_desc` = '$documentation_desc'");
+
+            if($check_result){
+                if($check_result->num_rows > 0){
+                    // that means the data already exists on the database and it should through an error
+                    echo '
+                    <script>
+                    danger_alert("Documentation already exists !!", "Your submitted documentation already exists on our software !!");
+                    </script>
+                    ';
+                    
+                    return;
+
+                }
+            }
+
+
+            // check if the file is supported or not (only pdf is supported)
+            if($documentation_file_extension != 'pdf'){
+                echo '
+                <script>
+                
+                danger_alert("The file is not supported !!", "Please upload .pdf files !! Only pdf file is supported !!");
+
+                </script>
+                ';
+
+                return;
+
+            }
+
+
+            // check if the directory exists or not, if not exists then create one
+            if(!file_exists($upload_dir)){
+                // that means the directory not exists and it should create one
+                mkdir($upload_dir);
+            }
+
+
+
+            // now if the data not exits on the database then add the new data to the database
+            $add_new_documentation_result = $this->insert("documentations", "`documentation_name`, `documentation_desc`, `documentation_file_name`", "'$documentation_name', '$documentation_desc', '$documentation_file'");
+
+            // now if the data added successfully on the database then upload the file on the software
+            if(move_uploaded_file($documentation_file_tmp, $upload_file)){
+                // that means the files has been uploaded successfully 
+                echo '
+                <script>
+                
+                success_alert("Success !!", "Your new documentation has been added successfully !!");
+
+                </script>
+                ';
+            }else{
+                echo '
+                <script>
+                
+                danger_alert("Error !!", "There has been some issues while uploading with your documentation !! Please try again later !! If you are facing the same problem again and again then please immediately contact the developer of the software !!");
+
+                </script>
+                ';
+
+                // // if there an error occurs then delete the added data from the database
+                // $delete_added_data_result = $this->delete("documentations", "`documentation_name` = '$documentation_name' AND `documentation_desc` = '$documentation_desc' AND `documentation_file_name` = '$documentation_file'");
+
+                // if($delete_added_data_result){
+                //     // that means the added data has been deleted successfully
+                //     echo '
+                //     <script>
+                //     success_alert("Success !!", "We have deleted the added data successfully !!");
+                //     </script>
+                //     ';
+                // }
+
+                // $this->delete();
+
+
+
+            }
+
+
+
+        }
+    }
+
 
     public function send_push_msg($channel_name, $event_name, $message){
         $options = array(
