@@ -66,7 +66,10 @@ class controllers extends models
                 // reload in 5 seconds
                 echo '
                 <script>
-                setTimeout(function(){ window.location.reload(); }, 5000); 
+                setTimeout(function(){
+                    //  window.location.reload(); 
+                    location.href="/meetings";
+                    }, 5000); 
                 </script>
                 ';
 
@@ -105,11 +108,27 @@ class controllers extends models
                             // that means the meeting is running and it should start the meeting
                             echo '
                             <script>
-                            start_meeting("'. $username .'");
+                            start_meeting("'. $username .'", "'. $meeting_code .'");
                             </script>
                             ';
                         }
                     }
+                }else{
+                    // that means the meeting not exists on database
+                    echo '
+                    <script>
+                    danger_alert("The meeting does not exists !!", "This meeting does not exists on our software !! Please create a new meeting or join the existing meeting !!");
+
+                    setInterval(() => {
+                        location.href = "/meetings";
+                    }, 10000);
+
+                    </script>
+                    ';
+
+                    
+
+
                 }
             }
         }

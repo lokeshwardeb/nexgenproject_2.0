@@ -13,6 +13,7 @@ $Routes = [
     '/view_documentation' => __DIR__ . '/views/pages/view_documentation.views.php',
     '/meetings' => __DIR__ . '/views/pages/meetings.views.php',
     '/meeting_hub' => __DIR__ . '/views/pages/meeting_hub.views.php',
+    '/delete_meeting' => __DIR__ . '/views/pages/inc/_delete_meeting.views.php',
     '/projects' => __DIR__ . '/views/pages/projects.views.php',
     '/all_projects' => __DIR__ . '/views/pages/all_projects.views.php',
     '/create_new_project' => __DIR__ . '/views/pages/create_new_project.views.php',
