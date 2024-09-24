@@ -32,18 +32,6 @@ function start_meeting(username, meeting_code) {
       console.log("Participants present:", participants.present);
   });
 
-    //   if the participant has left the meeting then redirect that participant on dashboard
-    call.on('left-meeting', () => {
-
-        // delay for 5 seconds
-        setTimeout(() => {
-            window.location.href = '/dashboard';
-        }, 5000);
-
-        // window.location.href = '/dashboard';
-    })
-
-
   call.on('participant-left', async () => {
       const participants = await call.participantCounts();
       console.log("Participants present after someone left:", participants.present);
@@ -57,23 +45,21 @@ function start_meeting(username, meeting_code) {
               data: { meeting_code: meeting_code },
               success: function (response) {
                   // alert(response);
-                  danger_alert("Meeting will be end in 10 sec ..", "Your meeting will be end in 10 sec as there has no participants exists, except you !!")
+                  danger_alert("Meeting will be end in 5 sec ....", "Your meeting will be end in 5 sec as there has no participants exists !!")
               }
           });
 
           setTimeout(() => {
               window.location.href = '/dashboard';
-          }, 10000);
+          }, 5000);
+      }else if(participants.present){
+        // that means there are participants exists more that 1
+        
+        // setTimeout(() => {
+        //   window.location.href = '/dashboard';
+        // }, 5000);
+        
       }
-      
-    //   else if(participants.present > 1){
-    //     // that means there are participants exists more that 1
-        
-    //     // setTimeout(() => {
-    //     //   window.location.href = '/dashboard';
-    //     // }, 5000);
-        
-    //   }
   });
 
   // Redirect when the meeting ends

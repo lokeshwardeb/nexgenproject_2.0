@@ -53,8 +53,8 @@ $controllers = new controllers;
     <link rel="stylesheet" href="/assets/css/dashboard.css">
 
      <!-- botpress ai js files -->
- <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>
-<script src="https://mediafiles.botpress.cloud/3175fb81-1692-4bba-9916-12f850a4bda5/webchat/v2/config.js"></script>
+ <!-- <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>
+<script src="https://mediafiles.botpress.cloud/3175fb81-1692-4bba-9916-12f850a4bda5/webchat/v2/config.js"></script> -->
 
 <!-- pusher js files -->
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
@@ -67,6 +67,11 @@ $controllers = new controllers;
 
 <!-- jquery js files -->
 <script src="/assets/js/jquery.js"></script>
+
+     <!-- botpress ai js files -->
+     <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>
+<script src="https://mediafiles.botpress.cloud/3175fb81-1692-4bba-9916-12f850a4bda5/webchat/v2/config.js"></script>
+
     
 
 </head>

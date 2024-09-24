@@ -7,6 +7,26 @@
 class controllers extends models
 {
 
+    public function add_new_task(){
+        if(isset($_POST['add_new_task'])){
+            $task_name = $this->pure_data($_POST['task_name']);
+            $task_desc = $this->pure_data($_POST['task_desc']);
+            
+            $task_file = $_FILES['task_file']['name'];
+
+            // check if the data is blank or not
+            if($task_name == '' || $task_desc == ''){
+                // that means all the data is blank and it should be through an error 
+                echo '
+                <script>
+                danger_alert("Please fillup all the data !!", "You have to fillup all the data !! Data cannot be blank !!");
+                </script>
+                ';
+            }
+
+        }
+    }
+
     public function create_new_meeting(){
         if(isset($_POST['new_meeting'])){
 
@@ -62,6 +82,8 @@ class controllers extends models
                 success_alert("Meeting has been created successfully !!", "Reloading the page in 5 seconds ....");
                 </script>
                 ';
+
+                // unset($_POST['new_meeting']);
 
                 // reload in 5 seconds
                 echo '
