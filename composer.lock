@@ -629,16 +629,16 @@
         },
         {
             "name": "psr/log",
-            "version": "3.0.0",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
+                "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
-                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
+                "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
                 "shasum": ""
             },
             "require": {
@@ -673,9 +673,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/3.0.0"
+                "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
-            "time": "2021-07-14T16:46:02+00:00"
+            "time": "2024-09-11T13:17:53+00:00"
         },
         {
             "name": "pusher/pusher-php-server",
@@ -784,25 +784,25 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.5.0",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1"
+                "reference": "26954b3d62a6c5fd0ea8a2a00c0353a14978d05c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
-                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/26954b3d62a6c5fd0ea8a2a00c0353a14978d05c",
+                "reference": "26954b3d62a6c5fd0ea8a2a00c0353a14978d05c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1"
+                "php": ">=8.0.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.5-dev"
+                    "dev-main": "3.0-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -831,7 +831,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.0.2"
             },
             "funding": [
                 {
@@ -847,7 +847,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:32:20+00:00"
+            "time": "2022-01-02T09:55:41+00:00"
         }
     ],
     "packages-dev": [],
