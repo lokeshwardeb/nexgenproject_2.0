@@ -72,7 +72,13 @@ $controllers = new controllers;
      <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>
 <script src="https://mediafiles.botpress.cloud/3175fb81-1692-4bba-9916-12f850a4bda5/webchat/v2/config.js"></script>
 
-    
+
+<!-- check whether the replace state exits or not -->
+ <script>
+    if(window.history.replaceState){
+        window.history.replaceState(null, null, window.location.href);
+    }
+ </script>
 
 </head>
 <body>

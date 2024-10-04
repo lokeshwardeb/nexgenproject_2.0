@@ -7,22 +7,64 @@
 class controllers extends models
 {
 
+    
+
     public function add_new_task(){
         if(isset($_POST['add_new_task'])){
             $task_name = $this->pure_data($_POST['task_name']);
             $task_desc = $this->pure_data($_POST['task_desc']);
+
+            $project_id = $this->pure_data($_POST['project_id']);
+
             
             $task_file = $_FILES['task_file']['name'];
 
             // check if the data is blank or not
-            if($task_name == '' || $task_desc == ''){
+            if($task_name == '' || $task_desc == '' || $project_id == ''){
                 // that means all the data is blank and it should be through an error 
                 echo '
                 <script>
                 danger_alert("Please fillup all the data !!", "You have to fillup all the data !! Data cannot be blank !!");
                 </script>
                 ';
+                return;
             }
+
+            // check if the task already exists or not
+            $result_check = $this->get_all_data("tasks", "`project_id` = '$project_id' AND `task_name` = '$task_name' AND `task_desc` = '$task_desc'");
+
+
+
+            if($result_check){
+                // that means the same task is already exists on the software
+                echo '
+                <script>
+                danger_alert("The task already exists !!", "Same task already exists on the software");
+                </script>
+                ';
+
+                return;
+            }
+            
+
+            // insert the data to the database
+            $task_result = $this->insert("tasks", "`task_name`, `task_desc`", "'$task_name', '$task_desc'");
+
+            if($task_result){
+                echo '
+                <script>
+                    success_alert("The task has been added successfully !!");
+                </script>
+                ';
+            }else{
+                echo '
+                 <script>
+                    danger_alert("There has been error while adding the task");
+                 </script>
+                ';
+            }
+
+
 
         }
     }

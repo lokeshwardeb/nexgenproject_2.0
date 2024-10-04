@@ -8,7 +8,8 @@ $active_name = "All Projects";
 require __DIR__ . '/inc/_header.php';
 
 $controllers->login_check();
-$controllers->add_new_task();
+// $controllers->create_new_meeting();
+// $controllers->meetings_handler();
 
 ?>
 
@@ -36,7 +37,6 @@ $controllers->add_new_task();
             <div class="col-md-9 cus_bg_main_section_color">
                 <div class="main_content_section scrollbar_container">
 
-
                     <div class="the_running_main_content montserrat_font">
 
                         <div class="details_container">
@@ -46,75 +46,58 @@ $controllers->add_new_task();
                                 <div class="container">
                                     <div class="title_section">
                                         <div class="section_title fs-4 text-center mt-4 inter-font">
-                                            Add new task
+                                            Tasks Management
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="main_content_section mt-4">
-                                    <div class="projects_content lux_roman">
-                                        <div class="container">
-                                            <form action="" method="post" enctype="multipart/form-data" >
-                                            <div class="mb-3">
-                                                    <select class="form-control" name="project_id" id="project_id">
-                                                        <option value="">Select Project</option>
-                                                        <?php
-
-                                                        $result_get_projects = $controllers->get_all_data("projects", "1 ORDER BY projects.project_id DESC");
-
-                                                        if($result_get_projects){
-                                                            while($row = $result_get_projects->fetch_assoc()){
-                                                                echo '<option value="'. $row['project_id'] .'">'. $row['project_name'] .'</option>';
-                                                            }
-                                                        }
-
-
-                                                        ?>
-                                                    </select>
-                                                </div>    
-                                            <div class="mb-3">
-                                                    <input type="text" name="task_name" class="form-control" placeholder="Enter Task Name" >
-                                                </div>
-                                               
-                                                <div class="mb-3">
-                                                    <textarea name="task_desc" class="form-control" id="" placeholder="Enter Task Description" cols="30" rows="10"></textarea>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <input type="file" name="task_file" id="task_file" class="form-control" >
-                                                    <div  class="text-danger mt-4 ms-4 mb-4">* Please upload pdf files only (Optional)</d>
-                                                </div>
-                                                <div class="mb-3">
-                                                   <button type="submit" name="add_new_task" class="btn btn-outline-primary mt-4 mb-4" >Add new task</button>
+                                    <div class="container m-4 pt-4  pe-5">
+                                      <div class="meetings_main_section">
+                                        <div class="meetings_content">
+                                            <div class="container">
+                                                <div class="meetings_title fs-3 border-bottom border-dark  pb-2 inter-font">
+                                                    Manage team tasks and <br/> give task to team from anywhere
                                                 </div>
 
-                                            </form>
+                                                <div class="task_main_section m-4 p-4">
+                                                    <div class="task_btn_section">
+                                                        <div class="row">
+                                                            <div class="col-md-3 col-sm-12">
+                                                                <a href="/add_new_task">
+                                                                    <button type="submit" class="btn btn-primary" >Add new task</button>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-12">
+                                                                <a href="/manage_all_task">
+                                                                    <button class="btn btn-primary">Manage all tasks</button>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-12">
+                                                                <a href="">
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-12"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <hr class="bg-dark"/> -->
+
+                                            </div>
                                         </div>
+                                      </div>
                                     </div>
                                 </div>
 
-
-                                <?php
-
-                                // $result_total_page = $controllers->get_all_data("projects");
-
-                                // if ($result_total_page) {
-                                //     if ($result_total_page->num_rows > 0) {
-                                //         $total_page_records = $result_total_page->num_rows;
-                                //         $limit = 3;
-                                //         $total_page = ceil($total_page_records - $limit);
-
-                                //         for ($i = 0; $i <= $total_page; $i++) {
-
-                                //         }
+                             
 
 
-                                //     }
-                                // }
+                                
 
 
-                                ?>
-
-                               
+                                
                             </div>
 
                         </div>

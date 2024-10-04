@@ -241,13 +241,41 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
             </button>
         </a>
     </li>
+   
+
+    <!-- without collapsing feature on tasks url -->
+
     <li class="text-center m-auto">
+        <a href="/tasks" class="nav-link text-center mb-4">
+            <button type="button" class="btn  text-center <?php 
+            
+            switch($get_url){
+                case '/tasks':
+                    echo 'sidebar_btn_active';
+                    break;
+                case '/meeting_hub':
+                    echo 'sidebar_btn_active';
+                    break;
+                default:
+                    break;
+            }
+
+            
+            ?> sidebar_btn p-2 ">
+                Tasks
+            </button>
+        </a>
+    </li>
+   
+    <!-- <li class="text-center m-auto">
         <a href="" class="nav-link text-center mb-4">
             <button type="button" class="btn  text-center sidebar_btn p-2 ">
                 Task
             </button>
         </a>
-    </li>
+    </li> -->
+
+
     <!-- <li class="text-center m-auto">
                                     <a href="" class="nav-link text-center mb-4">
                                         <button type="button" class="btn  text-center sidebar_btn p-2 ">
