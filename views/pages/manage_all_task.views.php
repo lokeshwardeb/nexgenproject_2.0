@@ -70,7 +70,9 @@ $controllers->login_check();
                                                 $offset = ($current_page_no - 1) * $limit;
 
 
-                                                $result_all_projects = $controllers->create_sql_query("SELECT * FROM `projects` ORDER BY `project_id` DESC LIMIT {$offset}, {$limit}");
+                                                // get the task tables using the sql command
+
+                                                $result_all_projects = $controllers->create_sql_query("SELECT * FROM `tasks` ORDER BY `task_id` DESC LIMIT {$offset}, {$limit}");
 
                                                 if($result_all_projects){
                                                     if($result_all_projects->num_rows > 0){
@@ -84,10 +86,10 @@ $controllers->login_check();
                                                 <div
                                                 class="col-12 p-2 m-4 mt-2 mb-2 project_main_col_content  project_col_main ">
                                                 <div class="project_main  d-flex  ">
-                                                    <div class="project_no  ps-4 ms-4 me-4">'. $row['project_id'] .'</div>
-                                                    <div class="project_name me-4">'. $row['project_name'] .'</div>
+                                                    <div class="project_no  ps-4 ms-4 me-4">'. $row['task_id'] .'</div>
+                                                    <div class="project_name me-4">'. $row['task_name'] .'</div>
                                                     <div class="project_details ps-4 pe-4 me-4">
-                                                        <a href="/projects_hub?project_id='. $row['project_id'] .'">
+                                                        <a href="/task_details?project_id='. $row['task_id'] .'">
                                                             <i class="fa-solid fa-eye"></i>
 
                                                         </a>

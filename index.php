@@ -17,6 +17,7 @@ $Routes = [
     '/add_new_task' => __DIR__ . '/views/pages/add_new_task.views.php',
     '/manage_all_task' => __DIR__ . '/views/pages/manage_all_task.views.php',
     '/tasks' => __DIR__ . '/views/pages/tasks.views.php',
+    '/task_details' => __DIR__ . '/views/pages/task_details.views.php',
     '/projects' => __DIR__ . '/views/pages/projects.views.php',
     '/all_projects' => __DIR__ . '/views/pages/all_projects.views.php',
     '/create_new_project' => __DIR__ . '/views/pages/create_new_project.views.php',
