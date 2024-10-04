@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2024 at 05:09 PM
+-- Generation Time: Aug 27, 2024 at 11:11 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -71,7 +71,7 @@ INSERT INTO `meetings` (`meeting_id`, `meeting_code`, `meeting_status`, `datetim
 (7, 'uj0v2lrwzm1hat8d5gb9kf3nx6qp7si4cyeo_id_6', '', '2024-08-28 01:47:25'),
 (8, '5z8x0j3q9oiurldgbyhkms4tan7ec62wpvf1_id_7', '', '2024-08-28 01:47:31'),
 (9, 'dfyug0wtcz6k42sbihqonrlmj3x7a9p5v18e_id_8', '', '2024-08-28 01:47:36'),
-(29, '48o2nyu1t5aiw69mqh7zk0gpr3vsjldcxfeb_id_9', 'running', '2024-08-30 22:34:38');
+(10, '0t5q6hvwkpcmno7sl9bej4riuf32y81dzgax_id_9', 'running', '2024-08-28 01:48:47');
 
 -- --------------------------------------------------------
 
@@ -169,42 +169,6 @@ INSERT INTO `project_discussions` (`repository_msg_id`, `project_id`, `repositor
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tasks`
---
-
-CREATE TABLE `tasks` (
-  `task_id` int(11) NOT NULL,
-  `project_id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
-  `task_name` varchar(255) NOT NULL,
-  `task_desc` varchar(255) NOT NULL,
-  `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `tasks`
---
-
-INSERT INTO `tasks` (`task_id`, `project_id`, `user_id`, `task_name`, `task_desc`, `datetime`) VALUES
-(1, '', '', 'Jai sri ganesh', 'Jai sri ganesh', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `task_assigned_users`
---
-
-CREATE TABLE `task_assigned_users` (
-  `task_assigned_id` int(11) NOT NULL,
-  `task_id` varchar(255) NOT NULL,
-  `users_id` varchar(255) NOT NULL,
-  `task_assigned_datetime` datetime NOT NULL,
-  `task_last_submission_datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -262,18 +226,6 @@ ALTER TABLE `project_discussions`
   ADD PRIMARY KEY (`repository_msg_id`);
 
 --
--- Indexes for table `tasks`
---
-ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`task_id`);
-
---
--- Indexes for table `task_assigned_users`
---
-ALTER TABLE `task_assigned_users`
-  ADD PRIMARY KEY (`task_assigned_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -293,7 +245,7 @@ ALTER TABLE `documentations`
 -- AUTO_INCREMENT for table `meetings`
 --
 ALTER TABLE `meetings`
-  MODIFY `meeting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `meeting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `projects`
@@ -312,18 +264,6 @@ ALTER TABLE `projects_file_repository`
 --
 ALTER TABLE `project_discussions`
   MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
-
---
--- AUTO_INCREMENT for table `tasks`
---
-ALTER TABLE `tasks`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `task_assigned_users`
---
-ALTER TABLE `task_assigned_users`
-  MODIFY `task_assigned_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
