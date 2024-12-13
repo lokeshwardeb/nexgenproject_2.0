@@ -3,6 +3,10 @@
     --cus-main-section-bg-color: #E8EBF1;
 }
 
+.cus_body_bg_color{
+    background-color: var(--cus-main-section-bg-color) !important;
+}
+
 .cus_primary_color{
     color: var(--cus-primary-color) !important;
 }

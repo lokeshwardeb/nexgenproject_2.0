@@ -1,36 +1,13 @@
 <?php
 session_start();
 
-// "/config/conn.php"
-
-if(!file_exists(__DIR__ . "/../../../config/conn.php")){
-    echo '
-    <script>
-    location.href="/installation";
-    </script>
-    ';
-    exit;
-}
-
-
-// if (file_exists("config/conn.php")) {
-//     require_once __DIR__ . '/../../../config/conn.php';
-//     require_once __DIR__ . '/../../../models/models.php';
-//     require_once __DIR__ . '/../../../controllers/controllers.php';
+// require_once __DIR__ . '/../../../config/conn.php';
+// require_once __DIR__ . '/../../../models/models.php';
+// require_once __DIR__ . '/../../../controllers/controllers.php';
 
 
 
 // $controllers = new controllers;
-
-// }
-
-require_once __DIR__ . '/../../../config/conn.php';
-require_once __DIR__ . '/../../../models/models.php';
-require_once __DIR__ . '/../../../controllers/controllers.php';
-
-
-
-$controllers = new controllers;
 
 require './vendor/autoload.php';
 

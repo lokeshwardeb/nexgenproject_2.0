@@ -2,9 +2,56 @@
 
 require __DIR__ . '/inc/_login_signup_header.php';
 
-$controllers->login();
+// if(file_exists(__DIR__ . "/../config/conn.php")){
+// 		echo '
+// 		<script>
+// 		location.href="/installation";
+// 		</script>
+// 		';
+// 		exit;
+// }
 
-$controllers->signup();
+// $controllers->login();
+
+// $controllers->signup();
+
+
+// if(file_exists("/config/conn.php")){
+	
+// $controllers->login();
+
+// $controllers->signup();
+
+// }else{
+// 	// that means the config has not completed
+// 	echo '
+// 	<script>
+// 	location.href="/installation";
+// 	</script>
+// 	';
+// }
+
+
+// $controllers->login();
+
+// $controllers->signup();
+
+// check if the installer inc exists or not
+// $check_conn_file = file_exists("/config/conn.php");
+
+// if(!$check_conn_file){
+//     // that means the conn file is not exists
+//     echo '
+    
+//     <script>
+    
+//     location.href="/installation"
+
+//     </script>
+    
+    
+//     ';
+// }
 
 // $controllers->send_sms();
 

@@ -8,10 +8,10 @@ class database{
     private $dbname;
 
     protected function connection(){
-        $this->hostname = 'localhost';
-        $this->db_username = 'root';
-        $this->db_password = '';
-        $this->dbname = 'nexgenproject_2.0';
+        $this->hostname = 'host_name';
+        $this->db_username = 'user_name';
+        $this->db_password = 'pass_word';
+        $this->dbname = 'data_base_name';
 
         
 

@@ -3,7 +3,12 @@
 
 // $config = new connect;
 
+// if(file_exists("/config/conn.php")){
+//     require_once __DIR__ . '/../config/conn.php';
+// }
+
 class models extends database{
+
 
     public function pure_data($data){
         $result = htmlspecialchars(mysqli_real_escape_string($this->connection(), $data), ENT_QUOTES);

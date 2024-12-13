@@ -1,10 +1,73 @@
 <?php
-// session_start();
-// $_SESSION['username'] = 'jai sri ganesh';
+
 $active_name = "Dashboard";
+
+
 require __DIR__ . '/inc/_header.php';
 
-$controllers->login_check();
+// if(!file_exists("/config/conn.php")){
+//     echo '
+//      <script>
+//      location.href="/installation";
+//      </script>
+//      ';
+
+//      exit;
+// }
+
+
+    $controllers->login_check();
+
+
+
+// if(file_exists("/config/conn.php")){
+//     $controllers->login_check();
+       
+// }else{
+
+//     echo '
+//     <script>
+//     location.href="/installation";
+//     </script>
+//     ';
+// return;
+
+
+// }
+
+// echo "hi";
+
+
+// if(file_exists("/config/conn.php")){
+//     $active_name = "Dashboard";
+
+// $controllers->login_check();
+// }else{
+//     // that means the configuration file is not found and it should be setup first
+//     echo '
+//     <script>
+//     location.href="/setup";
+//     </script>
+//     ';
+// }
+
+
+
+
+// require __DIR__ . '/inc/_header.php';
+
+
+
+
+
+// session_start();
+// $_SESSION['username'] = 'jai sri ganesh';
+
+
+// $active_name = "Dashboard";
+// require __DIR__ . '/inc/_header.php';
+
+// $controllers->login_check();
 
 ?>
 

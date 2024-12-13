@@ -5,6 +5,8 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 $Routes = [
 
     '/' => __DIR__ . '/views/pages/dashboard.views.php',
+    '/installation' => __DIR__ . '/views/setup_pages/installation_process.php',
+    '/setup' => __DIR__ . '/views/setup_pages/setup.views.php',
     '/login' => __DIR__ . '/views/pages/login.views.php',
     '/signup' => __DIR__ . '/views/pages/signup.views.php',
     '/dashboard' => __DIR__ . '/views/pages/dashboard.views.php',
@@ -34,6 +36,8 @@ $Routes = [
 
 
 ];
+
+
 
 if(array_key_exists($uri, $Routes)){
     require $Routes[$uri];
