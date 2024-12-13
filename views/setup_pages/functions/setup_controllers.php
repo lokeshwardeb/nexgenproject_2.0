@@ -1,9 +1,51 @@
 <?php
+// require_once __DIR__ . '/../../../config/conn.php';
+if(file_exists( __DIR__ . '/../../../config/conn.php')){
+    require_once __DIR__ . '/../../../config/conn.php';
+
+}
+
+// require_once __DIR__ . '/../../../models/models.php';
+
 
 class setup_controllers{
 
     public function pure_html($data){
         return htmlentities($data, ENT_QUOTES);
+    }
+
+    public function check_database_exist($get_mysql_connect, $get_db_name){
+        $check_db_sql = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '{$get_db_name}'";
+        $check_db_result = $get_mysql_connect->query($check_db_sql);
+
+        if ($check_db_result && $check_db_result->num_rows > 0) {
+            // Database exists
+            return true;
+            // echo 'The database ' . $get_db_name . ' exists.<br>';
+
+        } else {
+            // Database does not exist
+            return false;
+            // echo 'The database ' . $get_db_name . ' does not exist.<br>';
+
+            // $get_mysql_connect->close();
+
+            // echo '
+            // <script>
+            
+            // location.href="/setup"
+            
+            // </script>
+            
+            
+            // ';
+
+            // header("location: /setup");
+            // exit;
+        }
+
+        // Close the temporary connection
+        // $check_db_conn->close();
     }
 
     public function save_server_configuration(){
@@ -42,7 +84,75 @@ class setup_controllers{
 
             file_put_contents($conn_file_dir, str_replace("data_base_name", $database_name, file_get_contents($conn_file_dir)));
 
-            return;
+
+            $mysql_connect = new mysqli($server_name, $server_user_name, $server_password);
+
+            if($mysql_connect->connect_error) {
+                die("there was error with setup db connect");
+            }
+
+            $get_database_exist_status = $this->check_database_exist($mysql_connect, $database_name);
+
+            if($get_database_exist_status == false){
+                // that means the database doesnot exist
+                $create_db_sql = "CREATE DATABASE `$database_name`";
+
+                $result_create_db = $mysql_connect->query($create_db_sql);
+
+
+            }
+
+            $my_conn = new mysqli($server_name, $server_user_name, $server_password, $database_name);
+
+
+            // $sql_file = __DIR__ . '/../../../sql/nexgenproject_2_0.sql';
+
+            // $sql_f = file_get_contents($sql_file);
+
+            // $result_setup_sql = $my_conn->query($sql_f);
+
+            // if($result_setup_sql){
+            //     echo '
+            //     <script>
+            //     location.href="/check"
+            //     </script>
+            //     ';
+            // }
+
+
+
+
+            $sql_file = __DIR__ . '/../../../sql/nexgenproject_2_0.sql';
+
+
+            // Read the .sql file into a string
+$sql = file_get_contents($sql_file);
+
+if ($sql === false) {
+    die("Could not read the .sql file.");
+}
+
+// Split the SQL file into individual queries (semicolon is used as a delimiter)
+$queries = explode(";", $sql);
+
+// Execute each query
+foreach ($queries as $query) {
+    $query = trim($query);
+    if (!empty($query)) {
+        if ($my_conn->query($query) === false) {
+            echo "Error executing query: " . $my_conn->error . "<br>";
+        }
+    }
+}
+
+             return "the installation was successfull";
+
+
+
+
+
+
+            // return;
 
 
 

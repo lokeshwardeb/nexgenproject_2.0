@@ -11,9 +11,9 @@ require __DIR__ . '/inc/_login_signup_header.php';
 // 		exit;
 // }
 
-// $controllers->login();
+$controllers->login();
 
-// $controllers->signup();
+$controllers->signup();
 
 
 // if(file_exists("/config/conn.php")){

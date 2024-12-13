@@ -74,6 +74,15 @@ $setup_controllers->save_server_configuration();
                             </script>
                             ';
                         }
+                        
+                        // if (isset($_POST['install']) || isset($_POST['start_setup']) && isset($_POST['save_server_config']) && $get_step == 1){
+
+                        //     echo $setup_controllers->save_server_configuration();
+
+                        // }
+
+                        
+                        // save_server_config
     
                     } else {
                         require __DIR__ . '/inc/setup_welcome.php';
