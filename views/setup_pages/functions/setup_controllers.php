@@ -125,6 +125,24 @@ class setup_controllers{
             $sql_file = __DIR__ . '/../../../sql/nexgenproject_2_0.sql';
 
 
+                        // check if the database exsits but the connection file doesnot exists
+                        if($get_database_exist_status == true){
+                            // that means the database is exists but the sql connection file is not exist
+
+                            return;
+
+                            // die('<div class="">the database already exists,, file already installed</div> <button class="btn btn-primary">Go to dashboard</button>');
+
+                            // return;
+                            // exit;
+
+                            
+                        }
+
+
+
+
+
             // Read the .sql file into a string
 $sql = file_get_contents($sql_file);
 
