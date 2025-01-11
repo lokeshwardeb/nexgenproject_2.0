@@ -14,6 +14,39 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
             </button>
         </a>
     </li>
+
+    <li class="text-center m-auto">
+        <a href="/meetings" class="nav-link text-center mb-4">
+            <button type="button" class="btn  text-center <?php 
+
+            if(isset($_GET['msg_user_id'])){
+                $get_msg_navigate_user_id = $_GET['msg_user_id'];
+
+            }else{
+                $get_msg_navigate_user_id = '';
+            }
+
+            $get_msg_navigate_user_id = 1;
+            
+            switch($get_url){
+                case '/messages?msg_user_id=1' :
+                    echo 'sidebar_btn_active';
+                    break;
+                case '/meeting_hub':
+                    echo 'sidebar_btn_active';
+                    break;
+                default:
+                    break;
+            }
+
+            
+            ?> sidebar_btn p-2 ">
+                Meetings
+            </button>
+        </a>
+    </li>
+
+
     <!-- <li class="text-center m-auto">
                                     <a href="" class="nav-link text-center mb-4">
                                         <button type="button" class="btn  text-center sidebar_btn p-2 ">
@@ -284,7 +317,7 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
                                     </a>
                                 </li> -->
     <li class="text-center m-auto">
-        <a href="/message_hub" class="nav-link text-center mb-4">
+        <a href="" class="nav-link text-center mb-4">
             <button type="button" class="btn  text-center sidebar_btn p-2 ">
                 Messages
             </button>
