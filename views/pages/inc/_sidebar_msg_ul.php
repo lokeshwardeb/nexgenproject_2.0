@@ -7,80 +7,94 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
 ?>
 
 <ul class="nav">
-    <li class="text-center m-auto">
+    <!-- <li class="text-center m-auto">
         <a href="/dashboard" class="nav-link text-center mb-4">
             <button type="button" class="btn <?php echo $dashboard_active_class_name ?> text-center sidebar_btn p-2 ">
                 Dashboard
             </button>
         </a>
-    </li>
+    </li> -->
 
     <li class="text-center m-auto">
 
 
-    <?php
+        <?php
 
-    $user_msg_nav_result = $controllers->get_all_data("users");
-    if($user_msg_nav_result->num_rows > 0){
-        while($user_msg_nav_row = $user_msg_nav_result->fetch_assoc()){
-            echo '
+        $user_msg_nav_result = $controllers->get_all_data("users");
+        if ($user_msg_nav_result->num_rows > 0) {
+            while ($user_msg_nav_row = $user_msg_nav_result->fetch_assoc()) {
+
+                // check if the user id is the current user id 
+        
+                $user_msg_nav_main_user_id = $user_msg_nav_row['user_id'];
+                $get_current_user_id = $_SESSION['user_id'];
+
+                if ($user_msg_nav_main_user_id == $get_current_user_id) {
+                    // that means the user is the current user and it should avoid the process;
+        
+                    // here the continue will skip the current user and continue with other users
+                    continue;
+                }
+
+
+                echo '
             
-            <a href="?msg_user_id='. $user_msg_nav_row['user_id'] .'" class="nav-link text-center mb-4">
+            <a href="?msg_user_id=' . $user_msg_nav_row['user_id'] . '" class="nav-link text-center mb-4">
             <button type="button" class="btn  text-center 
 
             ';
 
-            if(isset($_GET['msg_user_id'])){
-                $get_msg_navigate_user_id = $_GET['msg_user_id'];
+                if (isset($_GET['msg_user_id'])) {
+                    $get_msg_navigate_user_id = $_GET['msg_user_id'];
 
-            }else{
-                $get_msg_navigate_user_id = '';
-            }
-            
-            switch($get_msg_navigate_user_id){
-                case $user_msg_nav_row['user_id'] :
-                    echo 'sidebar_btn_active';
-                    break;
-                case '/meeting_hub':
-                    echo 'sidebar_btn_active';
-                    break;
-                default:
-                    break;
-            }
+                } else {
+                    $get_msg_navigate_user_id = '';
+                }
 
-            echo '
+                switch ($get_msg_navigate_user_id) {
+                    case $user_msg_nav_row['user_id']:
+                        echo 'sidebar_btn_active';
+                        break;
+                    case '/meeting_hub':
+                        echo 'sidebar_btn_active';
+                        break;
+                    default:
+                        break;
+                }
+
+                echo '
             sidebar_btn p-2 ">
-                '. $user_msg_nav_row['user_name'] .'
+                ' . $user_msg_nav_row['user_name'] . '
             </button>
         </a>
             
             
             ';
+            }
         }
-    }
 
-    echo '
+        echo '
     
     
     ';
 
 
-    ?>
+        ?>
 
 
 
-        <a href="/meetings" class="nav-link text-center mb-4">
-            <button type="button" class="btn  text-center <?php 
+        <!-- <a href="/meetings" class="nav-link text-center mb-4">
+            <button type="button" class="btn  text-center <?php
 
-            if(isset($_GET['msg_user_id'])){
+            if (isset($_GET['msg_user_id'])) {
                 $get_msg_navigate_user_id = $_GET['msg_user_id'];
 
-            }else{
+            } else {
                 $get_msg_navigate_user_id = '';
             }
-            
-            switch($get_url){
-                case '/messages' . $get_msg_navigate_user_id :
+
+            switch ($get_url) {
+                case '/messages' . $get_msg_navigate_user_id:
                     echo 'sidebar_btn_active';
                     break;
                 case '/meeting_hub':
@@ -90,14 +104,14 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
                     break;
             }
 
-            
+
             ?> sidebar_btn p-2 ">
                 Meetings
             </button>
-        </a>
+        </a> -->
     </li>
 
 
-   
+
 
 </ul>

@@ -86,6 +86,7 @@ require './vendor/autoload.php';
     <link rel="stylesheet" href="/assets/css/utilities.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
     <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/assets/css/messages.css">
 
     <!-- botpress ai js files -->
     <!-- <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>

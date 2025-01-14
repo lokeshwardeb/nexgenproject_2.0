@@ -57,22 +57,71 @@ $controllers->login_check();
                                       <div class="meetings_main_section">
                                         <div class="meetings_content">
                                             <div class="container">
-                                                <div class="meetings_title fs-4 justify-content-center d-flex m-auto border-bottom border-dark  pb-3 inter-font">
-                                                    NexGenProjects for messages
-                                                </div>
+                                                <?php
+
+                                                    $get_msg_user_id = (isset($_GET['msg_user_id']) ? $controllers->pure_data($_GET['msg_user_id']) : '' );
+
+                                                    // get all the data with the user
+                                                    $result_get_msg_user_info = $controllers->get_all_data("users", " `user_id` = '$get_msg_user_id' ");
+
+                                                    if($result_get_msg_user_info){
+                                                        if($result_get_msg_user_info->num_rows > 0){
+                                                            // that means the user exists on the software
+                                                            while($row_msg_user_info = $result_get_msg_user_info->fetch_assoc()){
+                                                                $get_msg_user_name = $row_msg_user_info['user_name'];
+                                                            }
+                                                        }else{
+                                                            $get_msg_user_name = '';
+                                                        }
+                                                    }
+
+
+
+                                                 if(!isset($_GET['msg_user_id'])){
+                                                        echo '
+                                                                 <div class="msg_title fs-4 justify-content-center d-flex m-auto border-bottom border-dark  pb-3 inter-font">
+                                                                     NexGenProjects for messages
+                                                                </div>
+                                                        ';
+                                                    }else{
+                                                        // that means the msg user id is given and it should show that user name
+                                                        echo '
+                                                        <div class="msg_title fs-4 justify-content-end d-flex m-auto border-bottom border-dark  pb-3 inter-font">
+                                                            '. $get_msg_user_name .'
+                                                       </div>
+                                               ';
+                                                    }
+
+
+
+                                                ?>
+
+                                           
 
                                                 <div class="msg_main_section m-4 p-4">
-                                                    <div class="section_title text-secondary text-center">
+                                                    <?php
+
+                                                    if(!isset($_GET['msg_user_id'])){
+                                                        echo '
+                                                        <div class="section_title text-secondary text-center">
                                                         Send and Receive Messages at one place. 
                                                         <br>
                                                         Send messages and get connected with your team members from anywhere !!
                                                     </div>
+                                                        ';
+                                                    }
+
+
+                                                    ?>
 
 
                                                     <div class="msg_contents">
                                                         <?php
                                                         if(isset($_GET['msg_user_id'])){
-                                                            include __DIR__. '/inc/inbox_msg_inc.php';
+
+                                                            include __DIR__ . '/inc/_personal_inbox_msg_components.php';
+
+                                                            // include __DIR__. '/inc/inbox_msg_inc.php';
                                                             // include __DIR__. '/inc/personal_inbox_messages.views.php';
                                                         }
 

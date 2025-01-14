@@ -262,6 +262,9 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
                 case '/manage_all_task':
                     echo 'sidebar_btn_active';
                     break;
+                case '/add_new_task':
+                    echo 'sidebar_btn_active';
+                    break;
                 default:
                     break;
             }
@@ -291,7 +294,30 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
                                 </li> -->
     <li class="text-center m-auto">
         <a href="/message_hub" class="nav-link text-center mb-4">
-            <button type="button" class="btn  text-center sidebar_btn p-2 ">
+            <button type="button" class="btn  text-center <?php 
+            
+            switch($get_url){
+                case '/message_hub':
+                    echo 'sidebar_btn_active';
+                    break;
+                // case '/assign_task':
+                //     echo 'sidebar_btn_active';
+                //     break;
+                // case '/task_details':
+                //     echo 'sidebar_btn_active';
+                //     break;
+                // case '/manage_all_task':
+                //     echo 'sidebar_btn_active';
+                //     break;
+                // case '/add_new_task':
+                //     echo 'sidebar_btn_active';
+                //     break;
+                default:
+                    break;
+            }
+
+            
+            ?> sidebar_btn p-2 ">
                 Messages
             </button>
         </a>
