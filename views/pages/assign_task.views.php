@@ -9,7 +9,9 @@ require __DIR__ . '/inc/_header.php';
 
 $controllers->login_check();
 
-$get_task_id = $_GET['task_id'];
+$controllers->assign_task();
+
+$get_task_id = $controllers->pure_data($_GET['task_id']);
 
 $get_current_user_id = $_SESSION['user_id'];
 
@@ -84,7 +86,7 @@ $get_current_user_id = $_SESSION['user_id'];
                                 <div class="container">
                                     <div class="title_section">
                                         <div class="section_title fs-4 text-center mt-4 inter-font">
-                                            Task Details
+                                            Assign Task
                                         </div>
                                     </div>
                                 </div>
@@ -139,51 +141,105 @@ $get_current_user_id = $_SESSION['user_id'];
                                                 </div>
                                             </div>
 
-                                            <div class="task_file_section m-4 ">
-                                                <div class="task_file">
-                                                    <embed
-                                                        src="/assets/uploads/task_file_upload/<?php echo $task_file_name; ?>"
-                                                        type="application/pdf" width="100%" height="650px">
-                                                </div>
-
-                                                <div class="task_file_download_btn p-4 m-4">
-                                                    <a href="/assets/uploads/task_file_upload/<?php echo $task_file_name; ?>"
-                                                        download="">
-                                                        <button type="button"
-                                                            class="btn btn-primary  d-flex justify-content-center m-auto  ">Download
-                                                            File</button>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="task_manage_section m-4 p-4 ">
-                                                <div class="container ">
-                                                    <div class="row  ">
-                                                        <div class="col-md-6 mb-4 col-sm-12">
-                                                            <a href="">
-                                                                <button class="btn btn-outline-dark">View assigned users
-                                                                    to this task</button>
-                                                            </a>
-
-                                                        </div>
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <a href="/assign_task?task_id=<?php echo $task_id; ?>">
-                                                                <button class="btn btn-outline-dark  ">Assign this task
-                                                                    to users</button>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-6 mb-4 col-sm-12">
-                                                            <a href="/update_task?task_id=<?php echo $task_id; ?>">
-                                                                <button class="btn btn-outline-dark  ">Update
-                                                                    task</button>
-                                                            </a>
-                                                        </div>
+                                            <div class="assign_task_section mt-4 ">
+                                                <div class="section_title">
+                                                    <div class="fs-5">
+                                                        Task assigned to the user(s) below :
+                                                    </div>
+                                                    <div class="fs-6">
+                                                        Please make check mark for the users you want to assign the task
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="assign_task_form lux_roman mt-4 fw-bold ">
+                                                    <form action="" method="post">
 
+                                                        <input type="hidden" name="task_id"
+                                                            value="<?php echo $get_task_id ?>">
+
+                                                        <div class="row mt-4 pt-4 ">
+                                                        <?php
+// Fetch all assigned user IDs for the current task
+$assigned_user_ids = [];
+$result_get_task_info = $controllers->create_sql_query("SELECT task_assigned_user_id, task_assigned_datetime, task_last_submission_datetime FROM task_assigned_users WHERE task_id = '$get_task_id'");
+if ($result_get_task_info) {
+    while ($row_task_info = $result_get_task_info->fetch_assoc()) {
+        $assigned_user_ids[] = $row_task_info['task_assigned_user_id'];
+        $task_assigned_datetime = $row_task_info['task_assigned_datetime'];
+        $task_submission_datetime = $row_task_info['task_last_submission_datetime'];
+    }
+}
+
+// Fetch all users to display in the checkbox list
+$result_get_all_users = $controllers->get_all_data("users");
+if ($result_get_all_users) {
+    if ($result_get_all_users->num_rows > 0) {
+        while ($row_get_users = $result_get_all_users->fetch_assoc()) {
+            $get_main_user_id = $row_get_users['user_id'];
+            $get_main_user_name = $row_get_users['user_name'];
+
+            $assigned_status = in_array($get_main_user_id, $assigned_user_ids);
+
+            echo '
+                <div class="col-md-4 col-sm-12">
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input ';
+
+            if ($assigned_status) {
+                echo 'checked ';
+            }
+
+            echo 'class="form-check-input" name="assign_users[]" type="checkbox" 
+                  value="' . $get_main_user_id . '" id="flexCheckDefault' . $get_main_user_id . '">
+                  <label class="text-primary form-check-label" for="flexCheckDefault' . $get_main_user_id . '">
+                      ' . $get_main_user_name . '
+                  </label>
+              </div>
+          </div>
+      </div>';
+        }
+    }
+}
+?>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3 mt-4 pt-4 ">
+                                                            <div class="task_assigned_datetime_section ">
+                                                                <div class="section_title fs-4 mb-4 text-primary ">
+                                                                    Task Assigned Datetime
+                                                                </div>
+                                                                <div class="section_content">
+                                                                    <input type="datetime-local" class="form-control"
+                                                                        name="task_assigned_datetime" value="<?php echo $task_assigned_datetime ?>"  />
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="mb-3 mt-4 ">
+                                                            <div class="task_assigned_datetime_section">
+                                                                <div class="section_title fs-4 mb-4 text-primary ">
+                                                                    Task Submission Datetime
+                                                                </div>
+                                                                <div class="section_content">
+                                                                    <input type="datetime-local" class="form-control"
+                                                                        name="task_submission_datetime" value="<?php echo $task_submission_datetime ?>" />
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="mb-3 mt-4 ">
+                                                            <button type="submit" class="btn btn-primary mt-4  "
+                                                                name="save_assigned_users">Save
+                                                                assigned users</button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
 
 
                                         </div>

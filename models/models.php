@@ -38,7 +38,7 @@ class models extends database{
     }
 
     public function update($table_name, $table_rows_and_values, $where_conditions){
-        $sql = "UPDATE `$table_name` SET $table_rows_and_values WHERE where_conditions ";
+        $sql = "UPDATE `$table_name` SET $table_rows_and_values WHERE $where_conditions ";
         $result = $this->connection()->query($sql);
 
         return $result;

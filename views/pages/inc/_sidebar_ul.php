@@ -253,7 +253,13 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
                 case '/tasks':
                     echo 'sidebar_btn_active';
                     break;
-                case '/meeting_hub':
+                case '/assign_task':
+                    echo 'sidebar_btn_active';
+                    break;
+                case '/task_details':
+                    echo 'sidebar_btn_active';
+                    break;
+                case '/manage_all_task':
                     echo 'sidebar_btn_active';
                     break;
                 default:

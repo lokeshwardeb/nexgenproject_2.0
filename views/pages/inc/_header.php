@@ -3,7 +3,7 @@ session_start();
 
 // "/config/conn.php"
 
-if(!file_exists(__DIR__ . "/../../../config/conn.php")){
+if (!file_exists(__DIR__ . "/../../../config/conn.php")) {
     echo '
     <script>
     location.href="/installation";
@@ -106,6 +106,22 @@ require './vendor/autoload.php';
     <!-- botpress ai js files -->
     <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>
     <script src="https://mediafiles.botpress.cloud/3175fb81-1692-4bba-9916-12f850a4bda5/webchat/v2/config.js"></script>
+
+
+    <!-- datatable js -->
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+
+    <!-- datatable button and features js -->
+
+
+    <!-- DataTables Buttons extension for export functionality -->
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+
 
 
     <!-- check whether the replace state exits or not -->

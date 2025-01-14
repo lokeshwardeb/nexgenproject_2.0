@@ -86,10 +86,10 @@ $controllers->login_check();
                                                 <div
                                                 class="col-12 p-2 m-4 mt-2 mb-2 project_main_col_content  project_col_main ">
                                                 <div class="project_main  d-flex  ">
-                                                    <div class="project_no  ps-4 ms-4 me-4">'. $row['task_id'] .'</div>
-                                                    <div class="project_name me-4">'. $row['task_name'] .'</div>
-                                                    <div class="project_details ps-4 pe-4 me-4">
-                                                        <a href="/task_details?project_id='. $row['task_id'] .'">
+                                                    <div class="task_id  ps-4 ms-4 me-4">'. $row['task_id'] .'</div>
+                                                    <div class="task_name me-4">'. $row['task_name'] .'</div>
+                                                    <div class="task_details ps-4 pe-4 me-4">
+                                                        <a href="/task_details?task_id='. $row['task_id'] .'">
                                                             <i class="fa-solid fa-eye"></i>
 
                                                         </a>
