@@ -139,7 +139,7 @@ $get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_i
                                         // Display text message
                                         echo '
                             <div class="parent_msg sended_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
-                                <div class="msg_sender_user_name text-primary">' . $get_current_user_name . '</div>
+                                <div class="msg_sender_user_name text-primary">You</div>
                                 <div class="main_msg_section row">
                                     <div class="msg col-md-6 col-sm-12">' . $db_msg . '</div>
                                     <div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" 
@@ -147,6 +147,16 @@ $get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_i
                                 </div>
                             </div>
                         ';
+                        //                 echo '
+                        //     <div class="parent_msg sended_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
+                        //         <div class="msg_sender_user_name text-primary">' . $get_current_user_name . '</div>
+                        //         <div class="main_msg_section row">
+                        //             <div class="msg col-md-6 col-sm-12">' . $db_msg . '</div>
+                        //             <div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" 
+                        //                 data-personal_inbox_msg_id="' . $db_msg_id . '" data-delete_msg_id="' . $db_msg_id . '" class="btn ms-4 btn-sm btn-outline-danger">Delete Button</button></div>
+                        //         </div>
+                        //     </div>
+                        // ';
                                     }
 
                                     if ($db_msg == '' || $db_msg_file_upload_status == 'file_uploaded') {

@@ -17,6 +17,18 @@
             <img src="/assets/img/nexGenProject_logo_no_bg.png" class="img-fluid " style="width: 250px; " alt=""><br>
 
         </div>
+        
+        <hr>
+
+<div class="loggedin_user_info_section  m-4 pb-4 ">
+    <div class="container">
+    <div class="user_info text-center  ">
+        <div class="user_name fs-5 fw-bold mt-2 pt-4 "><?php echo $_SESSION['username']; ?></div>
+    </div>
+    </div>
+</div>
+
+<hr>
 
 
         <div class="mobile_navigation_main_section mt-4 pt-4">
@@ -28,6 +40,17 @@
 
            ?>
         </div>
+
+        <hr>
+
+                        <div class="dashboard_return_section mt-4 pt-4 text-center ">
+                            <a href="/dashboard" target="_blank" >
+                                <button class="btn btn-outline-primary">
+                                    Go back to Dashboard
+                                </button>
+                            </a>
+                        </div>
+
 
 
 
