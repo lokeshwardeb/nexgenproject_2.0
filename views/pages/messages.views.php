@@ -98,7 +98,7 @@ $controllers->login_check();
 
                                            
 
-                                                <div class="msg_main_section m-4 p-4">
+                                                <div class="msg_main_section">
                                                     <?php
 
                                                     if(!isset($_GET['msg_user_id'])){

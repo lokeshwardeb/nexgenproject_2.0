@@ -94,131 +94,141 @@ if ($result_msg_receiver_user_name) {
     <div class="main_file_repository_section">
         <div class="msg_main_section">
             <div class="container">
-            <div class="msg_container" id="messages">
-    <?php
+                <div class="msg_container" id="messages">
+                    <?php
 
-    // SQL query to fetch messages between two users
-    $sql_inbox_msg_join = " 
+
+// generate the event name
+$communicated_user_ids = [$get_current_user_id, $get_msg_receiver_user_id];
+
+sort($communicated_user_ids);
+
+$get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_ids);
+
+
+
+
+
+                    // SQL query to fetch messages between two users
+                    $sql_inbox_msg_join = " 
         SELECT * FROM `personal_inbox_msg` 
         WHERE (`msg_sender_id` = '$get_current_user_id' AND `msg_receiver_id` = '$get_msg_receiver_user_id') 
         OR (`msg_sender_id` = '$get_msg_receiver_user_id' AND `msg_receiver_id` = '$get_current_user_id');
     ";
 
-    // Execute the query
-    $result_inbox_msg_join = $controllers->create_sql_query($sql_inbox_msg_join);
+                    // Execute the query
+                    $result_inbox_msg_join = $controllers->create_sql_query($sql_inbox_msg_join);
 
-    // Check if any results were returned
-    if ($result_inbox_msg_join) {
-        if ($result_inbox_msg_join->num_rows > 0) {
-            // Messages exist, loop through each message and display it
-            while ($row_inbox_msg_join = $result_inbox_msg_join->fetch_assoc()) {
-                $db_msg_id = $row_inbox_msg_join['msg_id'];
-                $db_msg = $row_inbox_msg_join['msg'];
-                $db_msg_sender_id = $row_inbox_msg_join['msg_sender_id'];
-                $db_msg_receiver_id = $row_inbox_msg_join['msg_receiver_id'];
-                $db_msg_seen_by_receiver_status = $row_inbox_msg_join['msg_seen_by_receiver_status'];
-                $db_msg_file_name = $row_inbox_msg_join['file_name'];
-                $db_msg_file_upload_status = $row_inbox_msg_join['file_upload_status'];
+                    // Check if any results were returned
+                    if ($result_inbox_msg_join) {
+                        if ($result_inbox_msg_join->num_rows > 0) {
+                            // Messages exist, loop through each message and display it
+                            while ($row_inbox_msg_join = $result_inbox_msg_join->fetch_assoc()) {
+                                $db_msg_id = $row_inbox_msg_join['msg_id'];
+                                $db_msg = $row_inbox_msg_join['msg'];
+                                $db_msg_sender_id = $row_inbox_msg_join['msg_sender_id'];
+                                $db_msg_receiver_id = $row_inbox_msg_join['msg_receiver_id'];
+                                $db_msg_seen_by_receiver_status = $row_inbox_msg_join['msg_seen_by_receiver_status'];
+                                $db_msg_file_name = $row_inbox_msg_join['file_name'];
+                                $db_msg_file_upload_status = $row_inbox_msg_join['file_upload_status'];
 
-                // Check if the message was sent by the current user or not
-                if ($db_msg_sender_id == $get_current_user_id) {
-                    // Message was sent by the current user
-                    if ($db_msg != '' || $db_msg_file_upload_status == '') {
-                        // Display text message
-                        echo '
+                                // Check if the message was sent by the current user or not
+                                if ($db_msg_sender_id == $get_current_user_id) {
+                                    // Message was sent by the current user
+                                    if ($db_msg != '' || $db_msg_file_upload_status == '') {
+                                        // Display text message
+                                        echo '
                             <div class="parent_msg sended_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
                                 <div class="msg_sender_user_name text-primary">' . $get_current_user_name . '</div>
-                                <div class="main_msg_section d-flex">
-                                    <div class="msg">' . $db_msg . '</div>
-                                    <div class="delete_button"><button type="button" onclick="delete_msg(this)" 
-                                        data-personal_inbox_msg_id="' . $db_msg_id . '" data-delete_msg_id="'. $db_msg_id .'" class="btn ms-4 btn-sm btn-outline-danger">Delete Button</button></div>
+                                <div class="main_msg_section row">
+                                    <div class="msg col-md-6 col-sm-12">' . $db_msg . '</div>
+                                    <div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" 
+                                        data-personal_inbox_msg_id="' . $db_msg_id . '" data-delete_msg_id="' . $db_msg_id . '" class="btn ms-4 btn-sm btn-outline-danger">Delete Button</button></div>
                                 </div>
                             </div>
                         ';
-                    }
+                                    }
 
-                    if ($db_msg == '' || $db_msg_file_upload_status == 'file_uploaded') {
-                        // Display file message
-                        echo '
+                                    if ($db_msg == '' || $db_msg_file_upload_status == 'file_uploaded') {
+                                        // Display file message
+                                        echo '
                             <div class="parent_msg sended_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
                                 <div class="msg_sender_user_name text-primary">You</div>
-                                <div class="main_msg_section d-flex">
-                                    <div class="msg_file msg">
+                                <div class="main_msg_section row">
+                                    <div class="msg_file msg col-md-6 col-sm-12">
                                         <a href="./assets/uploads/personal_inbox_upload/' . $db_msg_file_name . '" download="">
                                             <span>' . $db_msg_file_name . '</span>
                                             <i class="fa-solid fa-file ps-4 fs-4"></i>
                                         </a>
                                     </div>
-                                    <div class="delete_button"><button type="button" onclick="delete_msg(this)" 
+                                    <div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" 
                                         data-file_uploaded_path="./assets/uploads/personal_inbox_upload/' . $db_msg_file_name . '" 
-                                        data-personal_inbox_msg_id="' . $db_msg_id . '" data-delete_msg_id="'. $db_msg_id .'" class="btn ms-4 btn-sm btn-outline-danger">Delete Button</button></div>
+                                        data-personal_inbox_msg_id="' . $db_msg_id . '" data-delete_msg_id="' . $db_msg_id . '" class="btn ms-4 btn-sm btn-outline-danger">Delete Button</button></div>
                                 </div>
                             </div>
                         ';
-                    }
+                                    }
 
-                } elseif ($db_msg_receiver_id == $get_current_user_id) {
-                    // Message was sent by the receiver (not the current user)
-                    // echo "received";  // This will output the string "received"
+                                } elseif ($db_msg_receiver_id == $get_current_user_id) {
+                                    // Message was sent by the receiver (not send by the current user, it was received by the current user)
+                                    // echo "received";  // This will output the string "received"
+                    
+                                    // Get the receiver user's name
+                                    $result_get_msg_received_user_info = $controllers->get_all_data("users", " `user_id` = '$get_msg_receiver_user_id' ");
+                                    if ($result_get_msg_received_user_info) {
+                                        if ($result_get_msg_received_user_info->num_rows > 0) {
+                                            while ($row_msg_received_user = $result_get_msg_received_user_info->fetch_assoc()) {
+                                                $msg_received_user_name = $row_msg_received_user['user_name'];
+                                            }
+                                        }
+                                    }
 
-                    // Get the receiver user's name
-                    $result_get_msg_received_user_info = $controllers->get_all_data("users", " `user_id` = '$get_msg_receiver_user_id' ");
-                    if ($result_get_msg_received_user_info) {
-                        if ($result_get_msg_received_user_info->num_rows > 0) {
-                            while ($row_msg_received_user = $result_get_msg_received_user_info->fetch_assoc()) {
-                                $msg_received_user_name = $row_msg_received_user['user_name'];
-                            }
-                        }
-                    }
-
-                    // Display received text message
-                    if ($db_msg != '' || $db_msg_file_upload_status == '') {
-                        echo '
+                                    // Display received text message
+                                    if ($db_msg != '' || $db_msg_file_upload_status == '') {
+                                        echo '
                             <div class="parent_msg received_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
                                 <div class="msg_sender_user_name text-primary">' . $msg_received_user_name . '</div>
-                                <div class="msg">' . $db_msg . '</div>
+                                <div class="msg col-md-6 col-sm-12">' . $db_msg . '</div>
                             </div>
                         ';
-                    }
+                                    }
 
-                    // Display received file message
-                    if ($db_msg_file_upload_status == 'file_uploaded' || $db_msg == '') {
-                        echo '
-                            <div class="parent_msg sended_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
-                                <div class="msg_sender_user_name text-primary">You</div>
-                                <div class="main_msg_section d-flex">
-                                    <div class="msg_file msg">
+                                    // Display received file message
+                                    if ($db_msg_file_upload_status == 'file_uploaded' || $db_msg == '') {
+                                        echo '
+                            <div class="parent_msg received_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
+                                <div class="msg_sender_user_name text-primary">' . $get_msg_receiver_user_name . '</div>
+                                <div class="main_msg_section row">
+                                    <div class="msg_file msg col-md-6 col-sm-12">
                                         <a href="./assets/uploads/personal_inbox_upload/' . $db_msg_file_name . '" download="">
                                             <span>' . $db_msg_file_name . '</span>
                                             <i class="fa-solid fa-file ps-4 fs-4"></i>
                                         </a>
                                     </div>
-                                    <div class="delete_button"><button type="button" onclick="delete_msg(this)" 
-                                        data-file_uploaded_path="./assets/uploads/personal_inbox_upload/' . $db_msg_file_name . '" 
-                                        data-personal_inbox_msg_id="' . $db_msg_id . '" class="btn ms-4 btn-sm btn-outline-danger">Delete Button</button></div>
+                                   
                                 </div>
                             </div>
                         ';
-                    }
-                }
-            }
+                                    }
+                                }
+                            }
 
-        } else {
-            // No messages found
-            echo '
+                        } else {
+                            // No messages found
+                            echo '
                 <div class="section_title text-secondary p-4 text-center" id="no_msg_section">
                     No messages have been found
                     <br>
                     Send messages and get connected with ' . $get_msg_receiver_user_name . ' !!
                 </div>
             ';
-        }
-    }
+                        }
+                    }
 
-    // echo "check";  // This is for debugging purposes
-
-    ?>
-</div>
+                    // echo "check";  // This is for debugging purposes
+                    
+                    ?>
+                </div>
 
                 <div class="repl_section">
                     <form id="submit_form">
@@ -234,12 +244,19 @@ if ($result_msg_receiver_user_name) {
                         <!-- <input type="hidden" name="event_name" id="event_name" value="project_id_6"> -->
 
                         <input type="hidden" name="event_name" id="event_name"
-                            value="personal_inbox_send_msg_from_<?php echo $_SESSION['user_id'] ?>_to_<?php echo $_GET['msg_user_id']; ?>">
+                            value="<?php echo $get_event_name; ?>">
+
+                            
+
+
+                        <!-- <input type="hidden" name="event_name" id="event_name"
+                            value="personal_inbox_send_msg_from_<?php echo $_SESSION['user_id'] ?>_to_<?php echo $_GET['msg_user_id']; ?>"> -->
 
                         <input type="hidden" value="<?php echo $get_current_user_id; ?>" name="current_user_id"
                             id="current_user_id">
 
-                        <input type="hidden" value="<?php echo $_SESSION['username'] ?>" name="message_sender_user_name" id="message_sender_user_name">
+                        <input type="hidden" value="<?php echo $_SESSION['username'] ?>" name="message_sender_user_name"
+                            id="message_sender_user_name">
 
 
                         <input type="file" name="personal_inbox_msg_upload_file" class="form-control"
@@ -270,6 +287,7 @@ if ($result_msg_receiver_user_name) {
                         cluster: 'ap2'
                     });
 
+                    // var event_name = "personal_inbox_send_msg_from_3_to_2";
                     var event_name = $("#event_name").val();
 
                     // var channel = pusher.subscribe('my-channel');
@@ -305,6 +323,8 @@ if ($result_msg_receiver_user_name) {
                         var get_msg_receiver_user_id = data.message_receiver_user_id;
                         var get_current_user_id = $("#current_user_id").val()
 
+                        console.log("the data sender id is : " + data.message_sender_user_id)
+
                         if (get_msg_sender_user_id == get_current_user_id) {
                             // that means the message is sent by my (current loggedin user)
                             // add the message sender user_name
@@ -319,7 +339,10 @@ if ($result_msg_receiver_user_name) {
 
 
 
-                                $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-personal_inbox_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
+                                $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '"><div class="msg_sender_user_name text-primary">You</div><div class="main_msg_section row"><div class="msg col-md-6 col-sm-12">' + data.message + '</div><div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" data-personal_inbox_msg_id="' + data.personal_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
+
+
+                                // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section row"><div class="msg col-md-6 col-sm-12">' + data.message + '</div><div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" data-personal_inbox_msg_id="' + data.personal_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
 
 
 
@@ -329,26 +352,47 @@ if ($result_msg_receiver_user_name) {
                             if (data.file_uploaded_path != undefined || data.file_name != undefined) {
                                 // if the data_uploaded_path is not set and if data file name is not set
 
-                                // main code demo
-
-                                // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
 
 
-                                // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-personal_inbox_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>');
+                                // $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
-                                $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div><div class="delete_button"><button type="button" onclick="delete_msg(this)" data-file_uploaded_path="./assets/uploads/project_files_repo_upload/' + data.file_name + '" data-personal_inbox_msg_id="' + data.repository_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
-
-
+                                $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
 
-                                // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
-
-
-
-
+                                // $("#messages").append('<div class="received_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+                                // $("#messages").append('<div class="sended_msg shadow m-4""><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +'</a></div>')
                                 $("#personal_inbox_msg_upload_file").val("");
+
+                                // // send the file upload notification
+                                // send_notification('New File was uploaded on file repository by : ' + data.message_sender_user_name, data.message, "/project_discussions?project_id=6");
                             }
+
+
+
+                            // if (data.file_uploaded_path != undefined || data.file_name != undefined || data.file_name != '' || data.file_uploaded_path != '') {
+                            //     // if the data_uploaded_path is not set and if data file name is not set
+
+                            //     // main code demo
+
+                            //     // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+
+
+
+                            //     // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section row"><div class="msg col-md-6 col-sm-12">' + data.message + '</div><div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" data-personal_inbox_msg_id="' + data.personal_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div>');
+
+                            //     $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section row"><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div><div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" data-file_uploaded_path="./assets/uploads/project_files_repo_upload/' + data.file_name + '" data-personal_inbox_msg_id="' + data.personal_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
+
+
+
+
+                            //     // $("#messages").append('<div class="parent_msg sended_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+
+
+
+
+                            //     $("#personal_inbox_msg_upload_file").val("");
+                            // }
 
                             // send_notification('New file repository Message by : '+ data.message_sender_user_name , data.message, "/project_discussions?project_id=6");
 
@@ -375,14 +419,14 @@ if ($result_msg_receiver_user_name) {
                             // that means the message is not sent by me (current loggedin user)
                             if (data.message != '') {
 
-                                $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.repository_msg_id + '" id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
-                                // $("#messages").append('<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg">' + data.message + '</div></div>')
+                                $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.personal_msg_id + '" id="msg_id_' + data.personal_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg col-md-6 col-sm-12">' + data.message + '</div></div>')
+                                // $("#messages").append('<div class="parent_msg received_msg shadow m-4"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg col-md-6 col-sm-12">' + data.message + '</div></div>')
 
-                                // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section d-flex"><div class="msg">' + data.message + '</div></div></div>');
+                                // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section row"><div class="msg col-md-6 col-sm-12">' + data.message + '</div></div></div>');
 
 
                                 // send the notification
-                                send_notification('New Message was sent on file repository by : ' + data.message_sender_user_name, data.message, "/project_discussions?project_id=6");
+                                send_notification('New Message was sent on file repository by : ' + data.message_sender_user_name, data.message, "/messages?msg_user_id=" + data.message_receiver_user_name);
 
 
 
@@ -396,9 +440,9 @@ if ($result_msg_receiver_user_name) {
 
 
 
-                                // $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+                                // $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
-                                $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.repository_msg_id + ' " id="msg_id_' + data.repository_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+                                $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
 
                                 // $("#messages").append('<div class="received_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
@@ -424,8 +468,8 @@ if ($result_msg_receiver_user_name) {
 
                         console.log("the delete msg is : " + data.delete_msg_status)
 
-                        // var msg_id_element = $("#msg_id_" + delete_personal_msg_id);
-                        var msg_id_element = $(".msg_id_" + personal_inbox_msg_id);
+                        var msg_id_element = $("#msg_id_" + delete_personal_msg_id);
+                        // var msg_id_element = $(".msg_id_" + personal_inbox_msg_id);
 
                         console.log(msg_id_element)
 
@@ -453,7 +497,7 @@ if ($result_msg_receiver_user_name) {
                             var del_msg_id = "msg_id_" + delete_personal_msg_id;
                             // var get_del_id = $("#" + del_msg_id);
                             var get_del_id = $("." + del_msg_id);
-                            
+
 
 
 
@@ -556,10 +600,7 @@ if ($result_msg_receiver_user_name) {
 
                         }
 
-                        else {
-                            // that means there was something error with the delete msg features
-                            alert("There was something error while deleting the msg , msg data not exist !!")
-                        }
+
 
 
 
@@ -593,6 +634,11 @@ if ($result_msg_receiver_user_name) {
                         var get_file_uploaded_path = self.getAttribute("data-file_uploaded_path");
                         var get_delete_msg_id = self.getAttribute("data-delete_msg_id");
 
+                        var get_message_receiver_user_id = $("#message_receiver_user_id").val();
+                        var get_message_sender_user_id = $("#message_sender_user_id").val();
+
+                        var get_event_name = $("#event_name").val();
+
 
                         // console.log(get_repository_msg_id);
 
@@ -605,7 +651,7 @@ if ($result_msg_receiver_user_name) {
                             // url: "/delete_msg",
                             url: "/personal_inbox_delete_msg",
 
-                            data: { delete_msg_id: get_personal_inbox_msg_id, file_uploaded_path:get_file_uploaded_path },
+                            data: { delete_get_event_name: get_event_name, message_receiver_user_id: get_message_receiver_user_id, message_sender_user_id: get_message_sender_user_id, delete_msg_id: get_personal_inbox_msg_id, file_uploaded_path: get_file_uploaded_path },
 
                             // data: { delete_personal_msg_id: get_repository_msg_id, project_id: project_id, file_uploaded_path: get_file_uploaded_path },
                             // dataType: "dataType",

@@ -28,7 +28,32 @@ $message_sender_user_name = $controllers->pure_data($_POST['message_sender_user_
 
 $channel_name = "personal_inbox_msg";
 
-$event_name = "personal_inbox_send_msg_from_" . $message_sender_user_id . "_to_" . $message_receiver_user_id;
+
+
+// generate the event name
+$communicated_user_ids = [$message_sender_user_id, $message_receiver_user_id];
+
+sort($communicated_user_ids);
+
+$get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_ids);
+
+
+
+$event_name = $get_event_name;
+
+
+
+
+
+// personal_inbox_send_msg_from_3_to_2
+// $make_event_name = (string) "personal_inbox_send_msg_from_" . $message_receiver_user_id . "_to_" . $message_sender_user_id;
+// $make_event_name = (string) "personal_inbox_send_msg_from_" . $message_sender_user_id . "_to_" . $message_receiver_user_id;
+// $make_event_name = "personal_inbox_send_msg_from_" . $message_sender_user_id . "_to_" . $message_receiver_user_id;
+
+
+
+
+// $event_name = $make_event_name;
 
 // get the files if uploaded on the file repo
 if ($_FILES['personal_inbox_msg_upload_file']['name'] != '') {
@@ -80,27 +105,30 @@ if ($_FILES['personal_inbox_msg_upload_file']['name'] != '') {
 
 // // start the added the msg_id and the code so that we can add it on the insertion
 
-// // get the last id
-// $result_msg_last_id = $controllers->get_the_max_id("msg_id", "personal_inbox_msg");
+// get the last id
+$result_msg_last_id = $controllers->get_the_max_id("msg_id", "personal_inbox_msg");
 
-// //  $row_total = $result_msg_last_id->fetch_assoc();
+//  $row_total = $result_msg_last_id->fetch_assoc();
 
-// while ($row = $result_msg_last_id->fetch_assoc()) {
+while ($row = $result_msg_last_id->fetch_assoc()) {
 
-//   $msg_last_id = $row['max_id'];
-// }
+  $msg_last_id = $row['max_id'];
+}
 
-// //  $msg_last_id = $row_total['msg_id'];
-
-
+//  $msg_last_id = $row_total['msg_id'];
 
 
 
-// if ($msg_last_id == 0) {
-//   $msg_next_id = 1;
-// } else {
-//   $msg_next_id = $msg_last_id + 1;
-// }
+
+
+if ($msg_last_id == 0) {
+  $msg_next_id = 1;
+} else {
+  $msg_next_id = $msg_last_id + 1;
+}
+
+// $msg_next_id;
+
 
 
 // // add the msg_code
@@ -146,12 +174,18 @@ if($_FILES['personal_inbox_msg_upload_file']['name'] != ''){
 
 
 $data['message'] = $message;
+$data['get_event_name'] = $event_name;
+
+// here the $msg_next_id will be the main msg id as it encounters the msg id which will be added on the msg insertion time
+$data['personal_msg_id'] = $msg_next_id;
+$data['personal_inbox_msg_id'] = $msg_next_id;
 // $data['delete_msg_status'] = '';
 // $data['delete_msg_id'] = '';
 // $data['msg_last_id'] = $msg_last_id;
 // $data['msg_id'] = $msg_next_id;
 // $data['msg_id'] = $msg_last_id + 1;
 $data['message_sender_user_id'] = $message_sender_user_id;
+$data['message_receiver_user_id'] = $message_receiver_user_id;
 $data['message_sender_user_name'] = $message_sender_user_name;
 $data['message_status'] = "send";
 //   $data['message'] = 'jai sri ganesh pusher';

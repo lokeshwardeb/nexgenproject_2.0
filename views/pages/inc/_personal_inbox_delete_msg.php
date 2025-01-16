@@ -28,7 +28,27 @@ $message_sender_user_name = $controllers->pure_data($_POST['message_sender_user_
 
 $channel_name = "personal_inbox_msg";
 
-$event_name = "personal_inbox_send_msg_from_" . $message_sender_user_id . "_to_" . $message_receiver_user_id;
+
+
+// generate the event name
+$communicated_user_ids = [$message_sender_user_id, $message_receiver_user_id];
+
+sort($communicated_user_ids);
+
+$get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_ids);
+
+
+
+
+$event_name = $get_event_name;
+
+// $make_event_name = (string) "personal_inbox_send_msg_from_" . $message_receiver_user_id . "_to_" . $message_sender_user_id;
+// $event_name = $make_event_name;
+
+
+// $event_name = $controllers->pure_data($_POST['delete_get_event_name']);
+// $event_name = "personal_inbox_send_msg_from_" . $message_receiver_user_id . "_to_" . $message_sender_user_id;
+// $event_name = "personal_inbox_send_msg_from_" . $message_sender_user_id . "_to_" . $message_receiver_user_id;
 
 
 
