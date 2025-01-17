@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2025 at 04:40 AM
+-- Generation Time: Oct 04, 2024 at 05:09 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -76,103 +76,6 @@ INSERT INTO `meetings` (`meeting_id`, `meeting_code`, `meeting_status`, `datetim
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_inbox_files`
---
-
-CREATE TABLE `personal_inbox_files` (
-  `file_id` int(11) NOT NULL,
-  `msg_id` varchar(255) NOT NULL,
-  `file_sender_id` varchar(255) NOT NULL,
-  `file_receiver_id` varchar(255) NOT NULL,
-  `file_name` varchar(255) NOT NULL,
-  `datetime` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `personal_inbox_files`
---
-
-INSERT INTO `personal_inbox_files` (`file_id`, `msg_id`, `file_sender_id`, `file_receiver_id`, `file_name`, `datetime`) VALUES
-(1, '', '3', '1', 'stack_choosing_guidelines.pdf', '2025-01-14 21:44:36'),
-(2, '', '3', '1', 'stack_choosing_guidelines.pdf', '2025-01-14 23:59:23'),
-(3, '', '3', '1', 'project_completing_guidelines_2.pdf', '2025-01-14 23:59:47'),
-(4, '', '3', '1', 'stack_choosing_guidelines.pdf', '2025-01-15 00:01:11');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `personal_inbox_msg`
---
-
-CREATE TABLE `personal_inbox_msg` (
-  `msg_id` int(11) NOT NULL,
-  `msg_sender_id` varchar(255) NOT NULL,
-  `msg_receiver_id` varchar(255) NOT NULL,
-  `msg` text NOT NULL,
-  `msg_seen_by_receiver_status` varchar(255) NOT NULL,
-  `file_name` varchar(255) NOT NULL,
-  `file_upload_status` varchar(255) NOT NULL,
-  `datetime` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `personal_inbox_msg`
---
-
-INSERT INTO `personal_inbox_msg` (`msg_id`, `msg_sender_id`, `msg_receiver_id`, `msg`, `msg_seen_by_receiver_status`, `file_name`, `file_upload_status`, `datetime`) VALUES
-(8, '2', '3', 'hi', '', '', '', '2025-01-15 01:01:40'),
-(9, '2', '4', 'dfd', '', '', '', '2025-01-15 01:02:10'),
-(18, '3', '1', '', '', 'stack_choosing_guidelines.pdf', 'file_uploaded', '2025-01-16 10:45:13'),
-(19, '3', '1', '', '', 'project_completing_guidelines.pdf', 'file_uploaded', '2025-01-16 10:57:19'),
-(20, '3', '1', 'f', '', '', '', '2025-01-16 10:57:34'),
-(21, '3', '1', 'd', '', '', '', '2025-01-16 11:05:44'),
-(22, '3', '1', 'dd', '', '', '', '2025-01-16 11:06:30'),
-(23, '3', '1', 'dfdfdf', '', '', '', '2025-01-16 11:08:23'),
-(24, '3', '1', 'check', '', '', '', '2025-01-16 11:09:01'),
-(25, '3', '1', 'fdfd', '', '', '', '2025-01-16 11:10:18'),
-(26, '1', '3', 'dfdfdfdf', '', '', '', '2025-01-16 11:13:22'),
-(27, '3', '1', 'dfdf', '', '', '', '2025-01-16 11:18:54'),
-(28, '1', '3', 'hi', '', '', '', '2025-01-16 11:39:26'),
-(30, '3', '1', 'df', '', '', '', '2025-01-16 11:51:16'),
-(31, '1', '3', 'd', '', '', '', '2025-01-16 11:52:01'),
-(32, '1', '3', 'dfdfdf', '', '', '', '2025-01-16 11:56:12'),
-(33, '3', '1', 'hgh', '', '', '', '2025-01-16 11:58:08'),
-(34, '3', '1', 'dfdff', '', '', '', '2025-01-16 11:59:47'),
-(35, '1', '3', 'fdfdf', '', '', '', '2025-01-16 12:02:30'),
-(36, '1', '3', 'fdfd', '', '', '', '2025-01-16 12:04:58'),
-(38, '3', '1', 'f', '', '', '', '2025-01-16 12:07:38'),
-(39, '3', '1', 'dfdfdf', '', '', '', '2025-01-16 12:11:13'),
-(40, '3', '1', 'dfdffdfd', '', '', '', '2025-01-16 12:13:06'),
-(41, '1', '3', 'fdfd', '', '', '', '2025-01-16 12:15:41'),
-(42, '3', '2', 'hello birt', '', '', '', '2025-01-16 12:17:41'),
-(43, '2', '3', 'fdfd', '', '', '', '2025-01-16 12:20:52'),
-(44, '3', '2', 'dfdffccc', '', '', '', '2025-01-16 12:23:26'),
-(45, '3', '2', 'dfdfdfdergte3g34t4', '', '', '', '2025-01-16 12:25:17'),
-(46, '3', '2', 'ct', '', '', '', '2025-01-16 12:27:27'),
-(47, '3', '2', 'c', '', '', '', '2025-01-16 12:32:08'),
-(48, '2', '3', 'fdfdfdf', '', '', '', '2025-01-16 12:32:15'),
-(65, '3', '2', '', '', 'stack_choosing_guidelines.pdf', 'file_uploaded', '2025-01-16 13:32:29'),
-(68, '3', '2', '', '', 'stack_choosing_guidelines.pdf', 'file_uploaded', '2025-01-16 13:36:22'),
-(69, '3', '2', 'fdfd', '', '', '', '2025-01-16 13:36:42'),
-(71, '2', '3', 'dsdsds', '', '', '', '2025-01-16 13:40:54'),
-(72, '3', '2', 'dsdsswww', '', '', '', '2025-01-16 13:41:12'),
-(75, '2', '3', '', '', 'project_completing_guidelines_2.pdf', 'file_uploaded', '2025-01-16 13:43:58'),
-(76, '3', '2', '', '', 'stack_choosing_guidelines.pdf', 'file_uploaded', '2025-01-16 13:44:56'),
-(77, '3', '2', 'ghgh', '', '', '', '2025-01-16 13:46:26'),
-(80, '2', '3', 'efeege', '', '', '', '2025-01-16 13:50:20'),
-(81, '2', '3', 'fergrgrg', '', '', '', '2025-01-16 13:51:31'),
-(84, '2', '3', 'fdfeegege4ge4', '', '', '', '2025-01-16 13:54:42'),
-(85, '2', '3', 'fdfdfdf', '', '', '', '2025-01-16 14:25:27'),
-(86, '3', '2', 'gfgf', '', '', '', '2025-01-16 14:26:13'),
-(87, '2', '3', 'gfgf', '', '', '', '2025-01-16 14:57:57'),
-(88, '3', '2', 'fdfd', '', '', '', '2025-01-16 14:59:20'),
-(91, '3', '2', 'gfgfgf', '', '', '', '2025-01-16 15:02:42'),
-(93, '3', '2', '', '', 'project_completing_guidelines_2.pdf', 'file_uploaded', '2025-01-16 15:03:08'),
-(97, '2', '3', '', '', 'stack_choosing_guidelines.pdf', 'file_uploaded', '2025-01-16 16:28:16');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `projects`
 --
 
@@ -225,8 +128,7 @@ INSERT INTO `projects_file_repository` (`repository_msg_id`, `project_id`, `repo
 (241, '6', 'pronex_repo_msg_241', 'hi', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-21 22:51:25'),
 (283, '6', 'pronex_repo_msg_283', 'fdjfldjfd', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-22 02:41:29'),
 (287, '6', 'pronex_repo_msg_284', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-22 03:00:41'),
-(296, '6', 'pronex_repo_msg_288', 'jai sri ganesh', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-22 14:12:46'),
-(301, '6', 'pronex_repo_msg_297', '', 'file_and_message', '3', 'c', 'file_uploaded', 'stack_choosing_guidelines.pdf', '', '', '2025-01-15 00:36:12');
+(296, '6', 'pronex_repo_msg_288', 'jai sri ganesh', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-22 14:12:46');
 
 -- --------------------------------------------------------
 
@@ -259,16 +161,10 @@ INSERT INTO `project_discussions` (`repository_msg_id`, `project_id`, `repositor
 (283, '6', 'pronex_repo_msg_283', 'fdjfldjfd', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-22 02:41:29'),
 (287, '6', 'pronex_repo_msg_284', 'jai sri ganesh', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-22 03:00:41'),
 (296, '6', 'pronex_repo_msg_288', 'jai sri ganeshhh', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-22 14:12:46'),
+(301, '6', 'pronex_repo_msg_297', 'hi check', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-25 23:15:36'),
+(302, '6', 'pronex_repo_msg_302', 'this is test', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-25 23:26:21'),
 (303, '6', 'pronex_repo_msg_303', 'hi', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2024-08-25 23:26:42'),
-(307, '3', 'pronex_repo_msg_304', 'hi', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-27 22:24:51'),
-(308, '', 'pronex_repo_msg_308', 'dfd', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2025-01-14 14:05:15'),
-(309, '', 'pronex_repo_msg_309', 'fdfd', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2025-01-14 14:06:17'),
-(310, '', 'pronex_repo_msg_310', 'hghgh', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2025-01-14 14:10:44'),
-(311, '', 'pronex_repo_msg_311', 'fdfdfd', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2025-01-14 14:12:51'),
-(312, '', 'pronex_repo_msg_312', 'fdfdfdf', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2025-01-14 14:14:32'),
-(313, '', 'pronex_repo_msg_313', 'gdfgfg', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2025-01-14 14:17:06'),
-(314, '', 'pronex_repo_msg_314', 'gfg', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2025-01-14 14:17:58'),
-(315, '', 'pronex_repo_msg_315', 'gfgf', 'file_and_message', '3', 'c', 'file_not_uploaded', '', '', '', '2025-01-14 14:18:27');
+(307, '3', 'pronex_repo_msg_304', 'hi', 'file_and_message', '2', 'birt', 'file_not_uploaded', '', '', '', '2024-08-27 22:24:51');
 
 -- --------------------------------------------------------
 
@@ -282,31 +178,15 @@ CREATE TABLE `tasks` (
   `user_id` varchar(255) NOT NULL,
   `task_name` varchar(255) NOT NULL,
   `task_desc` varchar(255) NOT NULL,
-  `task_file_name` varchar(255) NOT NULL,
-  `task_file_upload_status` varchar(255) NOT NULL,
-  `datetime` datetime NOT NULL DEFAULT current_timestamp()
+  `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`task_id`, `project_id`, `user_id`, `task_name`, `task_desc`, `task_file_name`, `task_file_upload_status`, `datetime`) VALUES
-(1, '6', '[value-3]', 'The first task', 'the first new task', '$task_file', 'task_file_uploaded', '0000-00-00 00:00:00'),
-(2, 'g', 'fgfg', 'fgfg', 'gfg', '', '', '2025-01-11 18:38:20'),
-(3, '', '', 'Jai sri ganesh', 'the checking new', '', '', '2025-01-11 18:41:51'),
-(4, '', '', 'The task is checking ', 'Hello this is a task check with file', '', '', '2025-01-11 20:05:44'),
-(5, '', '', 'test check with file', 'test with file', '', '', '2025-01-11 20:06:51'),
-(6, '', '', 'ty', 'tyest', '', '', '2025-01-11 20:10:11'),
-(7, '', '', 'fdf', 'dfergergregrg', '', '', '2025-01-11 20:51:24'),
-(8, '', '', 'dfddfe', 'dfdfdfdf', '', '', '2025-01-11 20:52:34'),
-(9, '', '', 'fefe', 'fefe', '', '', '2025-01-11 20:53:51'),
-(10, '', '', 'fdfdfdf', 'dfdfefefe', '', '', '2025-01-11 20:55:33'),
-(11, '', '', 'fdfdfed', 'fedfe', '', '', '2025-01-11 20:56:11'),
-(12, '', '', 'fdeefefefe', 'dfdfdfdfdf', 'stack_choosing_guidelines.pdf', 'task_file_uploaded', '2025-01-11 21:03:35'),
-(13, '', '', 'fdfdf', 'fdfd', '', '', '2025-01-11 21:07:13'),
-(14, '6', '', 'the new task', 'the best task', '', '', '2025-01-11 23:00:57'),
-(15, '6', '', 'the again file task', 'the again file task for first new project', 'stack_choosing_guidelines.pdf', 'task_file_uploaded', '2025-01-11 23:01:42');
+INSERT INTO `tasks` (`task_id`, `project_id`, `user_id`, `task_name`, `task_desc`, `datetime`) VALUES
+(1, '', '', 'Jai sri ganesh', 'Jai sri ganesh', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -317,18 +197,10 @@ INSERT INTO `tasks` (`task_id`, `project_id`, `user_id`, `task_name`, `task_desc
 CREATE TABLE `task_assigned_users` (
   `task_assigned_id` int(11) NOT NULL,
   `task_id` varchar(255) NOT NULL,
-  `task_assigned_user_id` varchar(255) NOT NULL,
+  `users_id` varchar(255) NOT NULL,
   `task_assigned_datetime` datetime NOT NULL,
   `task_last_submission_datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `task_assigned_users`
---
-
-INSERT INTO `task_assigned_users` (`task_assigned_id`, `task_id`, `task_assigned_user_id`, `task_assigned_datetime`, `task_last_submission_datetime`) VALUES
-(2, '15', '1', '2025-01-14 11:42:00', '2025-01-14 11:52:00'),
-(3, '15', '2', '2025-01-14 11:42:00', '2025-01-14 11:52:00');
 
 -- --------------------------------------------------------
 
@@ -370,18 +242,6 @@ ALTER TABLE `documentations`
 --
 ALTER TABLE `meetings`
   ADD PRIMARY KEY (`meeting_id`);
-
---
--- Indexes for table `personal_inbox_files`
---
-ALTER TABLE `personal_inbox_files`
-  ADD PRIMARY KEY (`file_id`);
-
---
--- Indexes for table `personal_inbox_msg`
---
-ALTER TABLE `personal_inbox_msg`
-  ADD PRIMARY KEY (`msg_id`);
 
 --
 -- Indexes for table `projects`
@@ -436,18 +296,6 @@ ALTER TABLE `meetings`
   MODIFY `meeting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `personal_inbox_files`
---
-ALTER TABLE `personal_inbox_files`
-  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `personal_inbox_msg`
---
-ALTER TABLE `personal_inbox_msg`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
-
---
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
@@ -457,25 +305,25 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `projects_file_repository`
 --
 ALTER TABLE `projects_file_repository`
-  MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
+  MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
 
 --
 -- AUTO_INCREMENT for table `project_discussions`
 --
 ALTER TABLE `project_discussions`
-  MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=316;
+  MODIFY `repository_msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
 
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `task_assigned_users`
 --
 ALTER TABLE `task_assigned_users`
-  MODIFY `task_assigned_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `task_assigned_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
