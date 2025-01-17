@@ -146,6 +146,13 @@ $controllers->check_get_project_id();
                                                     </button>
                                                 </a>
                                             </div>
+                                            <div class="col-md-3 col-sm-12 mt-4 ">
+                                                <a href="/code_bridge_hub?project_id=<?php echo $project_id; ?>">
+                                                    <button class="btn btn-outline-dark">
+                                                        CodeBridge
+                                                    </button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
 

@@ -11,11 +11,11 @@
   } */
 
   .montserrat_font{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
   }
 
 .lux_roman {
-    font-family: "Luxurious Roman", serif;
+    font-family: "Luxurious Roman", serif !important;
     font-weight: 400;
     font-style: normal;
   }
@@ -24,7 +24,7 @@
 /* // <weight>: Use a value from 100 to 900 */
 
 .inter-font {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif ;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
