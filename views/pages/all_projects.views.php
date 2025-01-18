@@ -53,63 +53,71 @@ $controllers->login_check();
                                 <div class="main_content_section mt-4">
                                     <div class="projects_content">
                                         <div class="container">
-                                            <div class="row">
-                                                <?php
-
-                                                if(isset($_GET['page'])){
-                                                    
-                                                    $current_page_no = $_GET['page'];
-
-                                                }else{
-                                                    $current_page_no = 1;
-                                                }
-
-                                                // $limit = 3;
-                                                $limit = 4;
-
-                                                $offset = ($current_page_no - 1) * $limit;
+                                            <div class=" mt-4 pt-4 ">
+                                                <table class="table cus_hover mt-4 mb-4 " style="width:100%"
+                                                    id="datatable_info_table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Project Name</th>
+                                                            <th scope="col">View</th>
+                                                            <th scope="col">Edit</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
 
 
-                                                $result_all_projects = $controllers->create_sql_query("SELECT * FROM `projects` ORDER BY `project_id` DESC LIMIT {$offset}, {$limit}");
 
-                                                if($result_all_projects){
-                                                    if($result_all_projects->num_rows > 0){
-                                                        while($row = $result_all_projects->fetch_assoc()){
+                                                        $result_all_projects = $controllers->get_all_data("projects", " 1 ORDER BY `projects`.`project_id` DESC ");
 
-                                                            // border-start border-5 border-primary cus_project_main_box
+                                                        if ($result_all_projects) {
+                                                            if ($result_all_projects->num_rows > 0) {
+                                                                $sl_no = 1;
+                                                                while ($row = $result_all_projects->fetch_assoc()) {
 
-                                                            echo '
+                                                                    // border-start border-5 border-primary cus_project_main_box
+                                                        
+                                                                    echo '
+                                                             <tr class="project_main_col_content">
+                                                                <th scope="row">' . $sl_no . '</th>
+                                                                <td>' . $row['project_name'] . '</td>
+                                                                <td>
+                                                                     <div class="project_details ps-4 pe-4 me-4">
+                                                                        <a href="/projects_hub?project_id=' . $row['project_id'] . '">
+                                                                            <i class="fa-solid fa-eye"></i>
+
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="project_edit me-4">
+                                                                        <a href="">
+                                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                             
-                                                            
-                                                <div
-                                                class="col-12 p-2 m-4 mt-2 mb-2 project_main_col_content  project_col_main ">
-                                                <div class="project_main  d-flex  ">
-                                                    <div class="project_no  ps-4 ms-4 me-4">'. $row['project_id'] .'</div>
-                                                    <div class="project_name me-4">'. $row['project_name'] .'</div>
-                                                    <div class="project_details ps-4 pe-4 me-4">
-                                                        <a href="/projects_hub?project_id='. $row['project_id'] .'">
-                                                            <i class="fa-solid fa-eye"></i>
-
-                                                        </a>
-                                                    </div>
-                                                    <div class="project_edit me-4">
-                                                        <a href="">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                
                                                             
                                                             ';
+
+                                                                    $sl_no++;
+
+                                                                }
+                                                            }
                                                         }
-                                                    }
-                                                }
 
 
 
 
-                                                ?>
-<!-- 
+                                                        ?>
+
+                                                    </tbody>
+                                                </table>
+
+                                                <!-- 
                                                 <div
                                                     class="col-12 p-2 m-4 border-start border-5 border-primary project_col_main cus_project_main_box">
                                                     <div class="project_main  d-flex  ">
@@ -128,8 +136,8 @@ $controllers->login_check();
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                               
-                                               
+
+
                                                 <!-- <div
                                                     class="col-12 p-2 m-4 border-start border-5 border-primary project_col_main cus_project_main_box">
                                                     <div class="project_main  d-flex  ">
@@ -155,150 +163,7 @@ $controllers->login_check();
                                 </div>
 
 
-                                <?php
 
-                                // $result_total_page = $controllers->get_all_data("projects");
-
-                                // if ($result_total_page) {
-                                //     if ($result_total_page->num_rows > 0) {
-                                //         $total_page_records = $result_total_page->num_rows;
-                                //         $limit = 3;
-                                //         $total_page = ceil($total_page_records - $limit);
-
-                                //         for ($i = 0; $i <= $total_page; $i++) {
-
-                                //         }
-
-
-                                //     }
-                                // }
-
-
-                                ?>
-
-                                <!-- pagination section starts here -->
-
-                                <div class="pagination_section m-auto">
-                                    <div class="container">
-                                    <nav aria-label="...">
-                                            <ul class="pagination">
-                                                <!-- <li class="page-item disabled">
-                                                    <a class="page-link">Previous</a>
-                                                </li> -->
-                                        <?php
-
-                                        $result_total_page = $controllers->get_all_data("projects");
-                                        
-
-                                        if ($result_total_page) {
-                                            if ($result_total_page->num_rows > 0) {
-                                                $total_page_records = $result_total_page->num_rows;
-                                                // $limit = 3;
-                                                $total_page = ceil($total_page_records / $limit);
-
-                                                if($current_page_no > 1){
-                                                    echo '
-                                                    <li class="page-item ">
-                                                    <a class="page-link" href="?page='. ($current_page_no - 1) .'">Previous</a>
-                                                </li>
-                                                    ';
-                                                }elseif($current_page_no == 1){
-                                                    echo '
-                                                    
-                                                    <li class="page-item disabled">
-                                                    <a class="page-link">Previous</a>
-                                                </li>
-
-                                                    ';
-                                                }
-
-                                                for ($i = 1; $i <= $total_page; $i++) {
-
-                                                    if($current_page_no == $i){
-                                                        $active_pagination = 'active';
-                                                    }else{
-                                                        $active_pagination = '';
-                                                    }
-
-                                                    echo '
-                                                    <li class="page-item '. $active_pagination .'"><a class="page-link" href="?page='. $i .'">'. $i .'</a></li>
-                                                    ';
-                                                }
-
-                                                if($total_page > $current_page_no){
-                                                    echo '
-                                                    <li class="page-item">
-                                                    <a class="page-link" href="?page='. ($current_page_no + 1) .'">Next</a>
-                                                </li>
-                                                    ';
-                                                }elseif($total_page == $current_page_no){
-                                                    echo '
-                                                    <li class="page-item disabled">
-                                                    <a class="page-link" href="#">Next</a>
-                                                </li>
-                                                    ';
-                                                }
-
-
-                                            }else{
-                                                echo 'empty table';
-                                            }
-                                        }
-
-
-                                        ?>
-                                      
-                                                <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item active" aria-current="page">
-                                                    <a class="page-link" href="#">2</a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-                                                <!-- <li class="page-item">
-                                                    <a class="page-link" href="#">Next</a>
-                                                </li> -->
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-
-                                <!-- pagination section ends here -->
-
-
-                                <!-- pagination section starts here -->
-                                <!-- <div class="pagination_section m-auto">
-                                    <div class="container">
-                                    <nav aria-label="...">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled">
-                                                <a class="page-link">Previous</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item active" aria-current="page">
-                                                <a class="page-link" href="#">2</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    </div>
-                                </div> -->
-                                <!-- pagination section ends here -->
-
-
-
-
-
-                                <!-- <div class="status_container">
-                                    <h3>Status:</h3>
-                                    <p>Current project: <a href="">xyz</a></p>
-                                    <p>Your team is working on : <a href="">xyz</a></p>
-                                </div>
-                                <div class="process_container">
-                                    <h3>Process:</h3>
-                                    <p>Project complete: <a href="">50%</a></p>
-                                </div> -->
                             </div>
 
                         </div>

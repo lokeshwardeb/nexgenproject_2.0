@@ -816,10 +816,11 @@ class controllers extends models
         if (isset($_POST['create_new_project'])) {
             $project_name = $this->pure_data($_POST['project_name']);
             $project_desc = $this->pure_data($_POST['project_desc']);
+            $project_github_repo_name = $this->pure_data($_POST['project_github_repo_name']);
             $project_submission_datetime = $this->pure_data($_POST['project_submission_datetime']);
 
             // check if the data was blank or not 
-            if ($project_name == '' || $project_desc == '' || $project_submission_datetime == '') {
+            if ($project_name == '' || $project_desc == '' || $project_github_repo_name == '' || $project_submission_datetime == '') {
                 echo '
                 <script>
                 danger_alert("Please fillup all the data !!", "The data cannot be blank !!");
@@ -830,7 +831,7 @@ class controllers extends models
             }
 
             // check if the project was already exists or not 
-            $result_check = $this->get_all_data("projects", "`project_name` = '$project_name' AND `project_desc` = '$project_desc' AND `project_submission_datetime` = '$project_submission_datetime'");
+            $result_check = $this->get_all_data("projects", "`project_name` = '$project_name' AND `project_desc` = '$project_desc' AND `project_github_repo_name` = '$project_github_repo_name' AND `project_submission_datetime` = '$project_submission_datetime'");
 
 
             if ($result_check) {
@@ -847,7 +848,7 @@ class controllers extends models
                 }
             }
 
-            $result_create_new_project = $this->insert("projects", "`project_name`, `project_desc`, `project_submission_datetime`", "'$project_name', '$project_desc', '$project_submission_datetime'");
+            $result_create_new_project = $this->insert("projects", "`project_name`, `project_desc`, `project_github_repo_name`, `project_submission_datetime`", "'$project_name', '$project_desc', '$project_github_repo_name', '$project_submission_datetime'");
 
             if ($result_create_new_project) {
                 // that means the project has been created successfully

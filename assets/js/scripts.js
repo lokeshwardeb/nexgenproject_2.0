@@ -1,3 +1,5 @@
+const SITE_URL = 'http://localhost:8000/';
+
 function showPass() {
     var show_pass_icon = document.getElementById('show_pass_icon');
     var hide_pass_icon = document.getElementById('hide_pass_icon');
@@ -173,7 +175,8 @@ function send_notification(notification_title_msg, notification_body_msg, window
                     });
 
                     notify.addEventListener("click", function () {
-                        window.open("http://localhost:8000/dashboard");
+                        window.open(`${SITE_URL}dashboard`);
+                        // window.open("http://localhost:8000/dashboard");
                     })
 
                 } else {
@@ -234,7 +237,8 @@ function check_notification() {
                     });
 
                     notify.addEventListener("click", function () {
-                        window.open("http://localhost:8000/dashboard");
+                        window.open(`${SITE_URL}dashboard`);
+                        // window.open("http://localhost:8000/dashboard");
                     })
 
                 } else {

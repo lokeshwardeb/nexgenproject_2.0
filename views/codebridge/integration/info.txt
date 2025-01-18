@@ -1,0 +1,15 @@
+The template O-Auth app credentials
+
+client : Ov23liStIlYecXq37qKz
+
+client_secreate : 893b17a9f9a520bbe872f47884550b802f6c17b8
+
+
+
+main new O-Auth app credentials
+
+O-Auth app name : NexGenProject
+
+Client : Ov23liBSEb1ZEuPKOmS5
+
+client_secreate : 491701b400ea67b95197231976f56bd9e66880b4

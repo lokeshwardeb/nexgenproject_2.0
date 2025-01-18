@@ -83,84 +83,11 @@ if ($result_get_project_info) {
                                         <div class="codebridge_integration_main_section mt-4 pt-4">
                                             <div class="codebridge_integration">
                                                 <div class="container">
-                                                    <div
-                                                        class="d-flex m-auto justify-content-center text-center integration_section">
-                                                        <div class="nexgenproject_integration">
-                                                            <div class="nexgenproject_logo">
-                                                                <img height="150px" width="150px" class="img-fluid"
-                                                                    src="/assets/img/nexGenProject_logo.jpeg" alt="">
-                                                            </div>
-                                                            <div
-                                                                class=" mt-4 fs-4 lux_roman fw-bold nexgenproject_brand_name">
-                                                                NexgenProject
-                                                            </div>
-                                                        </div>
-                                                        <div class="plus_integration">
+                                                    <?php
 
-                                                            <div class="ms-4 me-4 fs-1 pt-5  plus_brand_name">
-                                                                +
-                                                            </div>
-                                                        </div>
-                                                        <div class="github_integration">
-                                                            <div class="github_logo">
-                                                                <img height="150px" width="150px" class="img-fluid"
-                                                                    src="/assets/img/github_logo.png" alt="">
-                                                            </div>
-                                                            <div class=" mt-4 fs-4 lux_roman fw-bold github_brand_name">
-                                                                Github
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    include __DIR__ . '/../codebridge/integration/codebridge_main_integrate.php';
 
-                                                    <div class="info_section mt-4 pt-4">
-                                                        <input type="hidden" name="project_id" id="project_id" value="<?php echo $project_id; ?>" >
-                                                        <div
-                                                            class="information_main_section inter-font fw-bold fs-5 text-center ">
-                                                            <div class="text-danger">
-                                                                Authorizing the CodeBridge with the NexgenProject and
-                                                                Github
-                                                            </div>
-
-                                                            <div class="wait_Info text-primary mt-4 ">
-                                                                Please wait some time
-                                                            </div>
-
-                                                            <div
-                                                                class=" m-auto justify-content-center reloading_section text-primary mt-4 d-flex m-4 pt-4 ">
-                                                                <div class="reloading_info me-4 d-flex ">
-                                                                    Redirecting in <div class="ms-2 me-2" id="countdown"></div> sec
-                                                                </div>
-
-                                                                <div class="reloading_contents">
-                                                                    <div class="spinner-grow spinner-grow-sm "
-                                                                        role="status">
-                                                                        <span class="visually-hidden">Loading...</span>
-                                                                    </div>
-                                                                    <div class="spinner-grow spinner-grow-sm "
-                                                                        role="status">
-                                                                        <span class="visually-hidden">Loading...</span>
-                                                                    </div>
-                                                                    <div class="spinner-grow spinner-grow-sm "
-                                                                        role="status">
-                                                                        <span class="visually-hidden">Loading...</span>
-                                                                    </div>
-                                                                    <div class="spinner-grow spinner-grow-sm "
-                                                                        role="status">
-                                                                        <span class="visually-hidden">Loading...</span>
-                                                                    </div>
-                                                                    <div class="spinner-grow spinner-grow-sm "
-                                                                        role="status">
-                                                                        <span class="visually-hidden">Loading...</span>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,41 +96,7 @@ if ($result_get_project_info) {
 
 
 
-                                <script>
-
-                                    let project_id = $("#project_id").val();
-
-
-
-                                    let countdownTime = 10; // Total countdown time in seconds
-                                    $('#countdown').fadeIn(500).text(countdownTime); // Set initial countdown value
-
-                                    // Start countdown
-                                    let countdownInterval = setInterval(function () {
-                                        countdownTime--; // Decrease the countdown time by 1
-                                        $('#countdown').text(countdownTime); // Update the countdown text
-
-                                        // If countdown reaches 0, stop the interval and hide everything
-                                        if (countdownTime <= 0) {
-                                            clearInterval(countdownInterval); // Stop the countdown
-                                            // $('#github-icon').fadeOut(500);
-                                            // $('#software-icon').fadeOut(500);
-                                            $('#countdown').fadeOut(500);
-
-                                            window.location.href = "/dashboard"
-
-                                        }
-                                    }, 1000); // Execute every 1 second (1000 milliseconds)
-
-                                    setTimeout(function () {
-
-
-
-                                        // $('#github-icon').fadeOut(500);  // Fade out the GitHub icon
-                                        // $('#software-icon').fadeOut(500);  // Fade out the software icon
-                                    }, 10000);  // 10 seconds
-                                </script>
-
+                    
 
 
 

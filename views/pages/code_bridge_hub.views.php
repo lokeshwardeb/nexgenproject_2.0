@@ -32,9 +32,20 @@ if($result_get_project_info){
         // that means the project already exists
         while($row_get_project_info = $result_get_project_info->fetch_assoc()){
             $get_project_name = $row_get_project_info['project_name'];
+            $get_repo_name = $row_get_project_info['project_github_repo_name'];
         }
     }
 }
+
+$repo_name_is_blank = false;
+
+// check if the project repo name exists or not
+if($get_repo_name == ''){
+    // that means the repo name is blank
+    $repo_name_is_blank = true;
+}
+
+
 
 
 
@@ -106,6 +117,36 @@ if($result_get_project_info){
                                                                 </a>
                                                             </div>
                                                             <div class="col-md-3 col-sm-12">
+                                                            <?php 
+                                                            
+                                                            // check if the project github repo is exists or not
+                                                            if($repo_name_is_blank || $repo_name_is_blank == true){
+                                                                // that means the repo name is blank and it should not show the entry point link button
+
+                                                                echo '
+                                                                <div class="text-danger fw-bold " >
+                                                                    The github repo for this project are not exists !!
+                                                                </div>
+
+                                                                <div class="mt-4 mb-4" >
+                                                                    <a href="/all_projects" >
+                                                                        <button class="btn btn-primary  ">
+                                                                            Return to Projects
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                                ';
+
+                                                                return;
+
+                                                            }
+                                                            
+                                                            
+                                                            // echo $get_project_id; 
+                                                            
+                                                            
+                                                            
+                                                            ?>
                                                                 <a href="/code_bridge_entry_point?project_id=<?php echo $get_project_id; ?>" target="_blank" >
                                                                     <button class="btn btn-outline-primary">Enter CodeBridge with this project</button>
                                                                 </a>
@@ -146,66 +187,7 @@ if($result_get_project_info){
                     </div>
 
 
-                    <div class="container d-none">
-                        <div class="welcome_section fs-5 mt-4">
-                            Welcome again,
-                            <div class="welcome_username ms-5 ps-4 text-primary">
-                                <?php
-
-                                // echo $_SESSION['email'];
-                                
-                                echo $_SESSION['username'];
-
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="integrate_dashboard_nav">
-                            <?php
-
-                            require __DIR__ . '/inc/_dashboard_nav.php';
-
-                            ?>
-                        </div>
-
-
-
-                        <div class="main_section_contents fs-5">
-
-
-
-                            <div class="container">
-                                <div class="section_info mt-4 text-center pt-4">
-                                    <div class="ongoing_task_section mt-4">
-                                        <div class="section_title fs-4">
-                                            Here is your ongoing task
-                                        </div>
-                                        <div class="section_content text-danger mt-2">
-                                            Complete the design
-                                        </div>
-                                    </div>
-                                    <div class="ongoing_task_section mt-4">
-                                        <div class="section_title fs-4">
-                                            Here is your project status
-                                        </div>
-                                        <div class="section_content text-primary mt-2">
-                                            In process
-                                        </div>
-                                    </div>
-                                    <div class="ongoing_task_section mt-4">
-                                        <div class="section_title fs-4">
-                                            Your team is working on
-                                        </div>
-                                        <div class="section_content text-danger mt-2">
-                                            Complete the design
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
+                    
                 </div>
             </div>
         </div>

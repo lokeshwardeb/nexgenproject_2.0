@@ -20,14 +20,17 @@ $(document).ready(function () {
                 extend: 'excelHtml5',
                 text: 'Export to Excel',
                 exportOptions: {
-                    columns: ':not(:last-child)' // Exclude the last column
+                    columns: [0, 1] // Exclude the last column
+
+                    // columns: ':not(:last-child)' // Exclude the last column
                 }
             },
             {
                 extend: 'pdfHtml5',
                 text: 'Export to PDF',
                 exportOptions: {
-                    columns: ':not(:last-child)' // Exclude the last column
+                    // columns: ':not(:last-child)' // Exclude the last column
+                    columns: [0, 1] // Exclude the last column
 
                     // columns: [0, 1] // Include only the first two columns
                 }
@@ -36,7 +39,9 @@ $(document).ready(function () {
                 extend: 'csvHtml5',
                 text: 'Export to CSV',
                 exportOptions: {
-                    columns: ':not(:last-child)' // Exclude the last column
+                    columns: [0, 1] // Exclude the last column
+
+                    // columns: ':not(:last-child)' // Exclude the last column
 
                     // columns: ':visible' // Export only visible columns
                 }
@@ -45,7 +50,9 @@ $(document).ready(function () {
                 extend: 'copyHtml5',
                 text: 'Copy',
                 exportOptions: {
-                    columns: ':not(:last-child)' // Exclude the last column
+                    columns: [0, 1] // Exclude the last column
+
+                    // columns: ':not(:last-child)' // Exclude the last column
 
                     // columns: ':visible' // Export only visible columns
                 }

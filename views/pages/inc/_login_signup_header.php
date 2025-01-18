@@ -33,7 +33,7 @@ $controllers = new controllers;
 <head>
   <meta charset="UTF-8">
   <title>nexGenProjects </title>
-  <link rel="shortcut icon" href="/assets/img/nexGenProject_logo.jpeg" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/nexGenProject_logo.png" type="image/x-icon">
 
   <!-- <title>Double Slider Sign in/up Form</title> -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>

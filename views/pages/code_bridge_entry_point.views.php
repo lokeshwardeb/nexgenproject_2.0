@@ -32,9 +32,26 @@ if ($result_get_project_info) {
         // that means the project already exists
         while ($row_get_project_info = $result_get_project_info->fetch_assoc()) {
             $get_project_name = $row_get_project_info['project_name'];
+            $get_repo_name = $row_get_project_info['project_github_repo_name'];
         }
     }
+} 
+
+$repo_name_is_blank = false;
+
+// check if the project repo name exists or not
+if($get_repo_name == ''){
+    // that means the repo name is blank
+    $repo_name_is_blank = true;
+
+    echo '
+        <script>
+            window.location.href="/all_projects";
+        </script>
+    ';
+
 }
+
 
 
 
@@ -113,7 +130,7 @@ if ($result_get_project_info) {
                                                     </div>
 
                                                     <div class="info_section mt-4 pt-4">
-                                                        <input type="hidden" name="project_id" id="project_id" value="<?php echo $project_id; ?>" >
+                                                        <input type="hidden" name="project_id" id="get_project_id" value="<?php echo $get_project_id; ?>" >
                                                         <div
                                                             class="information_main_section inter-font fw-bold fs-5 text-center ">
                                                             <div class="text-danger">
@@ -171,7 +188,9 @@ if ($result_get_project_info) {
 
                                 <script>
 
-                                    let project_id = $("#project_id").val();
+                                    let get_project_id = $("#get_project_id").val();
+
+                                    console.log("the project id is : " + get_project_id)
 
 
 
@@ -190,18 +209,18 @@ if ($result_get_project_info) {
                                             // $('#software-icon').fadeOut(500);
                                             $('#countdown').fadeOut(500);
 
-                                            window.location.href = "/dashboard"
+                                            window.location.href = `/code_bridge?project_id=${get_project_id}`;
 
                                         }
                                     }, 1000); // Execute every 1 second (1000 milliseconds)
 
-                                    setTimeout(function () {
+                                    // setTimeout(function () {
 
 
 
-                                        // $('#github-icon').fadeOut(500);  // Fade out the GitHub icon
-                                        // $('#software-icon').fadeOut(500);  // Fade out the software icon
-                                    }, 10000);  // 10 seconds
+                                    //     // $('#github-icon').fadeOut(500);  // Fade out the GitHub icon
+                                    //     // $('#software-icon').fadeOut(500);  // Fade out the software icon
+                                    // }, 10000);  // 10 seconds
                                 </script>
 
 
@@ -219,66 +238,7 @@ if ($result_get_project_info) {
                     </div>
 
 
-                    <div class="container d-none">
-                        <div class="welcome_section fs-5 mt-4">
-                            Welcome again,
-                            <div class="welcome_username ms-5 ps-4 text-primary">
-                                <?php
-
-                                // echo $_SESSION['email'];
-                                
-                                echo $_SESSION['username'];
-
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="integrate_dashboard_nav">
-                            <?php
-
-                            require __DIR__ . '/inc/_dashboard_nav.php';
-
-                            ?>
-                        </div>
-
-
-
-                        <div class="main_section_contents fs-5">
-
-
-
-                            <div class="container">
-                                <div class="section_info mt-4 text-center pt-4">
-                                    <div class="ongoing_task_section mt-4">
-                                        <div class="section_title fs-4">
-                                            Here is your ongoing task
-                                        </div>
-                                        <div class="section_content text-danger mt-2">
-                                            Complete the design
-                                        </div>
-                                    </div>
-                                    <div class="ongoing_task_section mt-4">
-                                        <div class="section_title fs-4">
-                                            Here is your project status
-                                        </div>
-                                        <div class="section_content text-primary mt-2">
-                                            In process
-                                        </div>
-                                    </div>
-                                    <div class="ongoing_task_section mt-4">
-                                        <div class="section_title fs-4">
-                                            Your team is working on
-                                        </div>
-                                        <div class="section_content text-danger mt-2">
-                                            Complete the design
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
+                    
                 </div>
             </div>
         </div>

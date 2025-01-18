@@ -84,19 +84,40 @@ $get_documentation_id = $_GET['documentation_id'];
                                                 ?>
                                                 
                                                 <div>Documentation name : <span class="text-primary fw-bold"> <?php echo $documentation_name ?></span></div>
-                                                <div>Documentation name : <span class="text-primary fw-bold"><?php echo $documentation_desc ?></span></div>
+                                                <div>Documentation Description : <span class="text-primary fw-bold"><?php echo $documentation_desc ?></span></div>
 
                                               
 
                                             </div>
 
-                                            <div class="documentation_download_file mt-4 pt-4 ">
-                                                <a href="/assets/uploads/documentations_upload/<?php echo $documentation_file_name ?>" download="" ><button class="btn btn-sm btn-outline-dark">Download Documentation</button></a>
+                                            <?php
+
+                                            // set the directory name and the file name
+                                            $dir = "./assets/uploads/documentations_upload/";
+                                            $make_file_name = $dir . $documentation_file_name;
+
+                                            // check if the file is exists or not on the software
+                                            if(file_exists($make_file_name)){
+                                                echo '
+                                                <div class="documentation_download_file mt-4 pt-4 ">
+                                                <a href="./assets/uploads/documentations_upload/' . $documentation_file_name . '" download="" ><button class="btn btn-sm btn-outline-dark">Download Documentation</button></a>
                                             </div>
 
                                             <div class="documentation_file d-flex justify-content-center mt-4 pt-4 mb-4 pb-4">
-                                                    <embed style="min-height: 100vh !important; width: 100vw !important;" src="/assets/uploads/documentations_upload/<?php echo $documentation_file_name ?>" type="application/pdf">
+                                                    <embed style="min-height: 100vh !important; width: 100vw !important;" src="/assets/uploads/documentations_upload/' . $documentation_file_name . '" type="application/pdf">
                                                 </div>
+                                                ';
+                                            }else{
+                                                echo '
+                                                <div class="mt-5 pt-5 text-center text-danger fw-bold" >
+                                                    No documentation file has been found for this Documentation
+                                                </div>
+                                                ';
+                                            }
+
+                                            ?>
+
+                                            
                                         </div>
                                     </div>
                                 </div>

@@ -140,7 +140,42 @@ $get_current_user_id = $_SESSION['user_id'];
                                             </div>
 
                                             <div class="task_file_section m-4 ">
+                                                <?php
+
+                                            // set the directory name and the file name
+                                            $dir = "./assets/uploads/task_file_upload/";
+                                            $make_file_name = $dir . $task_file_name;
+
+                                            // check if the file is exists or not on the software
+                                            if(file_exists($make_file_name)){
+                                                echo '
                                                 <div class="task_file">
+                                                    <embed
+                                                        src="/assets/uploads/task_file_upload/'. $task_file_name .'"
+                                                        type="application/pdf" width="100%" height="650px">
+                                                </div>
+
+                                                   <div class="task_file_download_btn p-4 m-4">
+                                                    <a href="/assets/uploads/task_file_upload/'. $task_file_name .'"
+                                                        download="">
+                                                        <button type="button"
+                                                            class="btn btn-primary  d-flex justify-content-center m-auto  ">Download
+                                                            File</button>
+                                                    </a>
+                                                </div>
+
+                                                ';
+                                            }else{
+                                                echo '
+                                                <div class="mt-5 pt-5 text-center text-danger fw-bold" >
+                                                    No task file has been found for this Task
+                                                </div>
+                                                ';
+                                            }
+
+                                            ?>
+
+                                                <!-- <div class="task_file">
                                                     <embed
                                                         src="/assets/uploads/task_file_upload/<?php echo $task_file_name; ?>"
                                                         type="application/pdf" width="100%" height="650px">
@@ -153,7 +188,7 @@ $get_current_user_id = $_SESSION['user_id'];
                                                             class="btn btn-primary  d-flex justify-content-center m-auto  ">Download
                                                             File</button>
                                                     </a>
-                                                </div>
+                                                </div> -->
 
                                             </div>
 

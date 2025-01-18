@@ -62,6 +62,9 @@ $controllers->create_new_project();
                                                     <textarea name="project_desc" class="form-control" id="" placeholder="Enter Project Description" cols="30" rows="10"></textarea>
                                                 </div>
                                                 <div class="mb-3">
+                                                    <input name="project_github_repo_name" class="form-control" id="" placeholder="Enter Project Github Repository Name " >
+                                                </div>
+                                                <div class="mb-3">
                                                     <input type="datetime-local" class="form-control" name="project_submission_datetime" id="">
                                                 </div>
                                                 <div class="mb-3">

@@ -58,7 +58,7 @@ require './vendor/autoload.php';
     <title>nexGenProjects || <?php echo $active_name ?></title>
 
     <!-- favicon files -->
-    <link rel="shortcut icon" href="/assets/img/nexGenProject_logo.jpeg" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/img/nexGenProject_logo.png" type="image/x-icon">
 
     <!-- bootstrap css files -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -80,6 +80,10 @@ require './vendor/autoload.php';
 
     <!-- fonts css files -->
     <link rel="stylesheet" href="/assets/css/fonts.css">
+
+    <!-- datatable css files -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.css">
+
 
     <!-- custom css files -->
     <link rel="stylesheet" href="/assets/css/style.css">
