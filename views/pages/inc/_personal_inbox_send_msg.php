@@ -177,7 +177,8 @@ $data['message'] = $message;
 $data['get_event_name'] = $event_name;
 
 // here the $msg_next_id will be the main msg id as it encounters the msg id which will be added on the msg insertion time
-$data['personal_msg_id'] = $msg_next_id;
+// $data['personal_msg_id'] = $msg_next_id;
+$data['show_personal_msg_id'] = $msg_next_id;
 $data['personal_inbox_msg_id'] = $msg_next_id;
 // $data['delete_msg_status'] = '';
 // $data['delete_msg_id'] = '';

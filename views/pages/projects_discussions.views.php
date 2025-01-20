@@ -301,7 +301,8 @@ $controllers->login_check();
                                                             } else {
                                                                 // that means there are no message or files exists on the repository
                                                                 echo '
-                                                                <div class="container text-center">
+                                                                
+                                                                <div class="container text-center" id="no_msg_exists_info">
                                                                 
                                                                 <div class="inter-font text-secondary mt-4 fs-5">No messages or files exists on this repository</div>
                                                                 <div class="mt-2 mb-4">Be the first one to write some messages or upload some files related to this project in this repository</div>
@@ -744,6 +745,17 @@ $controllers->login_check();
 
                                                                     // alert(response)
 
+                                                                    
+                                                                    // Check if any .parent_msg exists inside #messages
+                                                                    if ($('#messages').find('.parent_msg').html() == '') {
+                                                                        // that means any message does not eixst and it should
+
+                                                                        $('#messages').html('<div class="container text-center" id="no_msg_exists_info" >                                                               <div class="inter-font text-secondary mt-4 fs-5">No messages or files exists on this repository</div><div class="mt-2 mb-4">Be the first one to write some messages or upload some files related to this project in this repository</div></div>');
+
+
+                                                                        // console.log('.parent_msg exists inside #messages!');
+                                                                    }
+
 
 
 
@@ -766,6 +778,16 @@ $controllers->login_check();
 
                                                             $("#submit_form").on("submit", function (e) {
                                                                 e.preventDefault();
+
+                                                                
+                                                                // firstly check if the no_msg_exists_info id exists or not
+                                                                var no_msg_exists_info = $("#no_msg_exists_info")
+
+                                                                if ($("#no_msg_exists_info").length) {
+                                                                    // that means the element exists
+                                                                    no_msg_exists_info.html("");
+                                                                }
+
 
                                                                 var msg_to_send = $("#msg_to_send").val();
                                                                 var message_sender_user_id = $("#message_sender_user_id").val();

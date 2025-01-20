@@ -98,12 +98,12 @@ if ($result_msg_receiver_user_name) {
                     <?php
 
 
-// generate the event name
-$communicated_user_ids = [$get_current_user_id, $get_msg_receiver_user_id];
+                    // generate the event name
+                    $communicated_user_ids = [$get_current_user_id, $get_msg_receiver_user_id];
 
-sort($communicated_user_ids);
+                    sort($communicated_user_ids);
 
-$get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_ids);
+                    $get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_ids);
 
 
 
@@ -147,16 +147,16 @@ $get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_i
                                 </div>
                             </div>
                         ';
-                        //                 echo '
-                        //     <div class="parent_msg sended_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
-                        //         <div class="msg_sender_user_name text-primary">' . $get_current_user_name . '</div>
-                        //         <div class="main_msg_section row">
-                        //             <div class="msg col-md-6 col-sm-12">' . $db_msg . '</div>
-                        //             <div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" 
-                        //                 data-personal_inbox_msg_id="' . $db_msg_id . '" data-delete_msg_id="' . $db_msg_id . '" class="btn ms-4 btn-sm btn-outline-danger">Delete Button</button></div>
-                        //         </div>
-                        //     </div>
-                        // ';
+                                        //                 echo '
+                                        //     <div class="parent_msg sended_msg shadow m-4 msg_id_' . $db_msg_id . '" id="msg_id_' . $db_msg_id . '">
+                                        //         <div class="msg_sender_user_name text-primary">' . $get_current_user_name . '</div>
+                                        //         <div class="main_msg_section row">
+                                        //             <div class="msg col-md-6 col-sm-12">' . $db_msg . '</div>
+                                        //             <div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" 
+                                        //                 data-personal_inbox_msg_id="' . $db_msg_id . '" data-delete_msg_id="' . $db_msg_id . '" class="btn ms-4 btn-sm btn-outline-danger">Delete Button</button></div>
+                                        //         </div>
+                                        //     </div>
+                                        // ';
                                     }
 
                                     if ($db_msg == '' || $db_msg_file_upload_status == 'file_uploaded') {
@@ -253,10 +253,9 @@ $get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_i
                         <!-- <input type="hidden" id="project_id" name="project_id" value="6"> -->
                         <!-- <input type="hidden" name="event_name" id="event_name" value="project_id_6"> -->
 
-                        <input type="hidden" name="event_name" id="event_name"
-                            value="<?php echo $get_event_name; ?>">
+                        <input type="hidden" name="event_name" id="event_name" value="<?php echo $get_event_name; ?>">
 
-                            
+
 
 
                         <!-- <input type="hidden" name="event_name" id="event_name"
@@ -349,7 +348,7 @@ $get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_i
 
 
 
-                                $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '"><div class="msg_sender_user_name text-primary">You</div><div class="main_msg_section row"><div class="msg col-md-6 col-sm-12">' + data.message + '</div><div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" data-personal_inbox_msg_id="' + data.personal_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
+                                $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.show_personal_msg_id + ' " id="msg_id_' + data.show_personal_msg_id + '"><div class="msg_sender_user_name text-primary">You</div><div class="main_msg_section row"><div class="msg col-md-6 col-sm-12">' + data.message + '</div><div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" data-personal_inbox_msg_id="' + data.show_personal_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
 
 
                                 // $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '"><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="main_msg_section row"><div class="msg col-md-6 col-sm-12">' + data.message + '</div><div class="delete_button col-md-6 col-sm-12"><button type="button" onclick="delete_msg(this)" data-personal_inbox_msg_id="' + data.personal_msg_id + '"  class="btn ms-4  btn-sm btn-outline-danger">Delete Button</button></div></div></div></div>');
@@ -367,7 +366,7 @@ $get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_i
 
                                 // $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
-                                $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
+                                $("#messages").append('<div class="parent_msg sended_msg shadow m-4 msg_id_' + data.show_personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
 
 
                                 // $("#messages").append('<div class="received_msg shadow m-4 p-4 "><a href="'+ data.file_uploaded_path +'" download="" >'+ data.file_name +' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
@@ -679,6 +678,10 @@ $get_event_name = "personal_inbox_send_msg_" . implode("_", $communicated_user_i
                                 console.log("sended repo msg id =>" + get_personal_inbox_msg_id)
 
                                 // alert(response)
+
+                                // $("#no_msg_section").removeClass("d-none");
+                                
+
 
 
 

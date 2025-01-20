@@ -55,7 +55,7 @@ require './vendor/autoload.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nexGenProjects || <?php echo $active_name ?></title>
+    <title>nexGenProjects || <?php echo  (isset($active_name) ? $active_name : "" )  ?></title>
 
     <!-- favicon files -->
     <link rel="shortcut icon" href="/assets/img/nexGenProject_logo.png" type="image/x-icon">
