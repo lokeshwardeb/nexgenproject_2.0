@@ -4,10 +4,8 @@ console.log(localStorage);
 
 let audioContext;
 let audioBuffer;
-let gainNode; // Gain node for volume control
-let currentVolume = 1; // Default volume (1 is full volume)
 
-// Function to initialize AudioContext and load audio
+// Function to initialize AudioContext and play sound if possible
 async function initializeAudioContext() {
     if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -17,11 +15,6 @@ async function initializeAudioContext() {
     if (audioContext.state === 'suspended') {
         await audioContext.resume().catch(err => console.error('Audio context resume error:', err));
     }
-
-    // Create gain node for volume control
-    gainNode = audioContext.createGain();
-    // gainNode.gain.value = currentVolume; // Set the initial volume
-    gainNode.gain.value = 0.2; // Set the initial volume
 
     // Load audio buffer only once
     if (!audioBuffer) {
@@ -35,22 +28,13 @@ async function initializeAudioContext() {
     }
 }
 
-// Function to play notification sound with volume control
+// Function to play notification sound
 function playNotificationSound() {
     if (audioBuffer && audioContext) {
         const source = audioContext.createBufferSource();
         source.buffer = audioBuffer;
-        source.connect(gainNode); // Connect to the gain node
-        gainNode.connect(audioContext.destination); // Connect gain node to the audio context's destination (output)
+        source.connect(audioContext.destination);
         source.start(0);
-    }
-}
-
-// Function to handle volume change from a slider
-function setVolume(volume) {
-    if (gainNode) {
-        gainNode.gain.value = volume; // Set the gain (volume)
-        currentVolume = volume; // Save the current volume
     }
 }
 
@@ -58,6 +42,7 @@ function setVolume(volume) {
 if (localStorage.getItem('audioContextInitialized')) {
     initializeAudioContext().then(() => {
         console.log("Audio context resumed on page load.");
+        // playNotificationSound();  // Try to play sound immediately
     }).catch(err => console.error('Audio context initialization failed:', err));
 } else {
     // Wait for user interaction if context wasn't previously initialized
@@ -70,6 +55,29 @@ if (localStorage.getItem('audioContextInitialized')) {
         document.removeEventListener('click', initAudioOnClick);
     });
 }
+document.addEventListener('click', function () {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        localStorage.setItem('audioContextInitialized', 'true');  // Set the flag
+    }
+
+    // Play custom notification sound
+    // playNotificationSound();
+});
+
+document.addEventListener('load', function () {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        localStorage.setItem('audioContextInitialized', 'true');  // Set the flag
+    }
+
+    // playNotificationSound();
+
+    // Play custom notification sound
+    // playNotificationSound();
+});
+
+
 
 // Function to send notifications
 function send_notification(notification_title_msg, notification_body_msg, window_open_url) {
@@ -78,17 +86,28 @@ function send_notification(notification_title_msg, notification_body_msg, window
         return;
     }
 
+    playNotificationSound();
+
+
     function showNotification() {
+        playNotificationSound();
         const notify = new Notification(notification_title_msg, {
             body: notification_body_msg,
             icon: './assets/img/nexGenProject_logo.jpeg',
-            silent: true  // Use this to mute the default notification sound
+            silent: true
         });
 
-        // Play custom notification sound if AudioContext is initialized
         playNotificationSound();
 
-        // Add click event for the notification
+        // Play notification sound if context is ready
+        // if (audioContext) {
+        //     playNotificationSound();
+        // }else{
+        //     playNotificationSound();
+
+        //     console.log("the audio context is null")
+        // }
+
         notify.addEventListener("click", function () {
             window.open(window_open_url, '_blank');
         });
@@ -109,14 +128,3 @@ function send_notification(notification_title_msg, notification_body_msg, window
         });
     }
 }
-
-// // Example of adding a volume slider (HTML)
-// document.body.innerHTML += `
-//     <label for="volumeSlider">Volume Control:</label>
-//     <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="${currentVolume}">
-// `;
-
-// // Event listener for volume slider change
-// document.getElementById('volumeSlider').addEventListener('input', function(event) {
-//     setVolume(event.target.value);
-// });
