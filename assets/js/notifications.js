@@ -66,17 +66,20 @@ function send_notification(notification_title_msg, notification_body_msg, window
     function showNotification() {
         const notify = new Notification(notification_title_msg, {
             body: notification_body_msg,
-            icon: './assets/img/nexGenProject_logo.jpeg'
+            icon: './assets/img/nexGenProject_logo.jpeg',
+            silent: true
         });
 
-        // Play notification sound if context is ready
-        if (audioContext) {
-            playNotificationSound();
-        }else{
-            playNotificationSound();
+        playNotificationSound();
 
-            console.log("the audio context is null")
-        }
+        // Play notification sound if context is ready
+        // if (audioContext) {
+        //     playNotificationSound();
+        // }else{
+        //     playNotificationSound();
+
+        //     console.log("the audio context is null")
+        // }
 
         notify.addEventListener("click", function () {
             window.open(window_open_url, '_blank');
