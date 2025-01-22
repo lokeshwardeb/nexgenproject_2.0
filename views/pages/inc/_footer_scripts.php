@@ -13,7 +13,7 @@
  <!-- custom js files -->
   
  <script src="/assets/js/datatable_library_config.js"></script>
- <script src="/assets/js/scripts.js"></script>
+ <!-- <script src="/assets/js/scripts.js"></script> -->
 
  
 

@@ -435,7 +435,7 @@ if ($result_msg_receiver_user_name) {
 
 
                                 // send the notification
-                                send_notification('New Message was sent on file repository by : ' + data.message_sender_user_name, data.message, "/messages?msg_user_id=" + data.message_receiver_user_name);
+                                send_notification('New Message was sent  by : ' + data.message_sender_user_name, data.message, "/messages?msg_user_id=" + data.message_receiver_user_name);
 
 
 
@@ -443,10 +443,10 @@ if ($result_msg_receiver_user_name) {
 
                             }
                             // $("#messages").append('<div class="received_msg shadow m-4">' + data.message + '</div>')
-                            if (data.file_uploaded_path != undefined || data.file_name != undefined) {
+                            else if (data.file_uploaded_path != undefined || data.file_name != undefined || data.file_uploaded_path || data.file_name) {
                                 // if the data_uploaded_path is not set and if data file name is not set
 
-
+                                console.log("the received file uploaded file is : " + data.file_uploaded_path + " and the received file name is : " + data.file_name);
 
 
                                 // $("#messages").append('<div class="parent_msg received_msg shadow m-4 msg_id_' + data.personal_msg_id + ' " id="msg_id_' + data.personal_msg_id + '" ><div class="msg_sender_user_name text-primary">' + data.message_sender_user_name + '</div><div class="msg_file msg col-md-6 col-sm-12"><a href="' + data.file_uploaded_path + '" download="" >' + data.file_name + ' <i class="fa-solid fa-file ps-4 fs-4"></i> </a></div>')
@@ -459,7 +459,7 @@ if ($result_msg_receiver_user_name) {
                                 $("#personal_inbox_msg_upload_file").val("");
 
                                 // send the file upload notification
-                                send_notification('New File was uploaded on file repository by : ' + data.message_sender_user_name, data.message, "/project_discussions?project_id=6");
+                                send_notification('New file was sent  by : ' + data.message_sender_user_name, data.message, "/messages?msg_user_id=" + data.message_receiver_user_name);
                             }
 
                             //  // add the message sender user_name

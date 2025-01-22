@@ -196,7 +196,7 @@ $data['message_status'] = "send";
 // echo '
 // <script>
 
-// send_notification("New file repository Message by '. $message_sender_user_name .'", " '. $message .' ");
+
 
 // </script>';
 
@@ -221,3 +221,59 @@ $data['message_status'] = "send";
 
 
 $pusher->trigger($channel_name, $event_name, $data);
+
+
+
+// now trigger the user notification
+$notification_channel_name = (string) "user_notification_" . $message_receiver_user_id;
+
+$notification_event_name = "user_notification";
+
+// send notification to the receiver user
+$notification_msg['user_notification_' . $message_receiver_user_id] = "Messages has been received from " . $message_sender_user_name;
+$notification_msg['user_notification_type_' . $message_receiver_user_id] = "personal_inbox_msg";
+$notification_msg['user_notification_sender_user_name_' . $message_receiver_user_id] = $message_sender_user_name;
+$notification_msg['user_notification_sender_user_id_' . $message_receiver_user_id] = $message_sender_user_id;
+
+// $pusher->trigger($notification_channel_name, $notification_event_name, $notification_msg);
+
+$set_notify_msg_max_length = 4;
+$get_notify_msg_length = strlen($message);
+
+$notify_msg = $message;
+
+if($get_notify_msg_length > $set_notify_msg_max_length){
+  // that means the length the bigger that max length and it should make shorter
+  $notify_msg =  substr($message, 0, $set_notify_msg_max_length) . '....' ;
+}
+
+$pusher->trigger($notification_channel_name, $notification_event_name, $notification_msg);
+
+
+
+// echo '
+//   <script src="./assets/js/notifications.js"></script>
+//   <script>
+//     send_notification("New Message has been sent by: ' . $message_sender_user_name . '", "' . $notify_msg . '", "/messages?msg_user_id=' . $message_sender_user_id . '");
+//   </script>
+// ';
+
+
+
+// <script src="./assets/js/notifications.js"></script>
+//   <script>
+
+//   </script>
+
+// $notify_msg = str_replace($message, );
+
+// echo '
+
+//   <script src="/assets/js/notifications.js" ></script>
+
+//   <script>
+//     send_notification("New Message has been sent by : '. $message_sender_user_name .' ", " '. $notify_msg .' ", "/messages?msg_user_id='. $message_sender_user_id .' ");
+//   </script>
+
+
+// ';

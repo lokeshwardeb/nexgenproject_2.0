@@ -1,7 +1,7 @@
 <?php
 // session_start();
 // $_SESSION['username'] = 'jai sri ganesh';
-$active_name = "All Projects";
+$active_name = "Meetings";
 // $dashboard_active_class_name = "sidebar_btn_active";
 // $all_projects_active_class_name = "sidebar_btn_active";
 // sidebar_btn_active
@@ -42,6 +42,16 @@ $controllers->login_check();
                         <div class="details_container">
 
                             <div class="details_container_info">
+
+                            
+                            <div class="main_content_navbar">
+                                    <?php
+
+                                    require_once __DIR__ . '/inc/_main_content_navbar.php';
+
+                                    ?>
+                                </div>
+
 
                                 <div class="container">
                                     <div class="title_section">

@@ -6,6 +6,17 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 ?>
 
+<!-- <div class="notification_main_section mb-4 pb-4 ">
+    <div class="container">
+        <div class="notification_section">
+            <?php
+
+            // include __DIR__ . '/_notification_modal.php';
+
+            ?>
+        </div>
+    </div>
+</div> -->
 <ul class="nav">
     <li class="text-center m-auto">
         <a href="/dashboard" class="nav-link text-center mb-4">
@@ -339,3 +350,13 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
     </li>
 
 </ul>
+
+<hr>
+
+<div class="loggedin_user_info_main_section">
+    <div class="container">
+        <div class="loggedin_user_info text-primary  fw-bold fs-5 m-4 ps-4 " style="cursor: pointer;" >
+            <?php echo $_SESSION['username']; ?>
+        </div>
+    </div>
+</div>

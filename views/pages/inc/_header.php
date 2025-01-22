@@ -99,6 +99,7 @@ require './vendor/autoload.php';
     <!-- pusher js files -->
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+
     <!-- daily js files -->
     <script crossorigin src="https://unpkg.com/@daily-co/daily-js"></script>
 
@@ -127,7 +128,7 @@ require './vendor/autoload.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 
-
+    <script src="/assets/js/notifications.js"></script>
 
     <!-- check whether the replace state exits or not -->
     <script>

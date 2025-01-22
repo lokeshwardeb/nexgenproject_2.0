@@ -1,15 +1,73 @@
 <?php
-// session_start();
-// $_SESSION['username'] = 'jai sri ganesh';
-$active_name = "All Projects";
-// $dashboard_active_class_name = "sidebar_btn_active";
-// $all_projects_active_class_name = "sidebar_btn_active";
-// sidebar_btn_active
+
+$active_name = "Dashboard";
+
+
 require __DIR__ . '/inc/_header.php';
 
-$controllers->login_check();
-// $controllers->create_new_meeting();
-// $controllers->meetings_handler();
+// if(!file_exists("/config/conn.php")){
+//     echo '
+//      <script>
+//      location.href="/installation";
+//      </script>
+//      ';
+
+//      exit;
+// }
+
+
+    $controllers->login_check();
+
+
+
+// if(file_exists("/config/conn.php")){
+//     $controllers->login_check();
+       
+// }else{
+
+//     echo '
+//     <script>
+//     location.href="/installation";
+//     </script>
+//     ';
+// return;
+
+
+// }
+
+// echo "hi";
+
+
+// if(file_exists("/config/conn.php")){
+//     $active_name = "Dashboard";
+
+// $controllers->login_check();
+// }else{
+//     // that means the configuration file is not found and it should be setup first
+//     echo '
+//     <script>
+//     location.href="/setup";
+//     </script>
+//     ';
+// }
+
+
+
+
+// require __DIR__ . '/inc/_header.php';
+
+
+
+
+
+// session_start();
+// $_SESSION['username'] = 'jai sri ganesh';
+
+
+// $active_name = "Dashboard";
+// require __DIR__ . '/inc/_header.php';
+
+// $controllers->login_check();
 
 ?>
 
@@ -34,50 +92,33 @@ $controllers->login_check();
                 </div>
 
             </div>
-            <div class="col-md-9 cus_bg_main_section_color">
+            <div class="col-md-9 cus_bg_main_section_color" >
                 <div class="main_content_section scrollbar_container">
 
+
                     <div class="the_running_main_content montserrat_font">
-
-                        <div class="details_container">
-
-                            <div class="details_container_info">
-
-                                <div class="main_content_navbar">
-                                    <?php
-
-                                    require_once __DIR__ . '/inc/_main_content_navbar.php';
-
-                                    ?>
+                        
+                        <div class="details_container align-items-center">
+                            <div class="details_container_info align-items-center">
+                                <div class="welcome_container">
+                                    <h1>Welcome <a href=""><?php echo $_SESSION['username'] ?></a></h1>
+                                    <!-- <h1>Welcome <a href="">Mr X</a></h1> -->
                                 </div>
-
-                                <div class="main_content_section mt-4">
-                                    <div class="container m-4 pt-4  pe-5">
-                                        <div class="dashboard_main_content">
-
-                                        </div>
-                                    </div>
+                                <div class="status_container">
+                                    <h3>Status:</h3>
+                                    <p>Current project: <a href="">xyz</a></p>
+                                    <p>Your team is working on : <a href="">xyz</a></p>
                                 </div>
-
-
-
-
-
-
-
-
+                                <div class="process_container">
+                                    <h3>Process:</h3>
+                                    <p>Project complete: <a href="">50%</a></p>
+                                </div>
                             </div>
-
                         </div>
-
-
-
-
-
                     </div>
 
 
-                    <div class="container d-none ">
+                    <div class="container d-none">
                         <div class="welcome_section fs-5 mt-4">
                             Welcome again,
                             <div class="welcome_username ms-5 ps-4 text-primary">
