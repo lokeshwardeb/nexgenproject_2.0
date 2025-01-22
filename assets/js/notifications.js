@@ -55,6 +55,29 @@ if (localStorage.getItem('audioContextInitialized')) {
         document.removeEventListener('click', initAudioOnClick);
     });
 }
+document.addEventListener('click', function () {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        localStorage.setItem('audioContextInitialized', 'true');  // Set the flag
+    }
+
+    // Play custom notification sound
+    // playNotificationSound();
+});
+
+document.addEventListener('load', function () {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        localStorage.setItem('audioContextInitialized', 'true');  // Set the flag
+    }
+
+    // playNotificationSound();
+
+    // Play custom notification sound
+    // playNotificationSound();
+});
+
+
 
 // Function to send notifications
 function send_notification(notification_title_msg, notification_body_msg, window_open_url) {
@@ -63,7 +86,11 @@ function send_notification(notification_title_msg, notification_body_msg, window
         return;
     }
 
+    playNotificationSound();
+
+
     function showNotification() {
+        playNotificationSound();
         const notify = new Notification(notification_title_msg, {
             body: notification_body_msg,
             icon: './assets/img/nexGenProject_logo.jpeg',
