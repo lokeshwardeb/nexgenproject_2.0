@@ -7,11 +7,31 @@ let audioBuffer;
 let gainNode; // Gain node for volume control
 let currentVolume = 1; // Default volume (1 is full volume)
 
+// Attempt to initialize audio context on page load
+if (localStorage.getItem('audioContextInitialized')) {
+    initializeAudioContext().then(() => {
+        console.log("Audio context resumed on page load.");
+    }).catch(err => console.error('Audio context initialization failed:', err));
+} else {
+    // Wait for user interaction if context wasn't previously initialized
+    document.addEventListener('click', function initAudioOnClick() {
+        initializeAudioContext().then(() => {
+            console.log("Audio context initialized after user click.");
+            localStorage.setItem('audioContextInitialized', 'true');
+            playNotificationSound();
+        });
+        document.removeEventListener('click', initAudioOnClick);
+    });
+}
+
 // Function to initialize AudioContext and load audio
 async function initializeAudioContext() {
     if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
+
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
 
     // Resume context if it was suspended
     if (audioContext.state === 'suspended') {
@@ -21,7 +41,8 @@ async function initializeAudioContext() {
     // Create gain node for volume control
     gainNode = audioContext.createGain();
     // gainNode.gain.value = currentVolume; // Set the initial volume
-    gainNode.gain.value = 0.2; // Set the initial volume
+    gainNode.gain.value = 1; // Set the initial volume
+    // gainNode.gain.value = 0.2; // Set the initial volume
 
     // Load audio buffer only once
     if (!audioBuffer) {
@@ -34,6 +55,8 @@ async function initializeAudioContext() {
         }
     }
 }
+
+
 
 // Function to play notification sound with volume control
 function playNotificationSound() {

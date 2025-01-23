@@ -41,7 +41,16 @@ $controllers->login_check();
                         <div class="details_container">
 
                             <div class="details_container_info">
+                                
+                            <div class="main_content_navbar">
+                                    <?php
 
+                                    require_once __DIR__ . '/inc/_main_content_navbar.php';
+
+                                    ?>
+                                </div>
+
+                                
                                 <div class="container">
                                     <div class="title_section">
                                         <div class="section_title fs-4 text-center mt-4 inter-font">
