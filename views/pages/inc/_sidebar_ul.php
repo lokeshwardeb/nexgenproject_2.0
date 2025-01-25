@@ -20,7 +20,27 @@ $get_url = parse_url($_SERVER['REQUEST_URI'])['path'];
 <ul class="nav">
     <li class="text-center m-auto">
         <a href="/dashboard" class="nav-link text-center mb-4">
-            <button type="button" class="btn <?php echo $dashboard_active_class_name ?> text-center sidebar_btn p-2 ">
+            <button type="button" class="btn <?php echo $dashboard_active_class_name ?> text-center sidebar_btn p-2 <?php
+
+switch ($get_url) {
+    case '/dashboard':
+        echo 'sidebar_btn_active';
+        break;
+    // case '/create_new_project':
+    //     echo 'sidebar_btn_active';
+
+    default:
+        # code...
+        break;
+}
+
+// if($get_url == '/')
+
+// if(isset($all_projects_active_class_name)){
+//     echo $all_projects_active_class_name;
+// }
+
+?>">
                 Dashboard
             </button>
         </a>
