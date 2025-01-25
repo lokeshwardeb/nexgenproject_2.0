@@ -64,40 +64,90 @@
 
                             if (notification_msg.hasOwnProperty(notification_key)) {
                                 let message_content = notification_msg[notification_key];
-                                let user_notification_type =notification_msg[user_notification_type_key];
-                             
+                                let user_notification_type = notification_msg[user_notification_type_key];
+
 
                                 // hide the notification_not_exists_section
                                 // firstly check if the d-none class exists or not
-                                if (notification_not_exists_section.hasClass("d-none")) {
+                                if (!notification_not_exists_section.hasClass("d-none")) {
                                     // that means the class is exists and it should be 
-                                    notification_not_exists_section.removeClass("d-none");
-                                } else {
                                     notification_not_exists_section.addClass("d-none")
-                                }
 
-                                // Display notification in the DOM
-                                $("#show_notifications").append(`
-                                    <div class="notification text-start ">
-                                        <strong>Message:</strong> ${message_content} <br>
-                                    </div>
+                                    // notification_not_exists_section.removeClass("d-none");
+                                }
+                                // else {
+                                //     notification_not_exists_section.addClass("d-none")
+                                // }
+
+                                // // Display notification in the DOM
+                                // $("#show_notifications").append(`
+                                //     <div class="notification text-primary text-start ">
+                                //         <strong>New  :</strong> ${message_content} <br>
+                                //     </div>
+                                // `);
+
+                                // $("#notificaiton_border_exists").append(`   
+                                //     <span class=" position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
+                                //         <span class="visually-hidden">New alerts</span>
+                                //     </span>
+                                // `);
+
+                                if (user_notification_type == 'personal_inbox_msg') {
+                                    let message_sender_user_id = notification_msg[`user_notification_sender_user_id_${get_loggedin_user_id}`];
+
+                                    let message_sender_user_name = notification_msg[`user_notification_sender_user_name_${get_loggedin_user_id}`];
+
+
+                                    $("#show_notifications").append(`
+                                    <div class="notification text-primary text-start ">
+                                        <a href="/messages?msg_user_id=${message_sender_user_id}" class="nav-link" >
+                                        
+                                        <strong>Your have new Message from ${message_sender_user_name} :</strong> ${message_content}
+                                        </a>
+                                        </div>
+                                        <br>
                                 `);
 
-                                $("#notificaiton_border_exists").append(`   
+                                    $("#notificaiton_border_exists").append(`   
                                     <span class=" position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
                                         <span class="visually-hidden">New alerts</span>
                                     </span>
                                 `);
 
-                                if(user_notification_type == 'personal_inbox_msg'){
-                                    let message_sender_user_id = notification_msg[`user_notification_sender_user_id_${get_loggedin_user_id}`];
+                                    // sent the notification
+                                    send_notification(`New Message has been ${user_notification_type} sent by: ${message_sender_user_name}`, `${message_content}`, `/messages?msg_user_id=${message_sender_user_id}`);
 
-                                    let message_sender_user_name = notification_msg[`user_notification_sender_user_name_${get_loggedin_user_id}`];
-                                // sent the notification
-                                send_notification(`New Message has been ${user_notification_type} sent by: ${message_sender_user_name}`, `${message_content}`, `/messages?msg_user_id=${message_sender_user_id}`);
 
+
+                                } else {
+
+                                    // Display notification in the DOM
+                                    $("#show_notifications").append(`
+                                    <div class="notification text-primary text-start ">
+                                        <strong>New notification :   </strong> ${message_content} <br>
+                                    </div>
+                                `);
+
+                                    $("#notificaiton_border_exists").append(`   
+                                    <span class=" position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
+                                        <span class="visually-hidden">New alerts</span>
+                                    </span>
+                                `);
                                 }
 
+
+
+                                // $("#show_notifications").append(`
+                                //     <div class="notification text-primary text-start ">
+                                //         <strong>Your have new Message from  :</strong> ${message_content} <br>
+                                //     </div>
+                                // `);
+
+                                // $("#notificaiton_border_exists").append(`   
+                                //     <span class=" position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
+                                //         <span class="visually-hidden">New alerts</span>
+                                //     </span>
+                                // `);
                                 // // sent the notification
                                 // send_notification(`New Message has been sent by: ${message_content}`, "' . $notify_msg . '", "/messages?msg_user_id=' . $message_sender_user_id . '");
 

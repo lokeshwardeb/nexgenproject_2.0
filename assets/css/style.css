@@ -157,5 +157,23 @@
 }
 
 
+.notification{
+    transition: all ease 600ms;
+
+    margin: 25px;
+
+
+}
+
+.notification:hover{
+    border-left: var(--cus-primary-color) 5px solid !important;
+    padding: 10px !important;
+    transition: all ease 400ms;
+
+}
+
+
+
+
 
 

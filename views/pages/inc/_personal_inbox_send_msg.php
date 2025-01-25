@@ -229,14 +229,6 @@ $notification_channel_name = (string) "user_notification_" . $message_receiver_u
 
 $notification_event_name = "user_notification";
 
-// send notification to the receiver user
-$notification_msg['user_notification_' . $message_receiver_user_id] = "Messages has been received from " . $message_sender_user_name;
-$notification_msg['user_notification_type_' . $message_receiver_user_id] = "personal_inbox_msg";
-$notification_msg['user_notification_sender_user_name_' . $message_receiver_user_id] = $message_sender_user_name;
-$notification_msg['user_notification_sender_user_id_' . $message_receiver_user_id] = $message_sender_user_id;
-
-// $pusher->trigger($notification_channel_name, $notification_event_name, $notification_msg);
-
 $set_notify_msg_max_length = 4;
 $get_notify_msg_length = strlen($message);
 
@@ -246,6 +238,17 @@ if($get_notify_msg_length > $set_notify_msg_max_length){
   // that means the length the bigger that max length and it should make shorter
   $notify_msg =  substr($message, 0, $set_notify_msg_max_length) . '....' ;
 }
+
+// send notification to the receiver user
+$notification_msg['user_notification_' . $message_receiver_user_id] = $notify_msg;
+$notification_msg['user_notification_info' . $message_receiver_user_id] = "Messages has been received from " . $message_sender_user_name;
+$notification_msg['user_notification_type_' . $message_receiver_user_id] = "personal_inbox_msg";
+$notification_msg['user_notification_sender_user_name_' . $message_receiver_user_id] = $message_sender_user_name;
+$notification_msg['user_notification_sender_user_id_' . $message_receiver_user_id] = $message_sender_user_id;
+
+// $pusher->trigger($notification_channel_name, $notification_event_name, $notification_msg);
+
+
 
 $pusher->trigger($notification_channel_name, $notification_event_name, $notification_msg);
 

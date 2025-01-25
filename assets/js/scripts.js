@@ -1,5 +1,8 @@
 const SITE_URL = 'http://localhost:8000/';
 
+
+console.log("scriptss runs");
+
 function showPass() {
     var show_pass_icon = document.getElementById('show_pass_icon');
     var hide_pass_icon = document.getElementById('hide_pass_icon');
@@ -96,6 +99,20 @@ document.addEventListener("DOMContentLoaded", function () {
         container.classList.remove("right-panel-active");
     }
 });
+
+
+
+
+// document.getElementById("msg_to_send").addEventListener("keydown", function(event) {
+//     console.log("msg enter runs");
+//     if (event.key === "Enter" && !event.shiftKey) {
+//         event.preventDefault();  // Prevents new line in textarea
+//         document.getElementById("submit_form").submit();
+        
+//     }
+// });
+
+
 
 
 

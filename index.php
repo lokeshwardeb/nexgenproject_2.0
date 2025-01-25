@@ -31,6 +31,7 @@ $Routes = [
     '/projects_hub' => __DIR__ . '/views/pages/projects_hub.views.php',
     '/projects_file_repository' => __DIR__ . '/views/pages/projects_files_repository.views.php',
     '/project_discussions' => __DIR__ . '/views/pages/projects_discussions.views.php',
+    '/test_dashboard' => __DIR__ . '/views/pages/test_dashboard.views.php',
     '/code_bridge_hub' => __DIR__ . '/views/pages/code_bridge_hub.views.php',
     '/code_bridge_entry_point' => __DIR__ . '/views/pages/code_bridge_entry_point.views.php',
     '/code_bridge' => __DIR__ . '/views/pages/code_bridge.views.php',
