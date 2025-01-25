@@ -83,8 +83,8 @@ $controllers->login_check();
                                                                 <!-- <img src="..." class="card-img-top" alt="..."> -->
                                                                 <div class="card-body">
                                                                     <h5 class="card-title text-primary fw-bold ">
-                                                                        Completed
-                                                                        Tasks</h5>
+                                                                        Your Completed Tasks
+                                                                    </h5>
                                                                     <p class="card-text">
                                                                         <i class="fa-solid fa-list-check me-2 "></i></i>
                                                                         60
@@ -143,7 +143,9 @@ $controllers->login_check();
                                         </div>
 
                                         <script>
-                                            google.charts.load('current', { packages: ['corechart', 'bar'] });
+                                            google.charts.load('current', {
+                                                packages: ['corechart', 'bar']
+                                            });
                                             google.charts.setOnLoadCallback(drawBasic);
 
                                             function drawBasic() {
@@ -153,7 +155,7 @@ $controllers->login_check();
                                                 data.addColumn('number', 'Task completed in the last month');
 
                                                 data.addRows([
-                                                    ['Protik', 50 ],
+                                                    ['Protik', 50],
                                                     ['X', 15],
                                                     ['Y', 20],
                                                     ['Z', 5],
