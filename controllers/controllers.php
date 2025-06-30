@@ -570,8 +570,9 @@ class controllers extends models
         }
     }
 
+    // note that we are using agora.io for the meeting hub, so we are disabling the daily.co from the meeting hub now
 
-    public function meetings_handler()
+    public function meetings_handler_using_daily_co()
     {
 
         if (isset($_GET['meeting_code'])) {
@@ -613,6 +614,26 @@ class controllers extends models
                 }
             }
         }
+
+    }
+
+    // the meetings handler function with the power of agora.io
+    public function meetings_handler()
+    {
+
+    //    <iframe src="https://48ede080403ef2d0730c.vercel.app/" frameborder="0" height ></iframe>
+
+        echo '
+        <iframe
+  src="https://48ede080403ef2d0730c.vercel.app/"
+  width="100%"
+  height="800vh !important;"
+  style="border: 0;"
+  allow="camera; microphone; clipboard-read; clipboard-write; fullscreen; speaker; display-capture"
+  allowfullscreen
+></iframe>
+
+        ';
 
     }
 
@@ -1044,8 +1065,3 @@ class controllers extends models
     }
 
 }
-
-
-
-
-?>

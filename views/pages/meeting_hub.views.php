@@ -12,13 +12,13 @@ $controllers->login_check();
 // $controllers->meetings_handler();
 
 
-if(!isset($_GET['meeting_code'])){
-    echo '
-    <script>
-    location.href="/meetings";
-    </script>
-    ';
-}
+// if(!isset($_GET['meeting_code'])){
+//     echo '
+//     <script>
+//     location.href="/meetings";
+//     </script>
+//     ';
+// }
 
 // $controllers->meetings_handler()
 
@@ -55,8 +55,8 @@ if(!isset($_GET['meeting_code'])){
 
                             <div class="details_container_info">
 
-                            
-                            <div class="main_content_navbar">
+
+                                <div class="main_content_navbar">
                                     <?php
 
                                     require_once __DIR__ . '/inc/_main_content_navbar.php';
@@ -75,29 +75,79 @@ if(!isset($_GET['meeting_code'])){
 
                                 <div class="main_content_section ">
                                     <div class="container m-4   pe-5">
-                                      <div class="meetings_main_section">
-                                        <div class="meetings_content">
-                                           <div class="container mb-4 pb-4">
-                                            <div class="meeting_container" id="meeting_container"></div>
-                                            <?php
-                                            
-                                            $controllers->meetings_handler();
+                                        <div class="meetings_main_section">
+                                            <div class="meetings_content">
+                                                <div class="container mb-4 pb-4">
+                                                    <div class="meeting_container" id="meeting_container"></div>
+
+                                                    <div class="meetings_content">
+                                                        <div class="container mb-4 pb-4">
+
+                                                            <!-- Trigger button -->
+                                                            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#meeting_canvas" aria-controls="meeting_canvas">
+                                                                🔳 Open Fullscreen Meeting
+                                                            </button>
+
+                                                            <!-- Hidden container for iframe (original location) -->
+                                                            <div id="iframe_holder" style="display: block;">
+                                                                <iframe
+                                                                    id="meeting_iframe"
+                                                                    src="https://48ede080403ef2d0730c.vercel.app/63e94387-e424-477e-8904-312f3e78d928"
+                                                                    width="100%"
+                                                                    style="border: 0; height: 100vh;"
+                                                                    allow="camera; microphone; clipboard-read; clipboard-write; fullscreen; speaker; display-capture"
+                                                                    allowfullscreen>
+                                                                </iframe>
+                                                            </div>
+
+                                                            <!-- Bootstrap Offcanvas -->
+                                                            <div class="offcanvas offcanvas-start w-100" tabindex="-1" id="meeting_canvas" aria-labelledby="meetingCanvasLabel">
+                                                                <div class="offcanvas-header">
+                                                                    <h5 class="offcanvas-title" id="meetingCanvasLabel">Agora Meeting</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="offcanvas-body p-0" id="offcanvas_body">
+                                                                    <!-- iframe will move here dynamically -->
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
 
 
-                                            ?>
-                                           </div>
+
+
+                                                </div>
+                                            </div>
                                         </div>
-                                      </div>
                                     </div>
                                 </div>
 
-                             
+                                <script>
+                                    // Ensure the iframe is moved to the offcanvas body when it opens
+                                    const iframe = document.getElementById('meeting_iframe');
+                                    const iframeHolder = document.getElementById('iframe_holder');
+                                    const offcanvasBody = document.getElementById('offcanvas_body');
+
+                                    // Move iframe into offcanvas when it opens
+                                    document.getElementById('meeting_canvas').addEventListener('shown.bs.offcanvas', () => {
+                                        offcanvasBody.appendChild(iframe);
+                                    });
+
+                                    // Move iframe back to original holder when it closes
+                                    document.getElementById('meeting_canvas').addEventListener('hidden.bs.offcanvas', () => {
+                                        iframeHolder.appendChild(iframe);
+                                    });
+                                </script>
 
 
-                                
 
 
-                                
+
+
+
+
+
                             </div>
 
                         </div>
@@ -109,7 +159,7 @@ if(!isset($_GET['meeting_code'])){
                     </div>
 
 
-                  
+
                 </div>
             </div>
         </div>
