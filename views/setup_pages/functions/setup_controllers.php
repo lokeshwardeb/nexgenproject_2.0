@@ -75,17 +75,18 @@ class setup_controllers{
             die("❌ Error connecting to MySQL server: " . $mysql_connect->connect_error);
         }
 
+        // comment this for the production
         // Check if database exists
-        if ($this->check_database_exist($mysql_connect, $database_name)) {
-            echo "<div class='alert alert-info'>✅ Database already exists. Setup skipped.</div>";
-            return;
-        }
+        // if ($this->check_database_exist($mysql_connect, $database_name)) {
+        //     echo "<div class='alert alert-info'>✅ Database already exists. Setup skipped.</div>";
+        //     return;
+        // }
 
-        // Create database
-        $create_db_sql = "CREATE DATABASE `$database_name`";
-        if (!$mysql_connect->query($create_db_sql)) {
-            die("❌ Failed to create database: " . $mysql_connect->error);
-        }
+        // // Create database
+        // $create_db_sql = "CREATE DATABASE `$database_name`";
+        // if (!$mysql_connect->query($create_db_sql)) {
+        //     die("❌ Failed to create database: " . $mysql_connect->error);
+        // }
 
         // Connect to newly created database
         $my_conn = new mysqli($server_name, $server_user_name, $server_password, $database_name);
