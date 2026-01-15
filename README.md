@@ -18,9 +18,9 @@
     It will be encountered as an copyright infrigment if any kind of 
     the copy was used without the permission of the developer.
 
-### Co-powered by :
+### Co-powered & Developed by :
     Lokeshwar Deb Protik
-    <!-- Code commanders, Lokeshwar Deb Protik and the full team of code commanders. -->
+    
 
 #### All rights are reserved by Lokeshwar Deb Protik
 
